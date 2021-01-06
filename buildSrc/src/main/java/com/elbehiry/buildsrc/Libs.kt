@@ -46,4 +46,5 @@ object Libs {
     const val MOSHI = "com.squareup.moshi:moshi"
     const val KOTCHI = "se.ansman.kotshi:api"
     const val KOTCHI_COMPILER = "se.ansman.kotshi:compiler"
+    const val DATA_STORE = "androidx.datastore:datastore-preferences"
 }

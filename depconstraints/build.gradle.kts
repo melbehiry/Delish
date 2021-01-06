@@ -35,6 +35,7 @@ val archTesting = "2.0.0"
 val retrofit = "2.9.0"
 val moshi = "1.11.0"
 val kotchi = "2.3.3"
+val datastore = "1.0.0-alpha05"
 
 
 dependencies {
@@ -86,6 +87,7 @@ dependencies {
         api("${Libs.MOSHI_KOTLIN}:$moshi")
         api("${Libs.KOTCHI}:$kotchi")
         api("${Libs.KOTCHI_COMPILER}:$kotchi")
+        api("${Libs.DATA_STORE}:$datastore")
     }
 }
 
