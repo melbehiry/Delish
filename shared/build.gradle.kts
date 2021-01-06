@@ -136,5 +136,5 @@ dependencies {
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
     //Data store
-    testImplementation(Libs.DATA_STORE)
+    api(Libs.DATA_STORE)
 }
