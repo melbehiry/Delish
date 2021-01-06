@@ -1,4 +1,5 @@
 include(
     ":mobile",
-    ":depconstraints"
+    ":depconstraints",
+    ":shared"
 )
