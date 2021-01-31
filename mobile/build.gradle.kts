@@ -20,6 +20,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
                 arguments["room.incremental"] = "true"
             }
         }
@@ -35,16 +36,6 @@ android {
         getByName("debug") {
             versionNameSuffix = "-debug"
         }
-        maybeCreate("staging")
-        getByName("staging") {
-            initWith(getByName("debug"))
-            versionNameSuffix = "-staging"
-            matchingFallbacks = listOf("debug")
-        }
-    }
-
-    buildFeatures {
-        dataBinding = true
     }
 
     // debug and release variants share the same source dir
@@ -65,8 +56,6 @@ android {
         // See lint.xml for rules configuration
     }
 
-    testBuildType = "staging"
-
     // Required for AR because it includes a library built with Java 8
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -78,6 +67,26 @@ android {
         val options = this
         options.jvmTarget = "1.8"
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.COMPOSE
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = false
+        aidl = false
+        renderScript = false
+        resValues = false
+        shaders = false
+        viewBinding = true
+    }
+
+    packagingOptions {
+        exclude("META-INF/licenses/**")
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/LGPL2.1")
+    }
 }
 
 dependencies {
@@ -87,14 +96,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(Libs.CORE_KTX)
-
-    // UI
-    implementation(Libs.ACTIVITY_KTX)
-    implementation(Libs.APPCOMPAT)
-    implementation(Libs.FRAGMENT_KTX)
-    implementation(Libs.CARDVIEW)
-    implementation(Libs.CONSTRAINT_LAYOUT)
-    implementation(Libs.MATERIAL)
 
     // Architecture Components
     implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)
@@ -107,6 +108,8 @@ dependencies {
     kapt(Libs.ROOM_COMPILER)
     testImplementation(Libs.ROOM_KTX)
     testImplementation(Libs.ROOM_RUNTIME)
+    testImplementation(Libs.LIFECYCLE_EXTENSION)
+    testImplementation(Libs.LIFECYCLE_RUN_TIME)
 
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
@@ -138,4 +141,15 @@ dependencies {
     testImplementation(Libs.HAMCREST)
 
     implementation(Libs.GSON)
+
+    //COMPOSE
+    implementation(Libs.COMPOSE_RUNTIME)
+    implementation(Libs.COMPOSE_UI)
+    implementation(Libs.COMPOSE_FOUNDATION_LAYOUT)
+    implementation(Libs.COMPOSE_MATERIAL)
+    implementation(Libs.COMPOSE_UI_GRAPHICS)
+    implementation(Libs.COMPOSE_UI_TOOLING)
+    implementation(Libs.COMPOSE_RUNTIME_LIVEDATA)
+    implementation(Libs.COMPOSE_ANIMATION)
+    implementation(Libs.COMPOSE_NAVIGATION)
 }

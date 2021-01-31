@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -86,8 +85,6 @@ dependencies {
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    // AppCompat
-    implementation(Libs.APPCOMPAT)
 
     // Architecture Components
     implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)

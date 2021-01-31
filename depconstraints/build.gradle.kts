@@ -3,16 +3,11 @@ plugins {
     id("maven-publish")
 }
 
-val appcompat = "1.1.0"
-val activity = "1.0.0"
-val cardview = "1.0.0"
-val constraintLayout = "1.1.3"
 val core = "1.2.0"
-val coroutines = "1.3.4"
-val coroutinesTest = "1.3.4"
+val coroutines = "1.4.2"
+val coroutinesTest = "1.4.2"
 val drawerLayout = "1.1.0-rc01"
 val espresso = "3.1.1"
-val fragment = "1.2.4"
 val glide = "4.9.0"
 val gson = "2.8.6"
 val hamcrest = "1.3"
@@ -36,22 +31,18 @@ val retrofit = "2.9.0"
 val moshi = "1.11.0"
 val kotchi = "2.3.3"
 val datastore = "1.0.0-alpha05"
+val compose = "1.0.0-alpha10"
+val composeNavigation = "1.0.0-alpha04"
 
 
 dependencies {
     constraints {
-        api("${Libs.ACTIVITY_KTX}:$activity")
         api("${Libs.ANDROIDX_HILT_COMPILER}:$hiltJetPack")
-        api("${Libs.APPCOMPAT}:$appcompat")
-        api("${Libs.CARDVIEW}:$cardview")
-        api("${Libs.CONSTRAINT_LAYOUT}:$constraintLayout")
         api("${Libs.CORE_KTX}:$core")
         api("${Libs.COROUTINES}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")
-        api("${Libs.DRAWER_LAYOUT}:$drawerLayout")
         api("${Libs.ESPRESSO_CORE}:$espresso")
         api("${Libs.ESPRESSO_CONTRIB}:$espresso")
-        api("${Libs.FRAGMENT_KTX}:$fragment")
         api("${Libs.GLIDE}:$glide")
         api("${Libs.GLIDE_COMPILER}:$glide")
         api("${Libs.GSON}:$gson")
@@ -88,6 +79,17 @@ dependencies {
         api("${Libs.KOTCHI}:$kotchi")
         api("${Libs.KOTCHI_COMPILER}:$kotchi")
         api("${Libs.DATA_STORE}:$datastore")
+        api("${Libs.LIFECYCLE_EXTENSION}:$lifecycle")
+        api("${Libs.LIFECYCLE_RUN_TIME}:$lifecycle")
+        api("${Libs.COMPOSE_UI}:$compose")
+        api("${Libs.COMPOSE_UI_GRAPHICS}:$compose")
+        api("${Libs.COMPOSE_UI_TOOLING}:$compose")
+        api("${Libs.COMPOSE_FOUNDATION_LAYOUT}:$compose")
+        api("${Libs.COMPOSE_MATERIAL}:$compose")
+        api("${Libs.COMPOSE_RUNTIME_LIVEDATA}:$compose")
+        api("${Libs.COMPOSE_RUNTIME}:$compose")
+        api("${Libs.COMPOSE_ANIMATION}:$compose")
+        api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
     }
 }
 

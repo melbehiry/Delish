@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
 
-    val kotlin_version by extra("1.3.72")
     repositories {
         google()
         mavenCentral()
@@ -28,9 +27,15 @@ allprojects {
         mavenCentral()
         jcenter()
 
-        flatDir {
-            dirs = setOf(file("libs"))
+//        flatDir {
+//            dirs = setOf(file("libs"))
+//        }
+
+        if (Versions.snapshot.isNotEmpty()) {
+            maven("https://androidx.dev/snapshots/builds/${Versions.snapshot}/artifacts/repository/")
         }
+
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
 }
 
@@ -66,13 +71,13 @@ subprojects {
         }
     }
 
-    // TODO: Remove when the Coroutine and Flow APIs leave experimental/internal/preview.
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions.freeCompilerArgs +=
             "-Xuse-experimental=" +
                     "kotlin.Experimental," +
                     "kotlinx.coroutines.ExperimentalCoroutinesApi," +
                     "kotlinx.coroutines.InternalCoroutinesApi," +
-                    "kotlinx.coroutines.FlowPreview"
+                    "kotlinx.coroutines.FlowPreview" +
+                    "-Xallow-jvm-ir-dependencies"
     }
 }
