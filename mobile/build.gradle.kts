@@ -4,6 +4,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-android")
 }
 
 android {
@@ -91,6 +92,8 @@ android {
 
 dependencies {
     api(platform(project(":depconstraints")))
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("com.google.android.material:material:1.2.1")
     kapt(platform(project(":depconstraints")))
     implementation(project(":shared"))
 
@@ -153,4 +156,6 @@ dependencies {
     implementation(Libs.COMPOSE_RUNTIME_LIVEDATA)
     implementation(Libs.COMPOSE_ANIMATION)
     implementation(Libs.COMPOSE_NAVIGATION)
+
+    implementation(Libs.INSETS)
 }

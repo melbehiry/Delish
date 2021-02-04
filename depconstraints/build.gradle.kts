@@ -31,8 +31,9 @@ val retrofit = "2.9.0"
 val moshi = "1.11.0"
 val kotchi = "2.3.3"
 val datastore = "1.0.0-alpha05"
-val compose = "1.0.0-alpha10"
+val compose = "1.0.0-alpha11"
 val composeNavigation = "1.0.0-alpha04"
+val insets = "0.5.0"
 
 
 dependencies {
@@ -89,7 +90,9 @@ dependencies {
         api("${Libs.COMPOSE_RUNTIME_LIVEDATA}:$compose")
         api("${Libs.COMPOSE_RUNTIME}:$compose")
         api("${Libs.COMPOSE_ANIMATION}:$compose")
+        api("${Libs.COMPOSE_ANIMATION_CORE}:$compose")
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
+        api("${Libs.INSETS}:$insets")
     }
 }
 

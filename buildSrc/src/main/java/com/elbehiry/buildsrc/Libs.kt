@@ -51,5 +51,7 @@ object Libs {
     const val COMPOSE_RUNTIME_LIVEDATA = "androidx.compose.runtime:runtime-livedata"
     const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime"
     const val COMPOSE_ANIMATION = "androidx.compose.animation:animation"
+    const val COMPOSE_ANIMATION_CORE = "androidx.compose.animation:animation-core"
     const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose"
+    const val INSETS = "dev.chrisbanes.accompanist:accompanist-insets"
 }
