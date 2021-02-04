@@ -1,12 +1,18 @@
 package com.elbehiry.delish.ui.launcher
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
 import com.elbehiry.delish.R
 import kotlinx.coroutines.delay
@@ -21,7 +27,9 @@ fun LauncherView(
 ) {
     val launchDestination: Boolean by viewModel.launchDestination.observeAsState(false)
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.grey)),
         contentAlignment = Alignment.Center
     ) {
         val currentOnTimeout by rememberUpdatedState(onLauncherComplete)
@@ -31,7 +39,8 @@ fun LauncherView(
         }
 
         Image(
-            imageVector = vectorResource(id = R.drawable.ic_recipe)
+            bitmap = imageResource(id = R.drawable.logo),
+            contentDescription = null
         )
     }
 }

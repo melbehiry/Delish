@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.compose.ui.platform.setContent
 import com.elbehiry.delish.ui.main.launchMainActivity
+import com.elbehiry.delish.ui.onboarding.launchOnBoardingActivity
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,10 +23,11 @@ class LauncherActivity : ComponentActivity() {
             DelishComposeTheme {
                 LauncherView(viewModel = launcherViewModel,
                     onLauncherComplete = { onBoardingCompleted ->
-                        launchMainActivity(
-                            context = this,
-                            onBoardingCompleted = onBoardingCompleted
-                        )
+                        if (onBoardingCompleted) {
+                            launchMainActivity(context = this)
+                        } else {
+                            launchOnBoardingActivity(context = this)
+                        }
                         finish()
                     })
             }
