@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.vectorResource
 import com.elbehiry.delish.R
 import kotlinx.coroutines.delay
 
@@ -23,9 +22,10 @@ private const val SplashWaitTime: Long = 2000
 fun LauncherView(
     viewModel: LauncherViewModel,
     modifier: Modifier = Modifier,
-    onLauncherComplete: (Boolean) -> Unit
+    onLauncherComplete: (LauncherViewModel.LaunchDestination) -> Unit
 ) {
-    val launchDestination: Boolean by viewModel.launchDestination.observeAsState(false)
+    val launchDestination: LauncherViewModel.LaunchDestination by
+    viewModel.launchDestination.observeAsState(LauncherViewModel.LaunchDestination.ONBOARDING)
     Box(
         modifier = modifier
             .fillMaxSize()

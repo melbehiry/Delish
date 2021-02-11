@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Delish</string>
+    <string name="home_tab">Home</string>
+    <string name="feature_tab">Feature</string>
 </resources>

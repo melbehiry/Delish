@@ -9,6 +9,9 @@ import com.elbehiry.delish.ui.main.launchMainActivity
 import com.elbehiry.delish.ui.onboarding.launchOnBoardingActivity
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
+import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.MAIN_ACTIVITY
+import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.ONBOARDING
+import com.elbehiry.delish.ui.util.checkAllMatched
 
 @AndroidEntryPoint
 class LauncherActivity : ComponentActivity() {
@@ -22,12 +25,11 @@ class LauncherActivity : ComponentActivity() {
         setContent {
             DelishComposeTheme {
                 LauncherView(viewModel = launcherViewModel,
-                    onLauncherComplete = { onBoardingCompleted ->
-                        if (onBoardingCompleted) {
-                            launchMainActivity(context = this)
-                        } else {
-                            launchOnBoardingActivity(context = this)
-                        }
+                    onLauncherComplete = { destination ->
+                        when (destination) {
+                            MAIN_ACTIVITY -> launchMainActivity(context = this)
+                            ONBOARDING ->  launchOnBoardingActivity(context = this)
+                        }.checkAllMatched
                         finish()
                     })
             }
