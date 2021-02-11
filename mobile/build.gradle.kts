@@ -96,6 +96,8 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
     kapt(platform(project(":depconstraints")))
     implementation(project(":shared"))
+    testImplementation(project(":test-shared"))
+    testImplementation(project(":androidTest-shared"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -143,6 +145,8 @@ dependencies {
     testImplementation(Libs.MOCKITO_CORE)
     testImplementation(Libs.MOCKITO_KOTLIN)
     testImplementation(Libs.HAMCREST)
+    // unit tests livedata
+    testImplementation(Libs.ARCH_TESTING)
 
     implementation(Libs.GSON)
 

@@ -84,6 +84,8 @@ dependencies {
     api(platform(project(":depconstraints")))
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    testImplementation(project(":test-shared"))
+    testImplementation(project(":androidTest-shared"))
 
 
     // Architecture Components

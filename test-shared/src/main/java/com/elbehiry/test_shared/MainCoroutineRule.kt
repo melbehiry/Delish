@@ -1,4 +1,4 @@
-package com.elbehiry.shared
+package com.elbehiry.test_shared
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,5 +1,7 @@
 include(
     ":mobile",
     ":depconstraints",
-    ":shared"
+    ":shared",
+    ":test-shared",
+    ":androidTest-shared"
 )
