@@ -12,5 +12,5 @@ class OnBoardingCompleteActionUseCase @Inject constructor(
     @IoDispatcher dispatcher: CoroutineDispatcher
 ) : UseCase<Boolean, Unit>(dispatcher) {
     override suspend fun execute(parameters: Boolean) =
-        dataStoreRepository.save(PreferencesKeys.onBoardingCompletedKey)
+        dataStoreRepository.save(PreferencesKeys.onBoardingCompletedKey,true)
 }

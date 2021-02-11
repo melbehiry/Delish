@@ -1,9 +1,9 @@
 package com.elbehiry.shared.usecase
 
-import com.elbehiry.shared.MainCoroutineRule
+import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.shared.domain.FlowUseCase
 import com.elbehiry.shared.result.Result
-import com.elbehiry.shared.runBlockingTest
+import com.elbehiry.test_shared.runBlockingTest
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -40,7 +40,5 @@ class FlowUseCaseTest {
         override fun execute(parameters: Unit): Flow<Result<Unit>> = flow {
             throw Exception("Test exception")
         }
-
     }
-
 }

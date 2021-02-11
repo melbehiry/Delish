@@ -1,9 +1,9 @@
 package com.elbehiry.shared.usecase
 
-import com.elbehiry.shared.MainCoroutineRule
+import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.shared.domain.UseCase
 import com.elbehiry.shared.result.Result
-import com.elbehiry.shared.runBlockingTest
+import com.elbehiry.test_shared.runBlockingTest
 import kotlinx.coroutines.CoroutineDispatcher
 import org.junit.Before
 import org.junit.Rule

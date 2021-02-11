@@ -5,6 +5,6 @@ import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.flow.Flow
 
 interface DataStoreOperations {
-    suspend fun save(key: Preferences.Key<Boolean>)
+    suspend fun save(key: Preferences.Key<Boolean>, value: Boolean)
     fun read(key: Preferences.Key<Boolean>): Flow<Result<Boolean>>
 }

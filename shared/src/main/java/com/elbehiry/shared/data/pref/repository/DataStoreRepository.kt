@@ -13,19 +13,18 @@ class DataStoreRepository @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : DataStoreOperations {
 
-    override suspend fun save(key: Preferences.Key<Boolean>) {
+    override suspend fun save(key: Preferences.Key<Boolean>, value: Boolean) {
         dataStore.edit {
-            val value = it[key] ?: false
-            it[key] = !value
+            it[key] = value
         }
     }
 
     override fun read(key: Preferences.Key<Boolean>): Flow<Result<Boolean>> {
         return dataStore.data
-            .catch {
-                Result.Error(Exception(it))
-            }.map {
+            .map {
                 Result.Success(it[key] ?: false)
+            }.catch {
+                Result.Error(Exception(it))
             }
     }
 }
