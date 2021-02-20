@@ -31,5 +31,4 @@ class LauncherViewModel @ViewModelInject constructor(
         ONBOARDING,
         MAIN_ACTIVITY
     }
-
 }

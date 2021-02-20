@@ -2,4 +2,9 @@
     <string name="app_name">Delish</string>
     <string name="home_tab">Home</string>
     <string name="feature_tab">Feature</string>
+    <string name="recipes_tab">Recipes</string>
+    <string name="book_mark">Book Mark</string>
+    <string name="meal_plan">Meal Plan</string>
+    <string name="Daily_inspiration">Daily Inspiration</string>
+    <string name="bookmark">bookmark</string>
 </resources>

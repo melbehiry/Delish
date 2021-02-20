@@ -32,6 +32,17 @@ val DarkTypography = Typography(
         fontWeight = FontWeight.Normal,
         color = white87,
         fontSize = 14.sp
+    ),
+    subtitle1 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    subtitle2 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        color = Color.Gray
     )
 )
 
@@ -60,5 +71,16 @@ val LightTypography = Typography(
         fontWeight = FontWeight.Normal,
         color = background800,
         fontSize = 14.sp
+    ),
+    subtitle1 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    subtitle2 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        color = Color.Gray
     )
 )

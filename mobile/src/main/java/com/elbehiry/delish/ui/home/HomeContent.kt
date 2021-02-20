@@ -1,98 +1,64 @@
 package com.elbehiry.delish.ui.home
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.ConstraintLayout
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import com.elbehiry.delish.ui.main.MainViewModel
+import com.elbehiry.model.RecipesItem
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.elbehiry.delish.R
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+
 
 @Composable
-fun HomeContent(
-    selectedTab: DelishHomeTabs,
-    setSelectedTab: (DelishHomeTabs) -> Unit
-) {
+fun HomeContent(viewModel: MainViewModel, modifier: Modifier) {
+    val recipes: List<RecipesItem> by viewModel.randomRecipes.observeAsState(listOf())
+//    val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
 
-    val tabs = DelishHomeTabs.values()
-
-    ConstraintLayout {
-        Scaffold(
-            backgroundColor = MaterialTheme.colors.primarySurface,
-            topBar = { HomeTopBar() },
-            bottomBar = {
-                BottomNavigation {
-                    tabs.forEach { tab ->
-                        BottomNavigationItem(
-                            icon = {
-                                Icon(
-                                    imageVector = vectorResource(id = tab.icon),
-                                    contentDescription = null
-                                )
-                            },
-                            label = { Text(text = stringResource(id = tab.title)) },
-                            selected = tab == selectedTab,
-                            onClick = { setSelectedTab(tab) },
-                            alwaysShowLabels = false,
-                            selectedContentColor = AmbientContentColor.current,
-                            unselectedContentColor = AmbientContentColor.current,
-                            modifier = Modifier.navigationBarsPadding()
-                        )
-                    }
-                }
-            }
-        ) {}
-//        { innerPadding ->
-//            val modifier = Modifier.padding(innerPadding)
-//            when (selectedTab) {
-//                StellerHomeTab.HOME -> HomePhotos(photos, selectPhoto, modifier)
-//                else -> HomePhotos(photos, selectPhoto, modifier)
-//            }
-//        }
-//        CircularProgressIndicator(
-//            modifier = Modifier.constrainAs(progress) {
-//                top.linkTo(parent.top)
-//                bottom.linkTo(parent.bottom)
-//                start.linkTo(parent.start)
-//                end.linkTo(parent.end)
-//            }.visible(isLoading)
-//        )
-//    }
+    Surface(modifier = Modifier.fillMaxSize()) {
+        LazyColumn {
+            item { HeaderTitle() }
+            item { DailyInspiration(recipes) }
+        }
     }
 }
 
 @Composable
-fun HomeTopBar() {
-    TopAppBar(
-        elevation = 6.dp,
-        modifier = Modifier.preferredHeight(58.dp)
-    ) {
+fun HeaderTitle() {
+    Text(
+        text = stringResource(id = R.string.Daily_inspiration),
+        color = MaterialTheme.colors.primary,
+        style = MaterialTheme.typography.h6,
+        textAlign = TextAlign.Start,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = 16.dp,
+                top = 16.dp,
+                end = 16.dp,
+                bottom = 0.dp
+            )
+    )
+}
 
-        Text(
-            text = stringResource(id = R.string.app_name),
-            color = Color.White,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Black,
-            modifier = Modifier
-                .padding(8.dp)
+@Composable
+fun DailyInspiration(recipes: List<RecipesItem>) {
+    LazyRow(
+        contentPadding = PaddingValues(
+            8.dp, 8.dp, 16.dp, 16.dp
         )
-
+    ) {
+        items(recipes) { recipe ->
+            InspirationItem(recipe)
+        }
     }
-}
-
-enum class DelishHomeTabs(
-    @StringRes val title: Int,
-    @DrawableRes val icon: Int
-) {
-    Home(R.string.home_tab, R.drawable.ic_grain),
-    Featured(R.string.feature_tab, R.drawable.ic_featured)
 }

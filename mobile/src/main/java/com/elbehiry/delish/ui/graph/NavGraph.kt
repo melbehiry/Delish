@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
-import com.elbehiry.delish.ui.home.DelishHomeTabs
-import com.elbehiry.delish.ui.home.HomeContent
+import com.elbehiry.delish.ui.main.MainContent
+import com.elbehiry.delish.ui.main.MainViewModel
 
 object MainDestinations {
     const val MAIN_ROUTE = "main"
@@ -18,6 +18,7 @@ object MainDestinations {
 @VisibleForTesting
 @Composable
 fun NavGraph(
+    viewModel: MainViewModel,
     startDestination: String = MainDestinations.MAIN_ROUTE
 ) {
     val navController = rememberNavController()
@@ -28,9 +29,7 @@ fun NavGraph(
         startDestination = startDestination,
     ) {
         composable((MainDestinations.MAIN_ROUTE)) {
-            HomeContent(DelishHomeTabs.Home) {
-
-            }
+            MainContent(viewModel)
         }
     }
 }
