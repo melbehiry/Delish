@@ -4,13 +4,27 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
+import com.elbehiry.shared.BuildConfig
+import com.elbehiry.shared.data.network.CommonHeaderInterceptor
 import com.elbehiry.shared.data.pref.repository.DataStoreOperations
 import com.elbehiry.shared.data.pref.repository.DataStoreRepository
+import com.elbehiry.shared.data.remote.DelishApi
+import com.elbehiry.shared.util.ApplicationJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 const val dataStoreName = "DelishDataStore"
@@ -29,4 +43,56 @@ class SharedModule {
     @Provides
     fun provideDataStoreRepository(dataStore: DataStore<Preferences>): DataStoreOperations =
         DataStoreRepository(dataStore)
+
+    @Singleton
+    @Provides
+    @Named("logging")
+    internal fun provideHttpLoggingInterceptor(): Interceptor =
+        HttpLoggingInterceptor { message ->
+            Timber.d(message)
+        }.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+
+    @Provides
+    @Singleton
+    @Named("header")
+    fun provideCommonHeaderInterceptor(): Interceptor {
+        return CommonHeaderInterceptor()
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttp(
+        @Named("logging") httpLoggingInterceptor: Interceptor,
+        @Named("header") headerInterceptor: Interceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(10L, TimeUnit.SECONDS)
+            .writeTimeout(10L, TimeUnit.SECONDS)
+            .readTimeout(30L, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(headerInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMoshi() = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideRetroFit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.SPOONACULAR_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideDelishApi(retrofit: Retrofit): DelishApi =
+        retrofit.create(DelishApi::class.java)
+
 }
