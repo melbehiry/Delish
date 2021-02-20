@@ -34,6 +34,7 @@ val datastore = "1.0.0-alpha05"
 val compose = "1.0.0-alpha11"
 val composeNavigation = "1.0.0-alpha04"
 val insets = "0.5.0"
+val coil = "0.5.0"
 
 
 dependencies {
@@ -41,6 +42,7 @@ dependencies {
         api("${Libs.ANDROIDX_HILT_COMPILER}:$hiltJetPack")
         api("${Libs.CORE_KTX}:$core")
         api("${Libs.COROUTINES}:$coroutines")
+        api("${Libs.COROUTINES_ANDROID}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")
         api("${Libs.ESPRESSO_CORE}:$espresso")
         api("${Libs.ESPRESSO_CONTRIB}:$espresso")
@@ -68,6 +70,7 @@ dependencies {
         api("${Libs.ROOM_COMPILER}:$room")
         api("${Libs.OKHTTP}:$okhttp")
         api("${Libs.OKHTTP_LOGGING_INTERCEPTOR}:$okhttp")
+        api("${Libs.OKHTTP_MOCK_SERVER}:$okhttp")
         api("${Libs.RULES}:$rules")
         api("${Libs.RUNNER}:$runner")
         api("${Libs.TIMBER}:$timber")
@@ -91,8 +94,10 @@ dependencies {
         api("${Libs.COMPOSE_RUNTIME}:$compose")
         api("${Libs.COMPOSE_ANIMATION}:$compose")
         api("${Libs.COMPOSE_ANIMATION_CORE}:$compose")
+        api("${Libs.COMPOSE_ICON}:$compose")
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
         api("${Libs.INSETS}:$insets")
+        api("${Libs.COIL}:$coil")
     }
 }
 

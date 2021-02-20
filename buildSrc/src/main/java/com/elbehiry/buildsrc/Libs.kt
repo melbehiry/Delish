@@ -2,6 +2,7 @@ object Libs {
     const val ANDROIDX_HILT_COMPILER = "androidx.hilt:hilt-compiler"
     const val CORE_KTX = "androidx.core:core-ktx"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+    const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
     const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test"
     const val ESPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib"
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core"
@@ -28,6 +29,7 @@ object Libs {
     const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx"
     const val OKHTTP = "com.squareup.okhttp3:okhttp"
     const val OKHTTP_LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor"
+    const val OKHTTP_MOCK_SERVER = "com.squareup.okhttp3:mockwebserver"
     const val ROOM_COMPILER = "androidx.room:room-compiler"
     const val ROOM_KTX = "androidx.room:room-ktx"
     const val ROOM_RUNTIME = "androidx.room:room-runtime"
@@ -53,5 +55,7 @@ object Libs {
     const val COMPOSE_ANIMATION = "androidx.compose.animation:animation"
     const val COMPOSE_ANIMATION_CORE = "androidx.compose.animation:animation-core"
     const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose"
+    const val COMPOSE_ICON = "androidx.compose.material:material-icons-extended"
     const val INSETS = "dev.chrisbanes.accompanist:accompanist-insets"
+    const val COIL = "dev.chrisbanes.accompanist:accompanist-coil"
 }

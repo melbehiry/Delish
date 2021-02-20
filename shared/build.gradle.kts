@@ -57,10 +57,10 @@ android {
     }
 
     buildTypes {
-        val urlName = "UNSPLASH_BASE_URL"
-        val baseUrl = "\"https://api.unsplash.com/\""
-        val keyName = "UNSPLASH_KEY"
-        val keyValue = "\"42b524e3c38fcf0c887e3dd2c383ae1c7f64011566b586d48bc93549632eff46\""
+        val urlName = "SPOONACULAR_BASE_URL"
+        val baseUrl = "\"https://api.spoonacular.com/\""
+        val keyName = "SPOONACULAR_KEY"
+        val keyValue = "\"8f544101cb524434a464b80a7b9951f6\""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
             buildConfigField(
@@ -86,7 +86,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     testImplementation(project(":test-shared"))
     testImplementation(project(":androidTest-shared"))
-
+    api(project(":model"))
 
     // Architecture Components
     implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)
@@ -105,6 +105,7 @@ dependencies {
     // OkHttp
     implementation(Libs.OKHTTP)
     implementation(Libs.OKHTTP_LOGGING_INTERCEPTOR)
+    testImplementation(Libs.OKHTTP_MOCK_SERVER)
 
     // Retrofit
     api(Libs.RETROFIT)

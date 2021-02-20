@@ -92,12 +92,11 @@ android {
 
 dependencies {
     api(platform(project(":depconstraints")))
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.1")
     kapt(platform(project(":depconstraints")))
     implementation(project(":shared"))
     testImplementation(project(":test-shared"))
     testImplementation(project(":androidTest-shared"))
+    api(project(":model"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -112,10 +111,10 @@ dependencies {
     implementation(Libs.ROOM_KTX)
     implementation(Libs.ROOM_RUNTIME)
     kapt(Libs.ROOM_COMPILER)
-    testImplementation(Libs.ROOM_KTX)
-    testImplementation(Libs.ROOM_RUNTIME)
-    testImplementation(Libs.LIFECYCLE_EXTENSION)
-    testImplementation(Libs.LIFECYCLE_RUN_TIME)
+    implementation(Libs.ROOM_KTX)
+    implementation(Libs.ROOM_RUNTIME)
+    implementation(Libs.LIFECYCLE_EXTENSION)
+    implementation(Libs.LIFECYCLE_RUN_TIME)
 
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
@@ -160,6 +159,8 @@ dependencies {
     implementation(Libs.COMPOSE_RUNTIME_LIVEDATA)
     implementation(Libs.COMPOSE_ANIMATION)
     implementation(Libs.COMPOSE_NAVIGATION)
+    implementation(Libs.COMPOSE_ICON)
 
     implementation(Libs.INSETS)
+    implementation(Libs.COIL)
 }

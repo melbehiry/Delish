@@ -3,5 +3,6 @@ include(
     ":depconstraints",
     ":shared",
     ":test-shared",
-    ":androidTest-shared"
+    ":androidTest-shared",
+    ":model"
 )
