@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -23,7 +24,8 @@ import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @Composable
 fun MainContent(
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    onIngredientContent: () -> Unit
 ) {
 
     val (selectedTab, setSelectedTab) = remember { mutableStateOf(DelishHomeTabs.Home) }
@@ -56,7 +58,7 @@ fun MainContent(
     ) { innerPadding ->
         val modifier = Modifier.padding(innerPadding)
         when (selectedTab) {
-            DelishHomeTabs.Home -> HomeContent(viewModel,modifier)
+            DelishHomeTabs.Home -> HomeContent(viewModel,onIngredientContent,modifier)
             DelishHomeTabs.BookMark -> BookMark(modifier)
             DelishHomeTabs.MealPlan -> MealPlan(modifier)
         }
@@ -77,6 +79,7 @@ fun HomeTopBar() {
             fontWeight = FontWeight.Black,
             modifier = Modifier
                 .padding(8.dp)
+                .align(Alignment.CenterVertically)
         )
 
     }

@@ -21,9 +21,13 @@ import com.elbehiry.model.IngredientItem
 
 
 @Composable
-fun HomeContent(viewModel: MainViewModel, modifier: Modifier) {
+fun HomeContent(
+    viewModel: MainViewModel,
+    onIngredientContent: () -> Unit,
+    modifier: Modifier
+) {
     val recipes: List<RecipesItem> by viewModel.randomRecipes.observeAsState(listOf())
-    val ingredients :List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
+    val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
 
 //    val isLoading: Boolean by viewModel.isLoading.observeAsState(false)
 
@@ -31,7 +35,7 @@ fun HomeContent(viewModel: MainViewModel, modifier: Modifier) {
         LazyColumn {
             item { HeaderTitle() }
             item { DailyInspiration(recipes) }
-            item { HomeIngredient(ingredients) }
+            item { HomeIngredient(ingredients,onIngredientContent) }
             item { Spacer(modifier = Modifier.padding(100.dp)) }
         }
     }

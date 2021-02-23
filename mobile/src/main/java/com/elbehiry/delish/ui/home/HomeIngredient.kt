@@ -23,7 +23,7 @@ import com.elbehiry.delish.ui.widget.VerticalGrid
 import com.elbehiry.model.IngredientItem
 
 @Composable
-fun HomeIngredient(ingredients: List<IngredientItem>) {
+fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () -> Unit) {
     Column(
         modifier = Modifier.background(color = Color.DarkGray)
     ) {
@@ -39,11 +39,11 @@ fun HomeIngredient(ingredients: List<IngredientItem>) {
             }
         }
         Button(
-            onClick = { },
+            onClick = { onIngredientContent() },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 28.dp,horizontal = 16.dp),
-            colors= ButtonDefaults.textButtonColors(
+                .padding(vertical = 28.dp, horizontal = 16.dp),
+            colors = ButtonDefaults.textButtonColors(
                 backgroundColor = Color.White
             ),
             shape = MaterialTheme.shapes.small
@@ -104,5 +104,5 @@ fun previewIngredient() {
 fun previewIngredientList() {
     HomeIngredient(
         IngredientListProvider.ingredientList.take(4)
-    )
+    ) {}
 }

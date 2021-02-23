@@ -8,11 +8,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import com.elbehiry.delish.ui.ingredient.IngredientFullList
 import com.elbehiry.delish.ui.main.MainContent
 import com.elbehiry.delish.ui.main.MainViewModel
 
 object MainDestinations {
     const val MAIN_ROUTE = "main"
+    const val INGREDIENT_ROUTE = "ingredient"
+
 }
 
 @VisibleForTesting
@@ -29,7 +32,13 @@ fun NavGraph(
         startDestination = startDestination,
     ) {
         composable((MainDestinations.MAIN_ROUTE)) {
-            MainContent(viewModel)
+            MainContent(
+                viewModel = viewModel,
+                onIngredientContent = actions.onIngredientContent
+            )
+        }
+        composable((MainDestinations.INGREDIENT_ROUTE)) {
+            IngredientFullList(viewModel)
         }
     }
 }
@@ -37,9 +46,9 @@ fun NavGraph(
 class MainActions(
     navController: NavHostController
 ) {
-    val onHomeContent: () -> Unit = {
+    val onIngredientContent: () -> Unit = {
         navController.navigate(
-            route = MainDestinations.MAIN_ROUTE
+            route = MainDestinations.INGREDIENT_ROUTE
         )
     }
 }
