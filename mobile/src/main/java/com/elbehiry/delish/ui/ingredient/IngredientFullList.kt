@@ -81,7 +81,6 @@ fun FullIngredientItem(ingredientItem: IngredientItem) {
                     .preferredHeight(120.dp)
                     .preferredWidth(120.dp)
                     .padding(20.dp)
-                    .align(Alignment.Center)
             )
         }
         Text(

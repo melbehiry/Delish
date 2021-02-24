@@ -44,7 +44,7 @@ object IngredientListProvider {
             8,
             R.string.olieve,
             R.drawable.olive_oil,
-            R.color.olieve_background
+            R.color.olive_background
         ),IngredientItem(
             9,
             R.string.carrot,

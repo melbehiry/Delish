@@ -5,8 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="grey">#FAFAFA</color>
     <color name="black_alpha">#80000000</color>
+    <color name="black_alpha_30">#66000000</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFF</color>
+    <color name="white_75">#BEFFFFFF</color>
     <color name="basil_background">#d0efb3</color>
     <color name="avocado_background">#c7e7a6</color>
     <color name="corn_background">#f5eaa8</color>
@@ -14,7 +16,7 @@
     <color name="beetroot_background">#ee7b7e</color>
     <color name="acai_background">#bfd5e2</color>
     <color name="flour_background">#d8d8d8</color>
-    <color name="olieve_background">#fff3af</color>
+    <color name="olive_background">#fff3af</color>
     <color name="carrot_background">#ffd48f</color>
     <color name="apple_background">#ee7b7e</color>
     <color name="almond_background">#ee7b7e</color>

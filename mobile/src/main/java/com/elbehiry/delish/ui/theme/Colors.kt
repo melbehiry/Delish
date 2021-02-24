@@ -21,3 +21,17 @@ val blue200 = Color(0xff91a4fc)
 fun Colors.compositedOnSurface(alpha: Float): Color {
     return onSurface.copy(alpha = alpha).compositeOver(surface)
 }
+
+@Composable
+fun Colors.randomBackgroundColor(): Color {
+    val colors: List<Color> = listOf(
+        Color(0xFFD0EFB3),
+        Color(0xFFC0D6E3),
+        Color(0xFFD8D8D8),
+        Color(0xFFEE7B7E),
+        Color(0xFFFFD48F),
+        Color(0xFFD8D8D8)
+    )
+
+    return colors.random()
+}

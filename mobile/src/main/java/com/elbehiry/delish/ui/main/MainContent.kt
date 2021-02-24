@@ -29,6 +29,7 @@ fun MainContent(
 ) {
 
     val (selectedTab, setSelectedTab) = remember { mutableStateOf(DelishHomeTabs.Home) }
+    var loading = remember { false }
 
     val tabs = DelishHomeTabs.values()
     Scaffold(
@@ -58,13 +59,12 @@ fun MainContent(
     ) { innerPadding ->
         val modifier = Modifier.padding(innerPadding)
         when (selectedTab) {
-            DelishHomeTabs.Home -> HomeContent(viewModel,onIngredientContent,modifier)
+            DelishHomeTabs.Home -> HomeContent(viewModel, onIngredientContent)
             DelishHomeTabs.BookMark -> BookMark(modifier)
             DelishHomeTabs.MealPlan -> MealPlan(modifier)
         }
     }
 }
-
 @Composable
 fun HomeTopBar() {
     TopAppBar(

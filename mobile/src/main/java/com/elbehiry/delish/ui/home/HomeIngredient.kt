@@ -29,7 +29,7 @@ fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () ->
     ) {
         Text(
             text = stringResource(id = R.string.search_ingredient_home),
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.h6,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp).fillMaxWidth()
         )
