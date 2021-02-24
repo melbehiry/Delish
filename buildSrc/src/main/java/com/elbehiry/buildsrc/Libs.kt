@@ -25,6 +25,7 @@ object Libs {
     const val MATERIAL = "com.google.android.material:material"
     const val MOCKITO_CORE = "org.mockito:mockito-core"
     const val MOCKITO_KOTLIN = "com.nhaarman:mockito-kotlin"
+    const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx"
     const val NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx"
     const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx"
     const val OKHTTP = "com.squareup.okhttp3:okhttp"

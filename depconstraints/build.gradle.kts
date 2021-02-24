@@ -35,6 +35,7 @@ val compose = "1.0.0-alpha11"
 val composeNavigation = "1.0.0-alpha04"
 val insets = "0.5.0"
 val coil = "0.5.0"
+val fragmentKtx = "1.3.0"
 
 
 dependencies {
@@ -64,6 +65,7 @@ dependencies {
         api("${Libs.MOCKITO_CORE}:$mockito")
         api("${Libs.MOCKITO_KOTLIN}:$mockitoKotlin")
         api("${Libs.NAVIGATION_FRAGMENT_KTX}:${Versions.NAVIGATION}")
+        api("${Libs.FRAGMENT_KTX}:$fragmentKtx")
         api("${Libs.NAVIGATION_UI_KTX}:${Versions.NAVIGATION}")
         api("${Libs.ROOM_KTX}:$room")
         api("${Libs.ROOM_RUNTIME}:$room")
