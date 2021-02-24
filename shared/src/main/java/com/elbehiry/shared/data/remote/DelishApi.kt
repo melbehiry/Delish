@@ -1,5 +1,6 @@
 package com.elbehiry.shared.data.remote
 
+import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.Recipes
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
@@ -13,4 +14,7 @@ interface DelishApi {
         @Query("tags") tags: String?,
         @Query("number") number: Int?
     ): Recipes
+
+    @GET("https://delish.getsandbox.com/getCuisines")
+    suspend fun getAvailableCuisines(): List<CuisineItem>
 }

@@ -1,5 +1,9 @@
 package com.elbehiry.shared.di
 
+import com.elbehiry.shared.data.recipes.cuisines.remote.GetCuisinesDataSource
+import com.elbehiry.shared.data.recipes.cuisines.remote.GetCuisinesRemoteDataSource
+import com.elbehiry.shared.data.recipes.cuisines.repository.CuisinesRepository
+import com.elbehiry.shared.data.recipes.cuisines.repository.GetCuisinesRepository
 import com.elbehiry.shared.data.recipes.random.remote.GetRandomRecipesRemoteDataSource
 import com.elbehiry.shared.data.recipes.random.remote.RandomRecipesRemoteDataSource
 import com.elbehiry.shared.data.recipes.random.repository.GetRandomRecipesRepository
@@ -24,4 +28,13 @@ class RecipesModule {
     ): RandomRecipesRepository =
         GetRandomRecipesRepository(randomRecipesRemoteDataSource)
 
+    @Provides
+    fun provideGetCuisinesDataSource(api: DelishApi): GetCuisinesDataSource =
+        GetCuisinesRemoteDataSource(api)
+
+    @Provides
+    fun provideCuisinesRepository(
+        getCuisinesDataSource: GetCuisinesDataSource
+    ): CuisinesRepository =
+        GetCuisinesRepository(getCuisinesDataSource)
 }
