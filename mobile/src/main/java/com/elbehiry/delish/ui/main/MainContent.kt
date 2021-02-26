@@ -2,8 +2,8 @@ package com.elbehiry.delish.ui.main
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,16 +41,16 @@ fun MainContent(
                     BottomNavigationItem(
                         icon = {
                             Icon(
-                                imageVector = vectorResource(id = tab.icon),
+                                painter = painterResource(id = tab.icon),
                                 contentDescription = null
                             )
                         },
                         label = { Text(text = stringResource(id = tab.title)) },
                         selected = tab == selectedTab,
                         onClick = { setSelectedTab(tab) },
-                        alwaysShowLabels = false,
-                        selectedContentColor = AmbientContentColor.current,
-                        unselectedContentColor = AmbientContentColor.current,
+                        alwaysShowLabel = false,
+                        selectedContentColor = MaterialTheme.colors.secondary,
+                        unselectedContentColor = LocalContentColor.current,
                         modifier = Modifier.navigationBarsPadding()
                     )
                 }
@@ -69,7 +69,7 @@ fun MainContent(
 fun HomeTopBar() {
     TopAppBar(
         elevation = 6.dp,
-        modifier = Modifier.preferredHeight(58.dp)
+        modifier = Modifier.height(58.dp)
     ) {
 
         Text(

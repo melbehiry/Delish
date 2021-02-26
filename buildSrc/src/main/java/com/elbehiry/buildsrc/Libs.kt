@@ -56,6 +56,8 @@ object Libs {
     const val COMPOSE_ANIMATION = "androidx.compose.animation:animation"
     const val COMPOSE_ANIMATION_CORE = "androidx.compose.animation:animation-core"
     const val COMPOSE_NAVIGATION = "androidx.navigation:navigation-compose"
+    const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose"
+    const val COMPOSE_CONSTRAINT = "androidx.constraintlayout:constraintlayout-compose"
     const val COMPOSE_ICON = "androidx.compose.material:material-icons-extended"
     const val INSETS = "dev.chrisbanes.accompanist:accompanist-insets"
     const val COIL = "dev.chrisbanes.accompanist:accompanist-coil"

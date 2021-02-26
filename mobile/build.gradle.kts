@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("kotlin-android")
@@ -161,6 +160,8 @@ dependencies {
     implementation(Libs.COMPOSE_ANIMATION)
     implementation(Libs.COMPOSE_NAVIGATION)
     implementation(Libs.COMPOSE_ICON)
+    implementation(Libs.COMPOSE_ACTIVITY)
+    implementation(Libs.COMPOSE_CONSTRAINT)
 
     implementation(Libs.INSETS)
     implementation(Libs.COIL)

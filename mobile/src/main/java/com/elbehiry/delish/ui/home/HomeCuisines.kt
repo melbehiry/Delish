@@ -47,9 +47,9 @@ fun CuisinesList(cuisines: List<CuisineItem>) {
         )
     ) {
         val cuisinesItems =
-        items(cuisines) { recipe ->
-            CuisineItem(recipe)
-        }
+            items(cuisines) { recipe ->
+                CuisineItem(recipe)
+            }
     }
 }
 
@@ -57,7 +57,7 @@ fun CuisinesList(cuisines: List<CuisineItem>) {
 fun CuisineItem(item: CuisineItem) {
     Surface(
         modifier = Modifier
-            .preferredSize(180.dp, 180.dp)
+            .requiredSize(180.dp, 180.dp)
             .padding(8.dp).clickable { },
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
@@ -67,13 +67,12 @@ fun CuisineItem(item: CuisineItem) {
                 .background(Color(android.graphics.Color.parseColor(item.color)))
         ) {
             CoilImage(
-                data = item.image, contentDescription = null,
+                data = item.image,
+                contentDescription = null,
                 modifier = Modifier
-                    .padding(8.dp).preferredSize(100.dp)
-                    .align(Alignment.CenterHorizontally)
-                ,
+                    .padding(8.dp).requiredSize(100.dp)
+                    .align(Alignment.CenterHorizontally),
                 contentScale = ContentScale.Crop,
-                fadeIn = true,
                 loading = {
                     Spacer(
                         modifier = Modifier

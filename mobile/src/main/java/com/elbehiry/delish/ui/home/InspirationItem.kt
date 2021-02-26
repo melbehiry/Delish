@@ -15,6 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import com.elbehiry.delish.ui.theme.compositedOnSurface
 import com.elbehiry.delish.ui.widget.BookMarkButton
@@ -27,7 +29,7 @@ fun InspirationItem(
     modifier: Modifier = Modifier
 ) {
     ConstraintLayout(modifier = Modifier
-        .preferredWidth(250.dp)
+        .width(250.dp)
         .padding(8.dp)
         .clickable { }
     ) {
@@ -35,7 +37,7 @@ fun InspirationItem(
         Surface(
             modifier = modifier
                 .fillMaxWidth()
-                .preferredHeight(150.dp)
+                .height(150.dp)
                 .constrainAs(image) {
                     linkTo(
                         start = parent.start,
@@ -56,7 +58,6 @@ fun InspirationItem(
                     modifier = Modifier
                         .fillMaxSize(),
                     contentScale = ContentScale.Crop,
-                    fadeIn = true,
                     loading = {
                         Spacer(
                             modifier = Modifier

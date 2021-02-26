@@ -3,7 +3,7 @@ plugins {
     id("maven-publish")
 }
 
-val core = "1.2.0"
+val core = "1.3.2"
 val coroutines = "1.4.2"
 val coroutinesTest = "1.4.2"
 val drawerLayout = "1.1.0-rc01"
@@ -31,10 +31,11 @@ val retrofit = "2.9.0"
 val moshi = "1.11.0"
 val kotchi = "2.3.3"
 val datastore = "1.0.0-alpha05"
-val compose = "1.0.0-alpha11"
-val composeNavigation = "1.0.0-alpha04"
-val insets = "0.5.0"
-val coil = "0.5.0"
+val compose = "1.0.0-beta01"
+val composeNavigation = "1.0.0-alpha08"
+val composeActivity = "1.3.0-alpha03"
+val composeConstraint = "1.0.0-alpha03"
+val accompanist = "0.6.0"
 val fragmentKtx = "1.3.0"
 
 
@@ -97,9 +98,11 @@ dependencies {
         api("${Libs.COMPOSE_ANIMATION}:$compose")
         api("${Libs.COMPOSE_ANIMATION_CORE}:$compose")
         api("${Libs.COMPOSE_ICON}:$compose")
+        api("${Libs.COMPOSE_ACTIVITY}:$composeActivity")
+        api("${Libs.COMPOSE_CONSTRAINT}:$composeConstraint")
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
-        api("${Libs.INSETS}:$insets")
-        api("${Libs.COIL}:$coil")
+        api("${Libs.INSETS}:$accompanist")
+        api("${Libs.COIL}:$accompanist")
     }
 }
 

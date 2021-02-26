@@ -7,10 +7,10 @@ object Versions {
     const val TARGET_SDK = 30
     const val MIN_SDK = 21
 
-    const val ANDROID_GRADLE_PLUGIN = "7.0.0-alpha05"
-    const val KOTLIN = "1.4.21-2"
+    const val ANDROID_GRADLE_PLUGIN = "7.0.0-alpha08"
+    const val KOTLIN = "1.4.30"
     const val NAVIGATION = "2.2.2"
     const val HILT = "2.30.1-alpha"
-    const val COMPOSE = "1.0.0-alpha11"
+    const val COMPOSE = "1.0.0-beta01"
     const val snapshot = ""
 }

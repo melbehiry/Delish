@@ -78,8 +78,8 @@ fun FullIngredientItem(ingredientItem: IngredientItem) {
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
                 modifier = Modifier
-                    .preferredHeight(120.dp)
-                    .preferredWidth(120.dp)
+                    .height(120.dp)
+                    .width(120.dp)
                     .padding(20.dp)
             )
         }

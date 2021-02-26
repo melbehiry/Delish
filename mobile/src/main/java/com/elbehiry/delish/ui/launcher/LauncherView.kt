@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import com.elbehiry.delish.R
 import kotlinx.coroutines.delay
 
@@ -29,7 +31,7 @@ fun LauncherView(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.grey)),
+            .background(colorResource(id = R.color.launcher_back)),
         contentAlignment = Alignment.Center
     ) {
         val currentOnTimeout by rememberUpdatedState(onLauncherComplete)
@@ -39,7 +41,7 @@ fun LauncherView(
         }
 
         Image(
-            bitmap = imageResource(id = R.drawable.logo),
+            painter = painterResource(id = R.drawable.ic_delish_logo),
             contentDescription = null
         )
     }

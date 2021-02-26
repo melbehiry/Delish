@@ -62,7 +62,7 @@ fun HomeIngredientItem(ingredientItem: IngredientItem) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
-                .preferredSize(70.dp)
+                .requiredSize(70.dp)
                 .clip(CircleShape)
                 .background(colorResource(id = ingredientItem.background))
         ) {
@@ -71,8 +71,8 @@ fun HomeIngredientItem(ingredientItem: IngredientItem) {
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
                 modifier = Modifier
-                    .preferredHeight(70.dp)
-                    .preferredWidth(70.dp)
+                    .height(70.dp)
+                    .width(70.dp)
                     .padding(8.dp)
                     .align(Alignment.Center)
             )

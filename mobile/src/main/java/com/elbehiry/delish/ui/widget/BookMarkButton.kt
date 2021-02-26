@@ -1,7 +1,8 @@
 package com.elbehiry.delish.ui.widget
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -24,13 +25,15 @@ fun BookMarkButton(
     Surface(
         color = colorResource(id = R.color.black_alpha),
         shape = CircleShape,
-        modifier = modifier.preferredSize(36.dp, 36.dp)
+        modifier = modifier.requiredSize(36.dp, 36.dp)
     ) {
         Icon(
             imageVector = icon,
             tint = colorResource(id = android.R.color.white),
             contentDescription = null,
-            modifier = Modifier.clickable {}
+            modifier = Modifier
+                .padding(6.dp)
+                .clickable {}
         )
     }
 }

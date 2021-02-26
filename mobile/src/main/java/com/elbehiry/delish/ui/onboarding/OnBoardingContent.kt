@@ -1,18 +1,22 @@
 package com.elbehiry.delish.ui.onboarding
 
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
@@ -28,7 +32,7 @@ fun OnBoardingContent(
     val launchDestination: Boolean by viewModel.navigateToMainActivity.observeAsState(false)
 
     if (launchDestination) {
-        launchMainActivity(context = AmbientContext.current)
+        launchMainActivity(context = LocalContext.current)
         onBoardingFinished()
     }
 
@@ -74,17 +78,17 @@ fun OnBoardingContent(
 
             Box(contentAlignment = Alignment.Center) {
                 Image(
-                    bitmap = imageResource(id = R.drawable.empty_plate),
+                    painter = painterResource(id = R.drawable.empty_plate),
                     contentDescription = null,
                     modifier = Modifier
-                        .preferredSize(250.dp, 250.dp)
+                        .requiredSize(250.dp, 250.dp)
                         .rotate(rotation)
                 )
                 Image(
-                    bitmap = imageResource(id = R.drawable.ic_health_food),
+                    painter = painterResource(id = R.drawable.ic_health_food),
                     contentDescription = null,
                     modifier = Modifier
-                        .preferredSize(100.dp, 100.dp)
+                        .requiredSize(100.dp, 100.dp)
                 )
             }
         }
@@ -102,7 +106,7 @@ fun OnBoardingTopBar(
             .statusBarsPadding()
     ) {
         Image(
-            imageVector = vectorResource(id = R.drawable.ic_lockup_white),
+            painter = painterResource(id = R.drawable.ic_lockup_white),
             contentDescription = null,
             modifier = Modifier.padding(16.dp)
         )
