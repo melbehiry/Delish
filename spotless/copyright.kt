@@ -14,12 +14,3 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.bookmark
-
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-
-@Composable
-fun BookMark() {
-    Text(text = "book mark")
-}

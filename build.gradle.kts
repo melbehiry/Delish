@@ -48,13 +48,13 @@ subprojects {
             ktlint(ktlintVer).userData(
                 mapOf("max_line_length" to "100", "disabled_rules" to "import-ordering")
             )
-            licenseHeaderFile(project.rootProject.file("copyright.kt"))
+            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
         }
         kotlinGradle {
             // same as kotlin, but for .gradle.kts files (defaults to '*.gradle.kts')
             target("**/*.gradle.kts")
             ktlint(ktlintVer)
-            licenseHeaderFile(project.rootProject.file("copyright.kt"), "(plugins |import |include)")
+            licenseHeaderFile(rootProject.file("spotless/copyright.kt"), "(plugins |import |include)")
         }
     }
 
