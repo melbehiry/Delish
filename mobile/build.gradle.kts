@@ -115,6 +115,7 @@ dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(Libs.APP_COMPAT)
     implementation(Libs.CORE_KTX)
 
     // Architecture Components

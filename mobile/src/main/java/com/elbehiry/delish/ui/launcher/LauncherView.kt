@@ -20,6 +20,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,7 +30,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.elbehiry.delish.R
+import com.elbehiry.shared.domain.pref.OnBoardingCompletedUseCase
 import kotlinx.coroutines.delay
 
 private const val SplashWaitTime: Long = 2000
@@ -45,7 +48,7 @@ fun LauncherView(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.launcher_back)),
+            .background(MaterialTheme.colors.background),
         contentAlignment = Alignment.Center
     ) {
         val currentOnTimeout by rememberUpdatedState(onLauncherComplete)

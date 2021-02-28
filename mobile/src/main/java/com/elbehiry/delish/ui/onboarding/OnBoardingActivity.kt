@@ -23,6 +23,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.ExperimentalAnimationApi
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
@@ -36,6 +37,7 @@ class OnBoardingActivity : ComponentActivity() {
 
     private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
+    @ExperimentalAnimationApi
     @SuppressLint("VisibleForTests")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +46,7 @@ class OnBoardingActivity : ComponentActivity() {
             ProvideWindowInsets {
                 DelishComposeTheme {
                     OnBoardingContent(onBoardingViewModel) {
-                        finish()
+                       // finish()
                     }
                 }
             }

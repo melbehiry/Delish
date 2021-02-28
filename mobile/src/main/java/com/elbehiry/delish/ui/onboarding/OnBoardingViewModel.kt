@@ -21,6 +21,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elbehiry.delish.ui.util.OnBoardingProvider
 import com.elbehiry.shared.domain.pref.OnBoardingCompleteActionUseCase
 import kotlinx.coroutines.launch
 
@@ -37,4 +38,6 @@ class OnBoardingViewModel @ViewModelInject constructor(
             _navigateToMainActivity.postValue(true)
         }
     }
+
+    fun getOnBoardingItemsList() = OnBoardingProvider.onBoardingDataList
 }

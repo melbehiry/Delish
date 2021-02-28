@@ -53,7 +53,7 @@ object IngredientListProvider {
         ),
         IngredientItem(
             6,
-            R.string.acaiberries,
+            R.string.acai_berries,
             R.drawable.acaiberries,
             R.color.acai_background
         ),
@@ -65,7 +65,7 @@ object IngredientListProvider {
         ),
         IngredientItem(
             8,
-            R.string.olieve,
+            R.string.olive,
             R.drawable.olive_oil,
             R.color.olive_background
         ),
@@ -185,20 +185,9 @@ object IngredientListProvider {
         ),
         IngredientItem(
             28,
-            R.string.button_mashroom,
+            R.string.button_mushroom,
             R.drawable.button_mashroom,
             R.color.mashroom_background
         )
-//        ,IngredientItem(
-//            29,
-//            R.string.asparagus,
-//            R.drawable.asparagus,
-//            R.color.asparagus
-//        ),IngredientItem(
-//            30,
-//            R.string.paprika,
-//            R.drawable.paprika,
-//            R.color.paprika
-//        )
     )
 }

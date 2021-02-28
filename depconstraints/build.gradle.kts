@@ -53,11 +53,13 @@ val composeActivity = "1.3.0-alpha03"
 val composeConstraint = "1.0.0-alpha03"
 val accompanist = "0.6.0"
 val fragmentKtx = "1.3.0"
+val appCompat = "1.2.0-rc01"
 
 dependencies {
     constraints {
         api("${Libs.ANDROIDX_HILT_COMPILER}:$hiltJetPack")
         api("${Libs.CORE_KTX}:$core")
+        api("${Libs.APP_COMPAT}:$appCompat")
         api("${Libs.COROUTINES}:$coroutines")
         api("${Libs.COROUTINES_ANDROID}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")

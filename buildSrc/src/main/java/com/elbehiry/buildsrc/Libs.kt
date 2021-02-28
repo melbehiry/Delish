@@ -1,6 +1,7 @@
 object Libs {
     const val ANDROIDX_HILT_COMPILER = "androidx.hilt:hilt-compiler"
     const val CORE_KTX = "androidx.core:core-ktx"
+    const val APP_COMPAT = "androidx.appcompat:appcompat"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
     const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
     const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test"

@@ -12,9 +12,9 @@
     <string name="corn">Corn</string>
     <string name="coconut">Coconut</string>
     <string name="beet_root">Beetroot</string>
-    <string name="acaiberries">Acai Berries</string>
+    <string name="acai_berries">Acai Berries</string>
     <string name="flour">Flour</string>
-    <string name="olieve">Olive Oil</string>
+    <string name="olive">Olive Oil</string>
     <string name="carrot">Carrot</string>
     <string name="apple">Apple</string>
     <string name="almond">Almond</string>
@@ -34,11 +34,20 @@
     <string name="butter">Butter</string>
     <string name="garlic">Garlic</string>
     <string name="lemon">Lemon</string>
-    <string name="button_mashroom">Button Mashroom</string>
+    <string name="button_mushroom">Button Mushroom</string>
     <string name="asparagus">Asparagus</string>
     <string name="paprika">Paprika</string>
     <string name="search_ingredient_home">Quick Search by Ingredients</string>
     <string name="view_ingredients">View all Ingredients</string>
     <string name="ingredients_wikis">Ingredients Wikis</string>
     <string name="cuisines_you_looking">What Cuisines Are You Looking For?</string>
+    <string name="onBoarding_page_1_title">Search for any recipe you want</string>
+    <string name="onBoarding_page_1_Description">Browse and fin any recipe you are looking for. Also you can search by the ingredient you like.</string>
+    <string name="onBoarding_page_2_title">Book mark and save your favourite recipe</string>
+    <string name="onBoarding_page_2_Description">Save all your favourite recipes and get it later locally.</string>
+    <string name="onBoarding_page_3_title">Add your week meal plan</string>
+    <string name="onBoarding_page_3_Description">Plan for the whole week, add the ingredients, browse recipes and add it easily and fast.</string>
+    <string name="onBoarding_start">Lets go</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
 </resources>
