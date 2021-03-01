@@ -46,7 +46,7 @@ class OnBoardingActivity : ComponentActivity() {
             ProvideWindowInsets {
                 DelishComposeTheme {
                     OnBoardingContent(onBoardingViewModel) {
-                        // finish()
+                        finish()
                     }
                 }
             }

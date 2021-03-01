@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.Surface
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Button
@@ -141,7 +142,8 @@ fun OnBoardingContent(
                     ) {
                         Text(
                             text = stringResource(id = R.string.skip),
-                            color = MaterialTheme.colors.background
+                            color = MaterialTheme.colors.background,
+                            style = MaterialTheme.typography.subtitle2
                         )
                     }
                     Row(
@@ -168,7 +170,8 @@ fun OnBoardingContent(
                     ) {
                         Text(
                             text = stringResource(id = R.string.next),
-                            color = MaterialTheme.colors.background
+                            color = MaterialTheme.colors.background,
+                            style = MaterialTheme.typography.subtitle2
                         )
                         Image(
                             imageVector = Icons.Filled.KeyboardArrowRight,
@@ -181,7 +184,7 @@ fun OnBoardingContent(
 
         Surface(
             color = MaterialTheme.colors.background,
-            modifier = Modifier.requiredSize(550.dp).fillMaxWidth(),
+            modifier = Modifier.requiredHeight(550.dp).fillMaxWidth(),
             shape = RoundedCornerShape(bottomStart = 60.dp, bottomEnd = 60.dp)
         ) {
             Column(
@@ -219,20 +222,20 @@ fun OnBoardingContent(
 
                 Text(
                     text = stringResource(id = onBoardingItemsList[currentPage.value].titleId),
-                    style = MaterialTheme.typography.h5,
+                    style = MaterialTheme.typography.h6,
                     textAlign = TextAlign.Center,
                     color = Color.White,
                     modifier = Modifier.padding(
-                        start = 30.dp, top = 30.dp, end = 30.dp
+                        start = 30.dp, top = 16.dp, end = 30.dp
                     )
                 )
                 Text(
                     text = stringResource(
                         id = onBoardingItemsList[currentPage.value].DescriptionId
                     ),
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.subtitle2,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(start = 60.dp, top = 8.dp, end = 60.dp),
+                    modifier = Modifier.padding(start = 30.dp, top = 16.dp, end = 30.dp),
                     color = Color.LightGray
                 )
             }

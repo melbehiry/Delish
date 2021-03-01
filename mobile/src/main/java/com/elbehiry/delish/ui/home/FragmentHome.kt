@@ -25,7 +25,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.elbehiry.delish.ui.graph.NavGraph
-import com.elbehiry.delish.ui.main.MainContent
 import com.elbehiry.delish.ui.main.MainViewModel
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,9 +47,6 @@ class FragmentHome : Fragment() {
             setContent {
                 DelishComposeTheme {
                     ProvideWindowInsets {
-                        MainContent(
-                            viewModel = mainViewModel,
-                        ) {}
                         NavGraph(mainViewModel)
                     }
                 }
