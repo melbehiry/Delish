@@ -1,20 +1,62 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.elbehiry.delish.ui.onboarding
 
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.*
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.Surface
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.material.Icon
+import androidx.compose.material.TextButton
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.filled.Album
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.runtime.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -25,13 +67,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.main.launchMainActivity
-import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
-import kotlinx.coroutines.NonCancellable.start
-import java.time.temporal.TemporalAdjusters.next
 
 @ExperimentalAnimationApi
 @VisibleForTesting
@@ -91,13 +129,14 @@ fun OnBoardingContent(
                 exit = slideOutVertically() + shrinkVertically() + fadeOut()
             ) {
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween, modifier =
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier =
                     Modifier.fillMaxWidth().padding(8.dp)
                 ) {
                     IconButton(
                         modifier = Modifier.align(Alignment.CenterVertically),
                         onClick = {
-                        viewModel.getStartedClick()
+                            viewModel.getStartedClick()
                         }
                     ) {
                         Text(
@@ -116,14 +155,17 @@ fun OnBoardingContent(
                             )
                         }
                     }
-                    TextButton(onClick = {
-                        if (currentPage.value != onBoardingItemsList.size - 1) {
-                            currentPage.value = currentPage.value + 1
-                        }
-                        if (currentPage.value != onBoardingItemsList.size - 2) {
-                            getStartedVisible.value = true
-                        }
-                    }, modifier = Modifier.align(Alignment.CenterVertically)) {
+                    TextButton(
+                        onClick = {
+                            if (currentPage.value != onBoardingItemsList.size - 1) {
+                                currentPage.value = currentPage.value + 1
+                            }
+                            if (currentPage.value != onBoardingItemsList.size - 2) {
+                                getStartedVisible.value = true
+                            }
+                        },
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    ) {
                         Text(
                             text = stringResource(id = R.string.next),
                             color = MaterialTheme.colors.background
@@ -137,10 +179,9 @@ fun OnBoardingContent(
             }
         }
 
-
         Surface(
             color = MaterialTheme.colors.background,
-            modifier = Modifier.size(550.dp).fillMaxWidth(),
+            modifier = Modifier.requiredSize(550.dp).fillMaxWidth(),
             shape = RoundedCornerShape(bottomStart = 60.dp, bottomEnd = 60.dp)
         ) {
             Column(
@@ -166,7 +207,9 @@ fun OnBoardingContent(
                     )
 
                     Image(
-                        painter = painterResource(onBoardingItemsList[currentPage.value].contentImageId),
+                        painter = painterResource(
+                            onBoardingItemsList[currentPage.value].contentImageId
+                        ),
                         contentDescription = null,
                         modifier = Modifier
                             .requiredSize(130.dp, 130.dp)
@@ -184,7 +227,9 @@ fun OnBoardingContent(
                     )
                 )
                 Text(
-                    text = stringResource(id = onBoardingItemsList[currentPage.value].DescriptionId),
+                    text = stringResource(
+                        id = onBoardingItemsList[currentPage.value].DescriptionId
+                    ),
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(start = 60.dp, top = 8.dp, end = 60.dp),
@@ -199,7 +244,7 @@ fun OnBoardingContent(
 fun OnBoardingSlide(selected: Boolean, color: Color, icon: ImageVector) {
     Icon(
         imageVector = icon,
-        modifier = Modifier.padding(4.dp).size(12.dp),
+        modifier = Modifier.padding(4.dp).requiredSize(12.dp),
         contentDescription = null,
         tint = if (selected) color else Color.Gray
     )

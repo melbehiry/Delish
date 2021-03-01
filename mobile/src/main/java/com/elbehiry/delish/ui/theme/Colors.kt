@@ -28,8 +28,7 @@ val background800 = Color(0xFF424242)
 val background900 = Color(0xFF212121)
 val white87 = Color(0Xddffffff)
 
-val yellow200 = Color(0xffffeb46)
-val yellowDarkPrimary = Color(0xff242316)
+val darkPrimary = Color(0xff242316)
 
 val blue200 = Color(0xff91a4fc)
 val Green500 = Color(0xFF1EB980)

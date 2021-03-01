@@ -25,13 +25,13 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = Green500,
-    secondary = blue200,
+    secondary = Green500,
     onSecondary = Color.Black,
-    surface = yellowDarkPrimary,
+    surface = darkPrimary,
     background = background,
     onBackground = background800,
     primaryVariant = purple500,
-    onPrimary = Color.White,
+    onPrimary = Color.Black,
     onSurface = Color.White
 )
 
@@ -51,12 +51,18 @@ fun DelishComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    /**
+     * support just dark color for this release.
+     */
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
         LightColorPalette
     }
 
+    /**
+     * support just dark color for this release.
+     */
     val typography = if (darkTheme) {
         DarkTypography
     } else {
@@ -64,8 +70,8 @@ fun DelishComposeTheme(
     }
 
     MaterialTheme(
-        colors = colors,
-        typography = typography,
+        colors = DarkColorPalette,
+        typography = DelishTypography,
         shapes = shapes,
         content = content
     )

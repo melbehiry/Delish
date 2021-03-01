@@ -16,7 +16,6 @@
 
 package com.elbehiry.delish.ui.main
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,6 +27,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BlurOn
+import androidx.compose.material.icons.filled.BookmarkBorder
+import androidx.compose.material.icons.filled.EventNote
 import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -65,7 +68,7 @@ fun MainContent(
                     BottomNavigationItem(
                         icon = {
                             Icon(
-                                painter = painterResource(id = tab.icon),
+                                imageVector = tab.icon,
                                 contentDescription = null
                             )
                         },
@@ -110,9 +113,9 @@ fun HomeTopBar() {
 
 enum class DelishHomeTabs(
     @StringRes val title: Int,
-    @DrawableRes val icon: Int
+    val icon: ImageVector
 ) {
-    Home(R.string.recipes_tab, R.drawable.ic_chef),
-    BookMark(R.string.book_mark, R.drawable.ic_bookmark),
-    MealPlan(R.string.meal_plan, R.drawable.ic_plan)
+    Home(R.string.recipes_tab, Icons.Filled.BlurOn),
+    BookMark(R.string.book_mark, Icons.Filled.BookmarkBorder),
+    MealPlan(R.string.meal_plan, Icons.Filled.EventNote)
 }

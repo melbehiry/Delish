@@ -75,7 +75,8 @@ fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () ->
         ) {
             Text(
                 text = stringResource(id = R.string.view_ingredients),
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.subtitle2,
+                color = Color.Black
             )
         }
     }

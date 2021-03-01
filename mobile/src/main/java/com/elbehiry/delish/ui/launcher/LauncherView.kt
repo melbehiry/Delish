@@ -28,11 +28,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.elbehiry.delish.R
-import com.elbehiry.shared.domain.pref.OnBoardingCompletedUseCase
 import kotlinx.coroutines.delay
 
 private const val SplashWaitTime: Long = 2000
