@@ -20,6 +20,7 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("kotlin-android")
+    id("androidx.navigation.safeargs")
 }
 
 android {
