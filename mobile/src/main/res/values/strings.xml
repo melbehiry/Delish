@@ -50,4 +50,24 @@
     <string name="onBoarding_start">Lets go</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
+    <string name="retry">Retry</string>
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+    <string name="servings">Servings</string>
+    <string name="weight_per_serving">Weight</string>
+    <string name="protein">Protein</string>
+    <string name="carbs">Carbs</string>
+    <string name="fat">Fat</string>
+    <string name="calories">Calories</string>
+    <string name="glutenFree">Gluten Free</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="vegan">Vegan</string>
+    <string name="dairyFree">Dairy Free</string>
+    <string name="veryHealthy">Very Healthy</string>
+    <string name="cheap">Cheap</string>
+    <string name="veryPopular">Very Popular</string>
+    <string name="sustainable">Sustainable</string>
+    <string name="minutes">Minutes</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="method">Method</string>
 </resources>
