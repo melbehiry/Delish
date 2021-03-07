@@ -81,7 +81,7 @@ val DelishTypography = Typography(
     subtitle2 = TextStyle(
         fontFamily = Montserrat,
         fontSize = 14.sp,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Light,
         lineHeight = 17.sp,
         letterSpacing = 0.1.sp
     ),

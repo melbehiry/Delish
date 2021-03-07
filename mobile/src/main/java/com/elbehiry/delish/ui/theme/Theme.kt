@@ -43,7 +43,8 @@ private val LightColorPalette = lightColors(
     primaryVariant = purple500,
     secondary = purple500,
     onPrimary = Color.White,
-    onSecondary = Color.White
+    onSecondary = Color.White,
+    error = orangeError
 )
 
 @Composable
