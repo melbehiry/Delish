@@ -18,8 +18,10 @@ package com.elbehiry.shared.data.remote
 
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.Recipes
+import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface DelishApi {
@@ -33,4 +35,11 @@ interface DelishApi {
 
     @GET("https://delish.getsandbox.com/getCuisines")
     suspend fun getAvailableCuisines(): List<CuisineItem>
+
+    @GET("recipes/{id}/information")
+    suspend fun getRecipeInformation(
+        @Path("id") id: Int?,
+        @Query("apiKey") apiKey: String = BuildConfig.SPOONACULAR_KEY,
+        @Query("includeNutrition") includeNutrition: Boolean? = true
+    ): RecipesItem
 }
