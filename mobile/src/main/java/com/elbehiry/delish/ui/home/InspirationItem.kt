@@ -48,13 +48,14 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 @Composable
 fun InspirationItem(
     recipe: RecipesItem,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onDetails: (Int) -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
             .width(250.dp)
             .padding(8.dp)
-            .clickable { }
+            .clickable { onDetails(recipe.id ?: 0) }
     ) {
         val (image, time, title, source) = createRefs()
         Surface(
@@ -77,7 +78,7 @@ fun InspirationItem(
                     .fillMaxSize()
             ) {
                 CoilImage(
-                    data = recipe.image, contentDescription = null,
+                    data = recipe.image ?: "", contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize(),
                     contentScale = ContentScale.Crop,
@@ -116,7 +117,7 @@ fun InspirationItem(
                 }
         )
         Text(
-            text = recipe.title,
+            text = recipe.title ?: "",
             style = MaterialTheme.typography.subtitle1,
             maxLines = 1,
             textAlign = TextAlign.Start,
@@ -160,6 +161,6 @@ fun InspirationItem(
 @Composable
 fun PreviewInspirationItem() {
     DelishComposeTheme {
-        InspirationItem(RecipesItem(image = ""))
+        InspirationItem(RecipesItem()) {}
     }
 }

@@ -41,8 +41,8 @@ class MainViewModel @ViewModelInject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _hasError = MutableLiveData<Boolean>()
-    val hasError: LiveData<Boolean> = _hasError
+    private val _hasError = MutableLiveData<String>()
+    val hasError: LiveData<String> = _hasError
 
     private val _ingredientList = MutableLiveData<List<IngredientItem>>()
     val ingredientList: LiveData<List<IngredientItem>> = _ingredientList
@@ -53,7 +53,11 @@ class MainViewModel @ViewModelInject constructor(
     private val _randomRecipes = MutableLiveData<List<RecipesItem>>()
     val randomRecipes: LiveData<List<RecipesItem>> = _randomRecipes
 
-    fun getRandomRecipes() {
+    init {
+        getHomeContent()
+    }
+
+    private fun getHomeContent() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
@@ -73,8 +77,10 @@ class MainViewModel @ViewModelInject constructor(
                     val cuisinesList = cuisinesListDeferred.await()
                     val randomRecipes = randomRecipesDeferred.await()
 
-                    if (cuisinesList is Result.Error || randomRecipes is Result.Error) {
-                        _hasError.postValue(true)
+                    if (cuisinesList is Result.Error) {
+                        _hasError.postValue(cuisinesList.exception.message)
+                    } else if (randomRecipes is Result.Error) {
+                        _hasError.postValue(randomRecipes.exception.message)
                     }
 
                     _randomRecipes.postValue(randomRecipes.data ?: listOf())
@@ -82,7 +88,7 @@ class MainViewModel @ViewModelInject constructor(
                     _cuisinesList.postValue(cuisinesList.data ?: listOf())
                 }
             } catch (e: Exception) {
-                _hasError.postValue(true)
+                _hasError.postValue(e.message)
             } finally {
                 _isLoading.value = false
             }

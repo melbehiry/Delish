@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.graph
+package com.elbehiry.delish.ui.home.graph
 
 import androidx.annotation.VisibleForTesting
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -33,11 +35,14 @@ object MainDestinations {
     const val INGREDIENT_ROUTE = "ingredient"
 }
 
+@ExperimentalFoundationApi
+@ExperimentalAnimationApi
 @VisibleForTesting
 @Composable
-fun NavGraph(
+fun HomeNavGraph(
     viewModel: MainViewModel,
-    startDestination: String = MainDestinations.MAIN_ROUTE
+    startDestination: String = MainDestinations.MAIN_ROUTE,
+    onDetails: (Int) -> Unit
 ) {
     val navController = rememberNavController()
     val actions = remember(navController) { MainActions(navController) }
@@ -49,7 +54,8 @@ fun NavGraph(
         composable((MainDestinations.MAIN_ROUTE)) {
             MainContent(
                 viewModel = viewModel,
-                onIngredientContent = actions.onIngredientContent
+                onIngredientContent = actions.onIngredientContent,
+                onDetails
             )
         }
         composable((MainDestinations.INGREDIENT_ROUTE)) {

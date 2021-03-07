@@ -16,6 +16,7 @@
 
 package com.elbehiry.delish.ui.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -47,6 +48,7 @@ import com.elbehiry.delish.ui.util.IngredientListProvider
 import com.elbehiry.delish.ui.widget.VerticalGrid
 import com.elbehiry.model.IngredientItem
 
+@ExperimentalFoundationApi
 @Composable
 fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () -> Unit) {
     Column(
@@ -75,7 +77,7 @@ fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () ->
         ) {
             Text(
                 text = stringResource(id = R.string.view_ingredients),
-                style = MaterialTheme.typography.subtitle2,
+                style = MaterialTheme.typography.body2,
                 color = Color.Black
             )
         }
@@ -125,6 +127,7 @@ fun PreviewIngredient() {
     )
 }
 
+@ExperimentalFoundationApi
 @Composable
 @Preview
 fun PreviewIngredientList() {

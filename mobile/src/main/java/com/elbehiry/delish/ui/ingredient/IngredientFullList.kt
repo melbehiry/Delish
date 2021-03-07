@@ -16,6 +16,7 @@
 
 package com.elbehiry.delish.ui.ingredient
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
@@ -25,9 +26,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -48,9 +50,9 @@ import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.main.HomeTopBar
 import com.elbehiry.delish.ui.main.MainViewModel
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
-import com.elbehiry.delish.ui.widget.VerticalGrid
 import com.elbehiry.model.IngredientItem
 
+@ExperimentalFoundationApi
 @Composable
 fun IngredientFullList(viewModel: MainViewModel) {
     val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
@@ -60,9 +62,7 @@ fun IngredientFullList(viewModel: MainViewModel) {
             backgroundColor = MaterialTheme.colors.primarySurface,
             topBar = { HomeTopBar() }
         ) {
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState())
-            ) {
+            Column {
                 Text(
                     text = stringResource(id = R.string.ingredients_wikis),
                     style = MaterialTheme.typography.h6,
@@ -76,8 +76,10 @@ fun IngredientFullList(viewModel: MainViewModel) {
                             bottom = 16.dp
                         )
                 )
-                VerticalGrid(columns = 2) {
-                    ingredients.forEach { ingredientItem ->
+                LazyVerticalGrid(
+                    cells = GridCells.Adaptive(minSize = 128.dp),
+                ) {
+                    items(ingredients) { ingredientItem ->
                         FullIngredientItem(ingredientItem)
                     }
                 }

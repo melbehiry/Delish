@@ -21,41 +21,42 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.elbehiry.delish.ui.graph.NavGraph
+import androidx.navigation.findNavController
 import com.elbehiry.delish.ui.main.MainViewModel
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
+import com.elbehiry.delish.ui.home.graph.HomeNavGraph
 
 @AndroidEntryPoint
-class FragmentHome : Fragment() {
+class HomeFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModels()
 
+    @ExperimentalFoundationApi
+    @ExperimentalAnimationApi
     @SuppressLint("VisibleForTests")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return ComposeView(requireContext()).apply {
-
             setContent {
                 DelishComposeTheme {
                     ProvideWindowInsets {
-                        NavGraph(mainViewModel)
+                        HomeNavGraph(mainViewModel) { recipeId ->
+                            val action = HomeFragmentDirections.goToRecipesDetails(recipeId)
+                            findNavController().navigate(action)
+                        }
                     }
                 }
             }
         }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mainViewModel.getRandomRecipes()
     }
 }

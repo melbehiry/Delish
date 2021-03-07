@@ -17,6 +17,8 @@
 package com.elbehiry.delish.ui.main
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -49,15 +51,16 @@ import com.elbehiry.delish.ui.home.HomeContent
 import com.elbehiry.delish.ui.plan.MealPlan
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
+@ExperimentalFoundationApi
+@ExperimentalAnimationApi
 @Composable
 fun MainContent(
     viewModel: MainViewModel,
-    onIngredientContent: () -> Unit
+    onIngredientContent: () -> Unit,
+    onDetails: (Int) -> Unit
 ) {
 
     val (selectedTab, setSelectedTab) = remember { mutableStateOf(DelishHomeTabs.Home) }
-    var loading = remember { false }
-
     val tabs = DelishHomeTabs.values()
     Scaffold(
         backgroundColor = MaterialTheme.colors.primarySurface,
@@ -83,10 +86,9 @@ fun MainContent(
                 }
             }
         }
-    ) { innerPadding ->
-        val modifier = Modifier.padding(innerPadding)
+    ) {
         when (selectedTab) {
-            DelishHomeTabs.Home -> HomeContent(viewModel, onIngredientContent)
+            DelishHomeTabs.Home -> HomeContent(viewModel, onIngredientContent, onDetails)
             DelishHomeTabs.BookMark -> BookMark()
             DelishHomeTabs.MealPlan -> MealPlan()
         }

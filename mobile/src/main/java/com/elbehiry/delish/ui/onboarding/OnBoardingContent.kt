@@ -50,9 +50,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.TextButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.filled.Album
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
@@ -120,7 +120,7 @@ fun OnBoardingContent(
                 ) {
                     Text(
                         text = stringResource(id = R.string.onBoarding_start),
-                        style = MaterialTheme.typography.subtitle2,
+                        style = MaterialTheme.typography.body2,
                         color = Color.White
                     )
                 }
@@ -143,7 +143,7 @@ fun OnBoardingContent(
                         Text(
                             text = stringResource(id = R.string.skip),
                             color = MaterialTheme.colors.background,
-                            style = MaterialTheme.typography.subtitle2
+                            style = MaterialTheme.typography.body2
                         )
                     }
                     Row(
@@ -171,10 +171,10 @@ fun OnBoardingContent(
                         Text(
                             text = stringResource(id = R.string.next),
                             color = MaterialTheme.colors.background,
-                            style = MaterialTheme.typography.subtitle2
+                            style = MaterialTheme.typography.body2
                         )
                         Image(
-                            imageVector = Icons.Filled.KeyboardArrowRight,
+                            imageVector = Icons.Outlined.KeyboardArrowRight,
                             contentDescription = null
                         )
                     }

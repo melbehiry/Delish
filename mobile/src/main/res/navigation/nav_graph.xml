@@ -6,7 +6,18 @@
     app:startDestination="@+id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.elbehiry.delish.ui.home.FragmentHome"
+        android:name="com.elbehiry.delish.ui.home.HomeFragment"
         android:label="Home">
+        <action
+            android:id="@+id/goToRecipesDetails"
+            app:destination="@+id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.elbehiry.delish.ui.recipedetails.RecipeDetailsFragment"
+        android:label="Details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>
