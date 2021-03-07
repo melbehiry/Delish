@@ -98,19 +98,19 @@ data class RecipesItem(
     val glutenFree: Boolean? = null,
     val veryPopular: Boolean? = null,
     val healthScore: Double? = null,
-    val title: String = "",
+    val title: String? = null,
     val diets: List<String?>? = null,
     val aggregateLikes: Int? = null,
     val creditsText: String? = null,
     val readyInMinutes: Int? = null,
     val sourceUrl: String? = null,
     val dairyFree: Boolean? = null,
-    val servings: Int? = null,
+    val servings: Double? = null,
     val vegetarian: Boolean? = null,
-    val id: Int? = null,
+    val id: Int? = 1,
     val imageType: String? = null,
     val summary: String? = null,
-    val image: String,
+    val image: String? = null,
     val veryHealthy: Boolean? = null,
     val vegan: Boolean? = null,
     val cheap: Boolean? = null,
@@ -125,6 +125,54 @@ data class RecipesItem(
     val spoonacularScore: Double? = null,
     val pricePerServing: Double? = null,
     val sourceName: String? = null,
-    val originalId: Any? = null,
-    val spoonacularSourceUrl: String? = null
+    val originalId: Int? = null,
+    val spoonacularSourceUrl: String? = null,
+    val winePairing: WinePairing? = null,
+    val nutrition: Nutrition? = null,
+)
+
+data class CaloricBreakdown(
+    val percentCarbs: Double? = null,
+    val percentProtein: Double? = null,
+    val percentFat: Double? = null
+)
+
+data class PropertiesItem(
+    val amount: Double? = null,
+    val unit: String? = null,
+    val name: String? = null,
+    val title: String? = null
+)
+
+data class FlavanoidsItem(
+    val amount: Double? = null,
+    val unit: String? = null,
+    val name: String? = null,
+    val title: String? = null
+)
+
+data class NutrientsItem(
+    val amount: Double? = null,
+    val unit: String? = null,
+    val percentOfDailyNeeds: Double? = null,
+    val name: String? = null,
+    val title: String? = null
+)
+
+data class Nutrition(
+    val caloricBreakdown: CaloricBreakdown? = null,
+    val weightPerServing: WeightPerServing? = null,
+    val ingredients: List<IngredientsItem?>? = null,
+    val flavanoids: List<FlavanoidsItem?>? = null,
+    val properties: List<PropertiesItem?>? = null,
+    val nutrients: List<NutrientsItem?>? = null
+)
+
+data class WinePairing(
+    val any: Any? = null
+)
+
+data class WeightPerServing(
+    val amount: Double? = null,
+    val unit: String? = null
 )
