@@ -28,6 +28,10 @@ import com.elbehiry.shared.data.recipes.random.remote.GetRandomRecipesRemoteData
 import com.elbehiry.shared.data.recipes.random.remote.RandomRecipesRemoteDataSource
 import com.elbehiry.shared.data.recipes.random.repository.GetRandomRecipesRepository
 import com.elbehiry.shared.data.recipes.random.repository.RandomRecipesRepository
+import com.elbehiry.shared.data.recipes.search.remote.SearchDataSource
+import com.elbehiry.shared.data.recipes.search.remote.SearchRecipesDataSource
+import com.elbehiry.shared.data.recipes.search.repository.SearchRecipesRepository
+import com.elbehiry.shared.data.recipes.search.repository.SearchRepository
 import com.elbehiry.shared.data.remote.DelishApi
 import dagger.Module
 import dagger.Provides
@@ -67,4 +71,14 @@ class RecipesModule {
         recipeInformationDataSource: RecipeInformationDataSource
     ): RecipeInformationRepository =
         GetRecipeInformationRepository(recipeInformationDataSource)
+
+    @Provides
+    fun provideSearchDataSource(api: DelishApi): SearchDataSource =
+        SearchRecipesDataSource(api)
+
+    @Provides
+    fun provideSearchRepository(
+        rearchDataSource: SearchDataSource
+    ): SearchRepository =
+        SearchRecipesRepository(rearchDataSource)
 }
