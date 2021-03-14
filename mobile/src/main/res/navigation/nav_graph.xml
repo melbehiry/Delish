@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@+id/homeFragment">
     <fragment
@@ -11,6 +10,9 @@
         <action
             android:id="@+id/goToRecipesDetails"
             app:destination="@+id/detailsFragment" />
+        <action
+            android:id="@+id/goToSearchScreen"
+            app:destination="@+id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -19,5 +21,20 @@
         <argument
             android:name="id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.elbehiry.delish.ui.search.SearchFragment"
+        android:label="Search">
+        <action
+            android:id="@+id/goToRecipesDetails"
+            app:destination="@+id/detailsFragment"
+            />
+        <argument
+            android:name="query"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="com.elbehiry.delish.ui.search.SearchType" />
     </fragment>
 </navigation>

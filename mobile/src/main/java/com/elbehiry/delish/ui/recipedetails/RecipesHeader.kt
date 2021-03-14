@@ -99,7 +99,7 @@ fun RecipesHeader(recipe: RecipesItem, navController: NavController) {
                 .fillMaxWidth()
                 .padding(
                     start = 16.dp,
-                    end = 150.dp,
+                    end = 100.dp,
                     bottom = 8.dp
                 ).constrainAs(title) {
                     linkTo(

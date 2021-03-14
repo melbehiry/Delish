@@ -53,7 +53,9 @@ import com.elbehiry.model.RecipesItem
 fun HomeContent(
     viewModel: MainViewModel,
     onIngredientContent: () -> Unit,
-    onDetails: (Int) -> Unit
+    onCuisineSearch: (String) -> Unit,
+    onDetails: (Int) -> Unit,
+    onIngredientSearch:(String) -> Unit
 ) {
     val recipes: List<RecipesItem> by viewModel.randomRecipes.observeAsState(listOf())
     val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
@@ -66,9 +68,9 @@ fun HomeContent(
 //                item { NotificationItem(errorMessage) }
                 item { HeaderTitle() }
                 item { DailyInspiration(recipes, onDetails) }
-                item { HomeIngredient(ingredients, onIngredientContent) }
+                item { HomeIngredient(ingredients, onIngredientContent,onIngredientSearch) }
                 item { Spacer(modifier = Modifier.padding(16.dp)) }
-                item { HomeCuisines(cuisines) }
+                item { HomeCuisines(cuisines, onCuisineSearch) }
                 item { Spacer(modifier = Modifier.padding(50.dp)) }
             }
         }

@@ -57,7 +57,9 @@ import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 fun MainContent(
     viewModel: MainViewModel,
     onIngredientContent: () -> Unit,
-    onDetails: (Int) -> Unit
+    onCuisineSearch: (String) -> Unit,
+    onDetails: (Int) -> Unit,
+    onIngredientSearch: (String) -> Unit
 ) {
 
     val (selectedTab, setSelectedTab) = remember { mutableStateOf(DelishHomeTabs.Home) }
@@ -88,17 +90,23 @@ fun MainContent(
         }
     ) {
         when (selectedTab) {
-            DelishHomeTabs.Home -> HomeContent(viewModel, onIngredientContent, onDetails)
+            DelishHomeTabs.Home -> HomeContent(
+                viewModel,
+                onIngredientContent,
+                onCuisineSearch,
+                onDetails,
+                onIngredientSearch
+            )
             DelishHomeTabs.BookMark -> BookMark()
             DelishHomeTabs.MealPlan -> MealPlan()
         }
     }
 }
+
 @Composable
 fun HomeTopBar() {
     TopAppBar(
-        elevation = 6.dp,
-        modifier = Modifier.height(58.dp)
+        elevation = 6.dp
     ) {
 
         Text(

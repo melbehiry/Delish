@@ -54,7 +54,9 @@ import com.elbehiry.model.IngredientItem
 
 @ExperimentalFoundationApi
 @Composable
-fun IngredientFullList(viewModel: MainViewModel) {
+fun IngredientFullList(
+    viewModel: MainViewModel,
+    onIngredientSearch:(String) -> Unit) {
     val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
 
     DelishComposeTheme {
@@ -80,7 +82,7 @@ fun IngredientFullList(viewModel: MainViewModel) {
                     cells = GridCells.Adaptive(minSize = 128.dp),
                 ) {
                     items(ingredients) { ingredientItem ->
-                        FullIngredientItem(ingredientItem)
+                        FullIngredientItem(ingredientItem,onIngredientSearch)
                     }
                 }
             }
@@ -89,7 +91,10 @@ fun IngredientFullList(viewModel: MainViewModel) {
 }
 
 @Composable
-fun FullIngredientItem(ingredientItem: IngredientItem) {
+fun FullIngredientItem(
+    ingredientItem: IngredientItem,
+    onIngredientSearch:(String) -> Unit) {
+    val title = stringResource(id = ingredientItem.titleId)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -99,7 +104,9 @@ fun FullIngredientItem(ingredientItem: IngredientItem) {
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .background(colorResource(id = ingredientItem.background))
-                .clickable(onClick = { })
+                .clickable(onClick = {
+                    onIngredientSearch(title)
+                })
         ) {
             Image(
                 painter = painterResource(id = ingredientItem.imageId),
@@ -112,7 +119,7 @@ fun FullIngredientItem(ingredientItem: IngredientItem) {
             )
         }
         Text(
-            text = stringResource(id = ingredientItem.titleId),
+            text = title,
             style = MaterialTheme.typography.caption,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)

@@ -70,4 +70,6 @@
     <string name="minutes">Minutes</string>
     <string name="ingredients">Ingredients</string>
     <string name="method">Method</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Find recipes...</string>
 </resources>

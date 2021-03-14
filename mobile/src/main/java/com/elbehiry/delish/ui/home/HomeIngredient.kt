@@ -19,6 +19,7 @@ package com.elbehiry.delish.ui.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,7 +52,10 @@ import com.elbehiry.model.IngredientItem
 
 @ExperimentalFoundationApi
 @Composable
-fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () -> Unit) {
+fun HomeIngredient(
+    ingredients: List<IngredientItem>,
+    onIngredientContent: () -> Unit,
+    onIngredientSearch:(String) -> Unit) {
     Column(
         modifier = Modifier.background(color = Color.DarkGray)
     ) {
@@ -62,7 +67,7 @@ fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () ->
         )
         VerticalGrid(columns = 4) {
             ingredients.take(8).forEach { ingredientItem ->
-                HomeIngredientItem(ingredientItem)
+                HomeIngredientItem(ingredientItem,onIngredientSearch)
             }
         }
         Button(
@@ -85,9 +90,16 @@ fun HomeIngredient(ingredients: List<IngredientItem>, onIngredientContent: () ->
 }
 
 @Composable
-fun HomeIngredientItem(ingredientItem: IngredientItem) {
+fun HomeIngredientItem(
+    ingredientItem: IngredientItem,
+    onIngredientSearch:(String) -> Unit) {
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    val itemTitle = stringResource(id = ingredientItem.titleId)
+    Column(
+        modifier = Modifier.clickable {
+            onIngredientSearch(itemTitle)
+        },
+        horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
             modifier = Modifier
                 .requiredSize(70.dp)
@@ -106,7 +118,7 @@ fun HomeIngredientItem(ingredientItem: IngredientItem) {
             )
         }
         Text(
-            text = stringResource(id = ingredientItem.titleId),
+            text = itemTitle,
             style = MaterialTheme.typography.caption,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
@@ -123,7 +135,7 @@ fun PreviewIngredient() {
             imageId = R.drawable.basil,
             background = R.color.basil_background,
             titleId = R.string.basil
-        )
+        ),{}
     )
 }
 
@@ -133,5 +145,5 @@ fun PreviewIngredient() {
 fun PreviewIngredientList() {
     HomeIngredient(
         IngredientListProvider.ingredientList.take(4)
-    ) {}
+    ,{},{})
 }

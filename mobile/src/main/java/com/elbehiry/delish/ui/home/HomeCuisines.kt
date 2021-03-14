@@ -48,7 +48,10 @@ import com.elbehiry.model.CuisineItem
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun HomeCuisines(cuisines: List<CuisineItem>) {
+fun HomeCuisines(
+    cuisines: List<CuisineItem>,
+    onCuisineSearch : (String) -> Unit
+) {
     if (cuisines.isNotEmpty()) {
         Column(
             modifier = Modifier.background(color = Color.DarkGray)
@@ -59,30 +62,36 @@ fun HomeCuisines(cuisines: List<CuisineItem>) {
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp).fillMaxWidth()
             )
-            CuisinesList(cuisines)
+            CuisinesList(cuisines,onCuisineSearch)
         }
     }
 }
 
 @Composable
-fun CuisinesList(cuisines: List<CuisineItem>) {
+fun CuisinesList(
+    cuisines: List<CuisineItem>,
+    onCuisineSearch : (String) -> Unit) {
     LazyRow(
         contentPadding = PaddingValues(
             8.dp, 8.dp, 16.dp, 16.dp
         )
     ) {
         items(cuisines) { recipe ->
-            CuisineItem(recipe)
+            CuisineItem(recipe,onCuisineSearch)
         }
     }
 }
 
 @Composable
-fun CuisineItem(item: CuisineItem) {
+fun CuisineItem(
+    item: CuisineItem,
+    onCuisineSearch : (String) -> Unit) {
     Surface(
         modifier = Modifier
             .requiredSize(180.dp, 180.dp)
-            .padding(8.dp).clickable { },
+            .padding(8.dp).clickable {
+                onCuisineSearch(item.title)
+            },
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
     ) {

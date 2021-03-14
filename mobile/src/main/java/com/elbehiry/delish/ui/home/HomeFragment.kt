@@ -32,6 +32,7 @@ import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import com.elbehiry.delish.ui.home.graph.HomeNavGraph
+import com.elbehiry.delish.ui.search.SearchType
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -50,7 +51,13 @@ class HomeFragment : Fragment() {
             setContent {
                 DelishComposeTheme {
                     ProvideWindowInsets {
-                        HomeNavGraph(mainViewModel) { recipeId ->
+                        HomeNavGraph(mainViewModel, onCuisineSearch = { cuisine ->
+                            val action = HomeFragmentDirections.goToSearchScreen(cuisine,SearchType.CUISINE)
+                            findNavController().navigate(action)
+                        }, onIngredientSearch = { query ->
+                            val action = HomeFragmentDirections.goToSearchScreen(query, SearchType.QUERY)
+                            findNavController().navigate(action)
+                        }) { recipeId ->
                             val action = HomeFragmentDirections.goToRecipesDetails(recipeId)
                             findNavController().navigate(action)
                         }
