@@ -129,8 +129,6 @@ dependencies {
     implementation(Libs.ROOM_KTX)
     implementation(Libs.ROOM_RUNTIME)
     kapt(Libs.ROOM_COMPILER)
-    implementation(Libs.ROOM_KTX)
-    implementation(Libs.ROOM_RUNTIME)
     implementation(Libs.LIFECYCLE_EXTENSION)
     implementation(Libs.LIFECYCLE_RUN_TIME)
 
@@ -180,6 +178,7 @@ dependencies {
     implementation(Libs.COMPOSE_ICON)
     implementation(Libs.COMPOSE_ACTIVITY)
     implementation(Libs.COMPOSE_CONSTRAINT)
+    implementation(Libs.COMPOSE_PAGING)
 
     implementation(Libs.INSETS)
     implementation(Libs.COIL)

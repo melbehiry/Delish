@@ -51,6 +51,7 @@ val compose = "1.0.0-beta01"
 val composeNavigation = "1.0.0-alpha08"
 val composeActivity = "1.3.0-alpha03"
 val composeConstraint = "1.0.0-alpha03"
+val composePaging = "1.0.0-alpha08"
 val accompanist = "0.6.0"
 val fragmentKtx = "1.3.0"
 val appCompat = "1.2.0-rc01"
@@ -115,6 +116,7 @@ dependencies {
         api("${Libs.COMPOSE_ANIMATION}:$compose")
         api("${Libs.COMPOSE_ANIMATION_CORE}:$compose")
         api("${Libs.COMPOSE_ICON}:$compose")
+        api("${Libs.COMPOSE_PAGING}:$composePaging")
         api("${Libs.COMPOSE_ACTIVITY}:$composeActivity")
         api("${Libs.COMPOSE_CONSTRAINT}:$composeConstraint")
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")

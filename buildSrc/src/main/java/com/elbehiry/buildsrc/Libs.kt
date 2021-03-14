@@ -60,6 +60,7 @@ object Libs {
     const val COMPOSE_ACTIVITY = "androidx.activity:activity-compose"
     const val COMPOSE_CONSTRAINT = "androidx.constraintlayout:constraintlayout-compose"
     const val COMPOSE_ICON = "androidx.compose.material:material-icons-extended"
+    const val COMPOSE_PAGING = "androidx.paging:paging-compose"
     const val INSETS = "dev.chrisbanes.accompanist:accompanist-insets"
     const val COIL = "dev.chrisbanes.accompanist:accompanist-coil"
 }
