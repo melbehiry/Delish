@@ -41,7 +41,7 @@ fun BookMarkButton(
     Surface(
         color = colorResource(id = R.color.black_alpha),
         shape = CircleShape,
-        modifier = modifier.requiredSize(36.dp, 36.dp)
+        modifier = modifier.requiredSize(36.dp, 36.dp).clickable {}
     ) {
         Icon(
             imageVector = icon,
@@ -49,7 +49,6 @@ fun BookMarkButton(
             contentDescription = null,
             modifier = Modifier
                 .padding(6.dp)
-                .clickable {}
         )
     }
 }
