@@ -19,10 +19,12 @@ package com.elbehiry.shared.data.remote
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.Recipes
 import com.elbehiry.model.RecipesItem
+import com.elbehiry.model.SearchItem
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface DelishApi {
 
@@ -42,4 +44,14 @@ interface DelishApi {
         @Query("apiKey") apiKey: String = BuildConfig.SPOONACULAR_KEY,
         @Query("includeNutrition") includeNutrition: Boolean? = true
     ): RecipesItem
+
+    @GET("/recipes/complexSearch")
+    suspend fun searchRecipes(
+        @Query("apiKey") apiKey: String = BuildConfig.SPOONACULAR_KEY,
+        @Query("query") query: String?,
+        @Query("cuisine") cuisine: String?,
+        @Query("addRecipeInformation") addRecipeInformation: Boolean?,
+        @Query("number") number: Int?,
+        @Query("offset") offset: Int
+    ): SearchItem
 }
