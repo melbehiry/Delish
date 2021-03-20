@@ -1,3 +1,19 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.elbehiry.delish.ui.widget
 
 import androidx.compose.animation.AnimatedVisibility
@@ -5,42 +21,50 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.IconButton
+import androidx.compose.material.Icon
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.elbehiry.delish.R
 
 @ExperimentalAnimationApi
 @Composable
 fun SearchAppBar(
-    title:String,
+    title: String,
     onTextChanged: (TextFieldValue) -> Unit,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    searchHint : String,
-    hintColor : Color = Color(0xFF8B8C8F),
+    searchHint: String,
+    hintColor: Color = Color(0xFF8B8C8F),
     keyboardType: KeyboardType = KeyboardType.Text,
     textFieldValue: TextFieldValue,
     backgroundColor: Color = Color(0xFF1F1F1F),
@@ -86,9 +110,10 @@ fun SearchAppBar(
                     bottom = parent.bottom
                 )
                 width = Dimension.fillToConstraints
-            }) {
+            }
+        ) {
             Surface(
-                modifier = Modifier.align(Alignment.CenterEnd).padding(end= 8.dp),
+                modifier = Modifier.align(Alignment.CenterEnd).padding(end = 8.dp),
                 shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
                 color = backgroundColor
             ) {
@@ -107,13 +132,17 @@ fun SearchAppBar(
                                     keyboardType = keyboardType,
                                     imeAction = ImeAction.Search
                                 ),
-                                keyboardActions= KeyboardActions(onSearch= {
-                                    onSearch()
-                                }),
+                                keyboardActions =
+                                KeyboardActions(
+                                    onSearch = {
+                                        onSearch()
+                                    }
+                                ),
                                 maxLines = 1,
                                 singleLine = true,
                                 cursorBrush = SolidColor(Color.White),
-                                textStyle = MaterialTheme.typography.body1.copy(color = Color.White),
+                                textStyle =
+                                MaterialTheme.typography.body1.copy(color = Color.White),
                                 modifier = Modifier.padding(horizontal = 16.dp)
                                     .fillMaxWidth()
                                     .constrainAs(searchContent) {
@@ -131,7 +160,7 @@ fun SearchAppBar(
                                             width = Dimension.fillToConstraints
                                         },
                                     text = searchHint,
-                                    style = MaterialTheme.typography.body1.copy(color= hintColor)
+                                    style = MaterialTheme.typography.body1.copy(color = hintColor)
                                 )
                             }
                         }

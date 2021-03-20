@@ -37,10 +37,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.elbehiry.delish.R
-import com.elbehiry.model.Nutrition
+import com.elbehiry.model.RecipesItem
 
 @Composable
-fun RecipeCaloric(nutrition: Nutrition?) {
+fun RecipeCaloric(recipeItem: RecipesItem) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
     ) {
@@ -62,7 +62,7 @@ fun RecipeCaloric(nutrition: Nutrition?) {
                     )
                 }
                 Text(
-                    text = "${nutrition?.caloricBreakdown?.percentProtein} %",
+                    text = "${recipeItem.percentProtein} %",
                     color = Color.White,
                     style = MaterialTheme.typography.subtitle2,
                     modifier = Modifier.align(Alignment.Center).padding(10.dp)
@@ -94,7 +94,7 @@ fun RecipeCaloric(nutrition: Nutrition?) {
                     )
                 }
                 Text(
-                    text = "${nutrition?.caloricBreakdown?.percentCarbs} %",
+                    text = "${recipeItem.percentCarbs} %",
                     color = Color.White,
                     style = MaterialTheme.typography.subtitle2,
                     modifier = Modifier.align(Alignment.Center).padding(10.dp)
@@ -125,7 +125,7 @@ fun RecipeCaloric(nutrition: Nutrition?) {
                     )
                 }
                 Text(
-                    text = "${nutrition?.caloricBreakdown?.percentFat} %",
+                    text = "${recipeItem.percentFat} %",
                     color = Color.White,
                     style = MaterialTheme.typography.subtitle2,
                     modifier = Modifier.align(Alignment.Center).padding(10.dp)

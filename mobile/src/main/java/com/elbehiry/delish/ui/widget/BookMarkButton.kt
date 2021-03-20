@@ -35,13 +35,16 @@ import com.elbehiry.delish.R
 @Composable
 fun BookMarkButton(
     modifier: Modifier = Modifier,
-    selected: Boolean = false
+    selected: Boolean = false,
+    onBookMark: () -> Unit
 ) {
     val icon = if (selected) Icons.Outlined.Bookmark else Icons.Filled.BookmarkBorder
     Surface(
         color = colorResource(id = R.color.black_alpha),
         shape = CircleShape,
-        modifier = modifier.requiredSize(36.dp, 36.dp).clickable {}
+        modifier = modifier.requiredSize(36.dp, 36.dp).clickable {
+            onBookMark()
+        }
     ) {
         Icon(
             imageVector = icon,
@@ -56,11 +59,11 @@ fun BookMarkButton(
 @Composable
 @Preview
 fun previewBookMarkButtonClicked() {
-    BookMarkButton(selected = false)
+    BookMarkButton(selected = false) {}
 }
 
 @Composable
 @Preview
 fun previewBookMarkButtonUnClicked() {
-    BookMarkButton(selected = true)
+    BookMarkButton(selected = true) {}
 }

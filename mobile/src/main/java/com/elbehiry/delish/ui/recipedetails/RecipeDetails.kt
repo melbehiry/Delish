@@ -49,19 +49,23 @@ fun RecipeDetails(
                 .background(color = MaterialTheme.colors.background)
         ) {
             item { RecipesHeader(recipe, navController) }
-            item { RecipeOptions(recipe) }
+            item {
+                RecipeOptions(recipe) { recipe ->
+                    viewModel.saveRecipe(recipe)
+                }
+            }
             item { RecipeDivider() }
             item { RecipeSummary(recipe) }
             item { RecipeDivider() }
             item { RecipeTags(recipe) }
-            item { RecipeCaloric(recipe.nutrition) }
+            item { RecipeCaloric(recipe) }
             item { RecipeDivider() }
             item { RecipeIngredientTitle() }
-            items(recipe.extendedIngredients ?: listOf()) { recipe ->
+            items(recipe.ingredientOriginalString ?: listOf()) { recipe ->
                 RecipeIngredientItem(recipe)
             }
             item { RecipeDivider() }
-            item { RecipeSteps(recipe.analyzedInstructions) }
+            item { RecipeSteps(recipe.step) }
             item { Spacer(modifier = Modifier.height(30.dp)) }
         }
     }

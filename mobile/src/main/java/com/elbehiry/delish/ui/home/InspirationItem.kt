@@ -45,11 +45,13 @@ import com.elbehiry.delish.ui.widget.BookMarkButton
 import com.elbehiry.model.RecipesItem
 import dev.chrisbanes.accompanist.coil.CoilImage
 
+// TODO: Handle pre book mark item.
 @Composable
 fun InspirationItem(
     recipe: RecipesItem,
     modifier: Modifier = Modifier,
-    onDetails: (Int) -> Unit
+    onDetails: (Int) -> Unit,
+    onBookMark: () -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -93,7 +95,9 @@ fun InspirationItem(
                 BookMarkButton(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(8.dp)
+                        .padding(8.dp),
+                    onBookMark = onBookMark,
+                    selected = recipe.saved
                 )
             }
         }
@@ -161,6 +165,6 @@ fun InspirationItem(
 @Composable
 fun PreviewInspirationItem() {
     DelishComposeTheme {
-        InspirationItem(RecipesItem()) {}
+        InspirationItem(RecipesItem(), onDetails = {}) {}
     }
 }

@@ -40,14 +40,12 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.widget.RecipesStepsSelection
-import com.elbehiry.model.AnalyzedInstructionsItem
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
 @Composable
-fun RecipeSteps(analyzedInstructionsItem: List<AnalyzedInstructionsItem?>?) {
-    if (analyzedInstructionsItem?.size != 0) {
-        val steps = analyzedInstructionsItem?.get(0)?.steps
+fun RecipeSteps(steps: List<String>?) {
+    if (steps?.size != 0) {
         val selectionIndex = remember { mutableStateOf(0) }
         Column(
             modifier = Modifier.fillMaxWidth()
@@ -59,7 +57,7 @@ fun RecipeSteps(analyzedInstructionsItem: List<AnalyzedInstructionsItem?>?) {
                 color = Color.White
             )
 
-            RecipeStepItem(steps?.get(selectionIndex.value)?.step ?: "")
+            RecipeStepItem(steps?.get(selectionIndex.value) ?: "")
 
             RecipesStepsSelection(
                 stepsCount = steps?.size ?: 0,

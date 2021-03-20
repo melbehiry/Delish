@@ -55,7 +55,7 @@ fun HomeContent(
     onIngredientContent: () -> Unit,
     onCuisineSearch: (String) -> Unit,
     onDetails: (Int) -> Unit,
-    onIngredientSearch:(String) -> Unit
+    onIngredientSearch: (String) -> Unit
 ) {
     val recipes: List<RecipesItem> by viewModel.randomRecipes.observeAsState(listOf())
     val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
@@ -67,8 +67,12 @@ fun HomeContent(
             LazyColumn {
 //                item { NotificationItem(errorMessage) }
                 item { HeaderTitle() }
-                item { DailyInspiration(recipes, onDetails) }
-                item { HomeIngredient(ingredients, onIngredientContent,onIngredientSearch) }
+                item {
+                    DailyInspiration(recipes, onDetails) { recipe ->
+                        viewModel.saveRecipe(recipe)
+                    }
+                }
+                item { HomeIngredient(ingredients, onIngredientContent, onIngredientSearch) }
                 item { Spacer(modifier = Modifier.padding(16.dp)) }
                 item { HomeCuisines(cuisines, onCuisineSearch) }
                 item { Spacer(modifier = Modifier.padding(50.dp)) }
@@ -113,7 +117,8 @@ fun HeaderTitle() {
 @Composable
 fun DailyInspiration(
     recipes: List<RecipesItem>,
-    onDetails: (Int) -> Unit
+    onDetails: (Int) -> Unit,
+    onBookMark: (RecipesItem) -> Unit
 ) {
     LazyRow(
         contentPadding = PaddingValues(
@@ -121,7 +126,9 @@ fun DailyInspiration(
         )
     ) {
         items(recipes) { recipe ->
-            InspirationItem(recipe, onDetails = onDetails)
+            InspirationItem(recipe, onDetails = onDetails) {
+                onBookMark(recipe)
+            }
         }
     }
 }

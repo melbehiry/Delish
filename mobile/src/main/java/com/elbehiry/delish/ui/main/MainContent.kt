@@ -19,7 +19,6 @@ package com.elbehiry.delish.ui.main
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.BottomNavigation
@@ -97,7 +96,7 @@ fun MainContent(
                 onDetails,
                 onIngredientSearch
             )
-            DelishHomeTabs.BookMark -> BookMark()
+            DelishHomeTabs.BookMark -> BookMark(viewModel, onDetails)
             DelishHomeTabs.MealPlan -> MealPlan()
         }
     }

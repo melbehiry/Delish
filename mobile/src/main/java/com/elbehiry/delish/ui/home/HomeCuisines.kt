@@ -50,7 +50,7 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 @Composable
 fun HomeCuisines(
     cuisines: List<CuisineItem>,
-    onCuisineSearch : (String) -> Unit
+    onCuisineSearch: (String) -> Unit
 ) {
     if (cuisines.isNotEmpty()) {
         Column(
@@ -62,7 +62,7 @@ fun HomeCuisines(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp).fillMaxWidth()
             )
-            CuisinesList(cuisines,onCuisineSearch)
+            CuisinesList(cuisines, onCuisineSearch)
         }
     }
 }
@@ -70,14 +70,15 @@ fun HomeCuisines(
 @Composable
 fun CuisinesList(
     cuisines: List<CuisineItem>,
-    onCuisineSearch : (String) -> Unit) {
+    onCuisineSearch: (String) -> Unit
+) {
     LazyRow(
         contentPadding = PaddingValues(
             8.dp, 8.dp, 16.dp, 16.dp
         )
     ) {
         items(cuisines) { recipe ->
-            CuisineItem(recipe,onCuisineSearch)
+            CuisineItem(recipe, onCuisineSearch)
         }
     }
 }
@@ -85,7 +86,8 @@ fun CuisinesList(
 @Composable
 fun CuisineItem(
     item: CuisineItem,
-    onCuisineSearch : (String) -> Unit) {
+    onCuisineSearch: (String) -> Unit
+) {
     Surface(
         modifier = Modifier
             .requiredSize(180.dp, 180.dp)

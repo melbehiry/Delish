@@ -40,7 +40,10 @@ import com.elbehiry.delish.R
 import com.elbehiry.model.RecipesItem
 
 @Composable
-fun RecipeOptions(recipe: RecipesItem) {
+fun RecipeOptions(
+    recipe: RecipesItem,
+    onSave: (RecipesItem) -> Unit
+) {
     Row(
         modifier = Modifier.padding(start = 8.dp, end = 8.dp)
     ) {
@@ -84,7 +87,9 @@ fun RecipeOptions(recipe: RecipesItem) {
         TextButton(
             modifier = Modifier.weight(1f)
                 .align(Alignment.CenterVertically),
-            onClick = { }
+            onClick = {
+                onSave(recipe)
+            }
         ) {
             Icon(
                 modifier = Modifier.padding(end = 4.dp),

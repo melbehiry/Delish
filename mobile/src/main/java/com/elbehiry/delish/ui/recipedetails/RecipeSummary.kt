@@ -42,9 +42,6 @@ fun RecipeSummary(recipe: RecipesItem) {
     Row(
         modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(16.dp)
     ) {
-        val calories = recipe.nutrition?.nutrients?.find {
-            it?.name?.equals("Calories", true) ?: false
-        }
         Text(
             text = buildAnnotatedString {
                 withStyle(
@@ -53,7 +50,7 @@ fun RecipeSummary(recipe: RecipesItem) {
                         fontSize = 14.sp
                     )
                 ) {
-                    append("${calories?.amount} ")
+                    append("${recipe.nutrientsAmount} ")
                 }
                 withStyle(
                     style = SpanStyle(

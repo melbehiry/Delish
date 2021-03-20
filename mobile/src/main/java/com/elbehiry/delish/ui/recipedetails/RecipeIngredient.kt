@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
-import com.elbehiry.model.ExtendedIngredientsItem
 
 @Composable
 fun RecipeIngredientTitle() {
@@ -39,10 +38,10 @@ fun RecipeIngredientTitle() {
 }
 
 @Composable
-fun RecipeIngredientItem(recipe: ExtendedIngredientsItem?) {
+fun RecipeIngredientItem(ingredientTitle: String) {
     Text(
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 16.dp),
-        text = "✓  ${recipe?.originalString}",
+        text = "✓  $ingredientTitle",
         style = MaterialTheme.typography.subtitle2,
         color = Color.White
     )

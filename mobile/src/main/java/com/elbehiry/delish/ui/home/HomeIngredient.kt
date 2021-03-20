@@ -38,7 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,7 +54,8 @@ import com.elbehiry.model.IngredientItem
 fun HomeIngredient(
     ingredients: List<IngredientItem>,
     onIngredientContent: () -> Unit,
-    onIngredientSearch:(String) -> Unit) {
+    onIngredientSearch: (String) -> Unit
+) {
     Column(
         modifier = Modifier.background(color = Color.DarkGray)
     ) {
@@ -67,7 +67,7 @@ fun HomeIngredient(
         )
         VerticalGrid(columns = 4) {
             ingredients.take(8).forEach { ingredientItem ->
-                HomeIngredientItem(ingredientItem,onIngredientSearch)
+                HomeIngredientItem(ingredientItem, onIngredientSearch)
             }
         }
         Button(
@@ -92,14 +92,16 @@ fun HomeIngredient(
 @Composable
 fun HomeIngredientItem(
     ingredientItem: IngredientItem,
-    onIngredientSearch:(String) -> Unit) {
+    onIngredientSearch: (String) -> Unit
+) {
 
     val itemTitle = stringResource(id = ingredientItem.titleId)
     Column(
         modifier = Modifier.clickable {
             onIngredientSearch(itemTitle)
         },
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Box(
             modifier = Modifier
                 .requiredSize(70.dp)
@@ -135,7 +137,8 @@ fun PreviewIngredient() {
             imageId = R.drawable.basil,
             background = R.color.basil_background,
             titleId = R.string.basil
-        ),{}
+        ),
+        {}
     )
 }
 
@@ -144,6 +147,6 @@ fun PreviewIngredient() {
 @Preview
 fun PreviewIngredientList() {
     HomeIngredient(
-        IngredientListProvider.ingredientList.take(4)
-    ,{},{})
+        IngredientListProvider.ingredientList.take(4), {}, {}
+    )
 }

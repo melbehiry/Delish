@@ -17,17 +17,30 @@
 package com.elbehiry.delish.ui.bookmark
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import com.elbehiry.delish.ui.home.InspirationItem
+import com.elbehiry.delish.ui.main.MainViewModel
+import com.elbehiry.model.RecipesItem
 
+@ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
-fun BookMark() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "In progress ...")
+fun BookMark(
+    viewModel: MainViewModel,
+    onDetails: (Int) -> Unit
+) {
+    val recipes: List<RecipesItem> by viewModel.savedRecipes.observeAsState(listOf())
+    LazyVerticalGrid(cells = GridCells.Fixed(2)) {
+        items(recipes.distinct()) { recipe ->
+            InspirationItem(recipe, onDetails = onDetails) {
+                viewModel.deleteRecipe(recipe)
+            }
+        }
     }
 }

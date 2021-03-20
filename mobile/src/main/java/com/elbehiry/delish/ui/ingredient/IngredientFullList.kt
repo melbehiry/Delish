@@ -56,7 +56,8 @@ import com.elbehiry.model.IngredientItem
 @Composable
 fun IngredientFullList(
     viewModel: MainViewModel,
-    onIngredientSearch:(String) -> Unit) {
+    onIngredientSearch: (String) -> Unit
+) {
     val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())
 
     DelishComposeTheme {
@@ -82,7 +83,7 @@ fun IngredientFullList(
                     cells = GridCells.Adaptive(minSize = 128.dp),
                 ) {
                     items(ingredients) { ingredientItem ->
-                        FullIngredientItem(ingredientItem,onIngredientSearch)
+                        FullIngredientItem(ingredientItem, onIngredientSearch)
                     }
                 }
             }
@@ -93,7 +94,8 @@ fun IngredientFullList(
 @Composable
 fun FullIngredientItem(
     ingredientItem: IngredientItem,
-    onIngredientSearch:(String) -> Unit) {
+    onIngredientSearch: (String) -> Unit
+) {
     val title = stringResource(id = ingredientItem.titleId)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -104,9 +106,11 @@ fun FullIngredientItem(
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .background(colorResource(id = ingredientItem.background))
-                .clickable(onClick = {
-                    onIngredientSearch(title)
-                })
+                .clickable(
+                    onClick = {
+                        onIngredientSearch(title)
+                    }
+                )
         ) {
             Image(
                 painter = painterResource(id = ingredientItem.imageId),

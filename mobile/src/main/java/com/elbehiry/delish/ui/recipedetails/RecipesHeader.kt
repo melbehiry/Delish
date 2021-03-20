@@ -49,7 +49,10 @@ import com.elbehiry.model.RecipesItem
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun RecipesHeader(recipe: RecipesItem, navController: NavController) {
+fun RecipesHeader(
+    recipe: RecipesItem,
+    navController: NavController
+) {
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth().height(300.dp)
     ) {
