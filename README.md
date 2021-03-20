@@ -22,6 +22,7 @@
 </p>
 
 <p align="center">
+<img src="https://user-images.githubusercontent.com/8813304/111886718-8d360100-89d8-11eb-8ec1-ea8b08ec623a.gif" width="15%"/>
 <img src="https://github.com/Elbehiry/Delish/blob/master/images/vid1.gif" width="15%"/>
 <img src="https://github.com/Elbehiry/Delish/blob/master/images/vid2.gif" width="15%"/>
 <img src="https://github.com/Elbehiry/Delish/blob/master/images/vid3.gif" width="15%"/>
