@@ -80,4 +80,13 @@ subprojects {
                     "kotlinx.coroutines.FlowPreview" +
                     "-Xallow-jvm-ir-dependencies"
     }
+
+    tasks.withType(KotlinCompile::class.java).all {
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-Xuse-experimental=kotlin.ExperimentalStdlibApi"
+            )
+        }
+    }
+
 }

@@ -55,6 +55,8 @@ val composePaging = "1.0.0-alpha08"
 val accompanist = "0.6.0"
 val fragmentKtx = "1.3.0"
 val appCompat = "1.2.0-rc01"
+val faker = "1.0.2"
+val binder = "1.0.0-alpha01"
 
 dependencies {
     constraints {
@@ -122,6 +124,9 @@ dependencies {
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
         api("${Libs.INSETS}:$accompanist")
         api("${Libs.COIL}:$accompanist")
+        api("${Libs.FAKER}:$faker")
+        api("${Libs.HILT_BINDER}:$binder")
+        api("${Libs.HILT_BINDER_COMPILER}:$binder")
     }
 }
 

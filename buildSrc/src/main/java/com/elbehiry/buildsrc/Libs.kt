@@ -63,4 +63,7 @@ object Libs {
     const val COMPOSE_PAGING = "androidx.paging:paging-compose"
     const val INSETS = "dev.chrisbanes.accompanist:accompanist-insets"
     const val COIL = "dev.chrisbanes.accompanist:accompanist-coil"
+    const val FAKER = "com.github.javafaker:javafaker"
+    const val HILT_BINDER = "com.paulrybitskyi:hilt-binder"
+    const val HILT_BINDER_COMPILER = "com.paulrybitskyi:hilt-binder-compiler"
 }

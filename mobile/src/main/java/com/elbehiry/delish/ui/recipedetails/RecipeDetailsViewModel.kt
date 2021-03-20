@@ -16,20 +16,26 @@
 
 package com.elbehiry.delish.ui.recipedetails
 
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.liveData
 import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeUseCase
 import com.elbehiry.shared.domain.recipes.information.GetRecipeInformationUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RecipeDetailsViewModel @ViewModelInject constructor(
-    private val getRecipeInformationUseCase: GetRecipeInformationUseCase
+@HiltViewModel
+class RecipeDetailsViewModel @Inject constructor(
+    private val getRecipeInformationUseCase: GetRecipeInformationUseCase,
+    private val saveRecipeUseCase: SaveRecipeUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -59,5 +65,11 @@ class RecipeDetailsViewModel @ViewModelInject constructor(
     fun getRecipeDetails(id: Int) {
         _isLoading.value = true
         recipeParam.value = id
+    }
+
+    fun saveRecipe(recipesItem: RecipesItem) {
+        viewModelScope.launch {
+            saveRecipeUseCase(recipesItem)
+        }
     }
 }

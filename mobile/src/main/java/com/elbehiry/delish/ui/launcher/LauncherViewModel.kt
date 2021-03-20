@@ -16,7 +16,6 @@
 
 package com.elbehiry.delish.ui.launcher
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -25,8 +24,11 @@ import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.flow.collect
 import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.MAIN_ACTIVITY
 import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.ONBOARDING
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LauncherViewModel @ViewModelInject constructor(
+@HiltViewModel
+class LauncherViewModel @Inject constructor(
     val onBoardingCompletedUseCase: OnBoardingCompletedUseCase
 ) : ViewModel() {
     val launchDestination: LiveData<LaunchDestination> = liveData {

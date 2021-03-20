@@ -10,7 +10,7 @@ object Versions {
     const val ANDROID_GRADLE_PLUGIN = "7.0.0-alpha08"
     const val KOTLIN = "1.4.30"
     const val NAVIGATION = "2.3.3"
-    const val HILT = "2.30.1-alpha"
+    const val HILT = "2.33-beta"
     const val COMPOSE = "1.0.0-beta01"
     const val snapshot = ""
 }
