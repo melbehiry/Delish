@@ -16,12 +16,12 @@
 
 package com.elbehiry.shared.data.recipes.random.repository
 
-import com.elbehiry.model.RecipesItem
+import com.elbehiry.model.Recipe
 
 interface RandomRecipesRepository {
 
     suspend fun getRandomRecipes(
         tags: String?,
         number: Int?
-    ): List<RecipesItem>
+    ): List<Recipe>
 }

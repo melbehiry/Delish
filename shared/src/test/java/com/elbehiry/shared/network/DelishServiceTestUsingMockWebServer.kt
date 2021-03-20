@@ -65,7 +65,7 @@ class DelishServiceTestUsingMockWebServer {
             val recipes = delishApiService.getRandomRecipes(tags = null, number = null)
             Assert.assertNotNull(recipes)
             val recipeItem = recipes.recipes[0]
-            Assert.assertEquals(recipeItem?.id, RecipesTestData.id)
+            Assert.assertEquals(recipeItem.id, RecipesTestData.id)
         }
     }
 

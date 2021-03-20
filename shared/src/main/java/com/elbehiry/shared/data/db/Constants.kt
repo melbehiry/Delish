@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.data.db
 
-import com.elbehiry.model.Recipe
+internal object Constants {
 
-interface RecipeInformationDataSource {
-    suspend fun getRecipeInformation(
-        id: Int?
-    ): Recipe
+    const val DATABASE_NAME = "delish.db"
+    const val VERSION = 1
 }

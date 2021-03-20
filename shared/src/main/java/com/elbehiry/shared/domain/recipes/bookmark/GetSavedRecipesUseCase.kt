@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.domain.recipes.bookmark
 
-import com.elbehiry.model.Recipe
-import com.elbehiry.shared.data.remote.DelishApi
+import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.di.IoDispatcher
+import com.elbehiry.shared.domain.UseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RecipeInformationRemoteDataSource(
-    private val api: DelishApi,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : RecipeInformationDataSource {
-    override suspend fun getRecipeInformation(id: Int?): Recipe =
-        withContext(ioDispatcher) {
-            api.getRecipeInformation(id = id)
-        }
+class GetSavedRecipesUseCase @Inject constructor(
+    private val dataStore: RecipesLocalDataStore,
+    @IoDispatcher ioDispatcher: CoroutineDispatcher
+) : UseCase<Unit, List<RecipesItem>>(ioDispatcher) {
+    override suspend fun execute(parameters: Unit): List<RecipesItem> =
+        dataStore.getRecipes()
 }

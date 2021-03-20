@@ -18,6 +18,7 @@ package com.elbehiry.shared.domain.recipes.random
 
 import com.elbehiry.shared.domain.UseCase
 import com.elbehiry.model.RecipesItem
+import com.elbehiry.model.toUiModel
 import com.elbehiry.shared.data.recipes.random.repository.RandomRecipesRepository
 import com.elbehiry.shared.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -31,7 +32,9 @@ class GetRandomRecipesUseCase @Inject constructor(
 ) : UseCase<GetRandomRecipesUseCase.Params, List<RecipesItem>>(ioDispatcher) {
 
     override suspend fun execute(parameters: Params): List<RecipesItem> =
-        randomRecipesRepository.getRandomRecipes(parameters.tags, parameters.number)
+        randomRecipesRepository.getRandomRecipes(parameters.tags, parameters.number).map {
+            it.toUiModel()
+        }
 
     class Params private constructor(
         val tags: String?,

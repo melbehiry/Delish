@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.domain
 
-import com.elbehiry.model.Recipe
+import com.elbehiry.shared.data.recipes.random.repository.RandomRecipesRepository
+import com.elbehiry.test_shared.MainCoroutineRule
+import com.elbehiry.test_shared.runBlockingTest
+import org.junit.Rule
 
-interface RecipeInformationDataSource {
-    suspend fun getRecipeInformation(
-        id: Int?
-    ): Recipe
+class GetRandomRecipesUseCaseTest {
+
+    @get:Rule
+    var coroutineRule = MainCoroutineRule()
+
+    private lateinit var repository: RandomRecipesRepository
+
+    fun executeRandomRecipesTest() = coroutineRule.runBlockingTest {
+//        val useCase = GetRandomRecipesUseCase()
+    }
 }

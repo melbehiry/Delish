@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.search.repository
+package com.elbehiry.shared.domain.recipes.bookmark
 
-import androidx.paging.PagingData
 import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.di.IoDispatcher
+import com.elbehiry.shared.domain.FlowUseCase
+import com.elbehiry.shared.result.Result
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-interface SearchRepository {
-    fun searchRecipes(
-        query: String?,
-        cuisine: String?
-    ): Flow<PagingData<RecipesItem>>
+class ObserveOnLastItemAddedUseCase @Inject constructor(
+    private val dataStore: RecipesLocalDataStore,
+    @IoDispatcher ioDispatcher: CoroutineDispatcher
+) : FlowUseCase<Unit, RecipesItem>(ioDispatcher) {
+    override fun execute(parameters: Unit): Flow<Result<RecipesItem>> {
+        return dataStore.observeOnLastAdded()
+    }
 }

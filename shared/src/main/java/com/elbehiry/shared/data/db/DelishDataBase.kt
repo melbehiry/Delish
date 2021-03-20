@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.data.db
 
-import com.elbehiry.model.Recipe
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.elbehiry.shared.data.db.recipes.entities.RecipeEntity
+import com.elbehiry.shared.data.db.recipes.tables.RecipesTable
 
-interface RecipeInformationDataSource {
-    suspend fun getRecipeInformation(
-        id: Int?
-    ): Recipe
+@Database(
+    entities = [
+        RecipeEntity::class
+    ],
+    version = Constants.VERSION
+)
+internal abstract class DelishDataBase : RoomDatabase() {
+    abstract val recipesTable: RecipesTable
 }

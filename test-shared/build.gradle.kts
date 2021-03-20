@@ -28,6 +28,7 @@ dependencies {
 
     // Test
     implementation(Libs.JUNIT)
+    implementation(Libs.FAKER)
     api(Libs.COROUTINES_TEST)
 }
 

@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.domain.recipes.bookmark
 
-import com.elbehiry.model.Recipe
+import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.di.IoDispatcher
+import com.elbehiry.shared.domain.UseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-interface RecipeInformationDataSource {
-    suspend fun getRecipeInformation(
-        id: Int?
-    ): Recipe
+class SaveRecipeUseCase @Inject constructor(
+    private val dataStore: RecipesLocalDataStore,
+    @IoDispatcher ioDispatcher: CoroutineDispatcher
+) : UseCase<RecipesItem, Unit>(ioDispatcher) {
+    override suspend fun execute(
+        parameters: RecipesItem
+    ) = dataStore.saveRecipe(parameters)
 }

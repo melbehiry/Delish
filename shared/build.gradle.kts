@@ -144,6 +144,7 @@ dependencies {
     testImplementation(Libs.HAMCREST)
     testImplementation(Libs.MOCKITO_CORE)
     testImplementation(Libs.MOCKITO_KOTLIN)
+    testImplementation(Libs.FAKER)
 
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)

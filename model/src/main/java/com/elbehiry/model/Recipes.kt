@@ -17,118 +17,58 @@
 package com.elbehiry.model
 
 data class Recipes(
-    val recipes: List<RecipesItem> = emptyList()
-)
-
-data class IngredientsItem(
-    val image: String? = null,
-    val localizedName: String? = null,
-    val name: String? = null,
-    val id: Int? = null
-)
-
-data class Measures(
-    val metric: Metric? = null,
-    val us: Us? = null
-)
-
-data class StepsItem(
-    val number: Int? = null,
-    val ingredients: List<IngredientsItem?>? = null,
-    val equipment: List<EquipmentItem?>? = null,
-    val step: String? = null,
-    val length: Length? = null
-)
-
-data class EquipmentItem(
-    val image: String? = null,
-    val localizedName: String? = null,
-    val name: String? = null,
-    val id: Int? = null
-)
-
-data class AnalyzedInstructionsItem(
-    val name: String? = null,
-    val steps: List<StepsItem?>? = null
-)
-
-data class Length(
-    val number: Int? = null,
-    val unit: String? = null
-)
-
-data class Temperature(
-    val number: Double? = null,
-    val unit: String? = null
-)
-
-data class ExtendedIngredientsItem(
-    val image: String? = null,
-    val amount: Double? = null,
-    val nameClean: String? = null,
-    val original: String? = null,
-    val aisle: String? = null,
-    val consistency: String? = null,
-    val originalName: String? = null,
-    val unit: String? = null,
-    val measures: Measures? = null,
-    val meta: List<Any?>? = null,
-    val name: String? = null,
-    val originalString: String? = null,
-    val id: Int? = null,
-    val metaInformation: List<Any?>? = null
-)
-
-data class Us(
-    val amount: Double? = null,
-    val unitShort: String? = null,
-    val unitLong: String? = null
-)
-
-data class Metric(
-    val amount: Double? = null,
-    val unitShort: String? = null,
-    val unitLong: String? = null
+    val recipes: List<Recipe> = emptyList()
 )
 
 data class RecipesItem(
-    val instructions: String? = null,
+    val id: Int? = 1,
     val sustainable: Boolean? = null,
-    val analyzedInstructions: List<AnalyzedInstructionsItem?>? = null,
     val glutenFree: Boolean? = null,
     val veryPopular: Boolean? = null,
     val healthScore: Double? = null,
     val title: String? = null,
-    val diets: List<String?>? = null,
     val aggregateLikes: Int? = null,
     val creditsText: String? = null,
     val readyInMinutes: Int? = null,
-    val sourceUrl: String? = null,
     val dairyFree: Boolean? = null,
-    val servings: Double? = null,
     val vegetarian: Boolean? = null,
-    val id: Int? = 1,
-    val imageType: String? = null,
-    val summary: String? = null,
     val image: String? = null,
     val veryHealthy: Boolean? = null,
     val vegan: Boolean? = null,
     val cheap: Boolean? = null,
-    val extendedIngredients: List<ExtendedIngredientsItem?>? = null,
-    val dishTypes: List<String?>? = null,
-    val gaps: String? = null,
-    val cuisines: List<Any?>? = null,
-    val lowFodmap: Boolean? = null,
-    val license: String? = null,
-    val weightWatcherSmartPoints: Int? = null,
-    val occasions: List<Any?>? = null,
     val spoonacularScore: Double? = null,
-    val pricePerServing: Double? = null,
     val sourceName: String? = null,
-    val originalId: Int? = null,
-    val spoonacularSourceUrl: String? = null,
-    val winePairing: WinePairing? = null,
+    val percentCarbs: Double? = null,
+    val percentProtein: Double? = null,
+    val percentFat: Double? = null,
+    val nutrientsAmount: Double? = 0.0,
+    val nutrientsName: String? = "",
+    val step: List<String>? = emptyList(),
+    val ingredientOriginalString: List<String>? = emptyList(),
+    val saved: Boolean = false
+)
+
+data class Recipe(
+    val sustainable: Boolean? = null,
+    val glutenFree: Boolean? = null,
+    val veryPopular: Boolean? = null,
+    val healthScore: Double? = null,
+    val title: String? = null,
+    val aggregateLikes: Int? = null,
+    val creditsText: String? = null,
+    val readyInMinutes: Int? = null,
+    val dairyFree: Boolean? = null,
+    val vegetarian: Boolean? = null,
+    val id: Int? = 1,
+    val image: String? = null,
+    val veryHealthy: Boolean? = null,
+    val vegan: Boolean? = null,
+    val cheap: Boolean? = null,
+    val spoonacularScore: Double? = null,
+    val sourceName: String? = null,
     val nutrition: Nutrition? = null,
+    val analyzedInstructions: List<AnalyzedInstructionsItem>? = null,
+    val extendedIngredients: List<ExtendedIngredientsItem>? = null
 )
 
 data class CaloricBreakdown(
@@ -137,42 +77,64 @@ data class CaloricBreakdown(
     val percentFat: Double? = null
 )
 
-data class PropertiesItem(
-    val amount: Double? = null,
-    val unit: String? = null,
-    val name: String? = null,
-    val title: String? = null
-)
-
-data class FlavanoidsItem(
-    val amount: Double? = null,
-    val unit: String? = null,
-    val name: String? = null,
-    val title: String? = null
-)
-
 data class NutrientsItem(
     val amount: Double? = null,
-    val unit: String? = null,
-    val percentOfDailyNeeds: Double? = null,
     val name: String? = null,
-    val title: String? = null
 )
 
 data class Nutrition(
     val caloricBreakdown: CaloricBreakdown? = null,
-    val weightPerServing: WeightPerServing? = null,
-    val ingredients: List<IngredientsItem?>? = null,
-    val flavanoids: List<FlavanoidsItem?>? = null,
-    val properties: List<PropertiesItem?>? = null,
-    val nutrients: List<NutrientsItem?>? = null
+    val nutrients: List<NutrientsItem>? = null
 )
 
-data class WinePairing(
-    val any: Any? = null
-)
+data class AnalyzedInstructionsItem(val steps: List<StepsItem>? = null)
 
-data class WeightPerServing(
-    val amount: Double? = null,
-    val unit: String? = null
-)
+data class StepsItem(val step: String? = null)
+
+data class ExtendedIngredientsItem(val originalString: String? = null)
+
+fun Recipe.toUiModel(): RecipesItem =
+    RecipesItem(
+        id,
+        sustainable,
+        glutenFree,
+        veryPopular,
+        healthScore,
+        title,
+        aggregateLikes,
+        creditsText,
+        readyInMinutes,
+        dairyFree,
+        vegetarian,
+        image,
+        veryHealthy,
+        vegan,
+        cheap,
+        spoonacularScore,
+        sourceName,
+        nutrition?.caloricBreakdown?.percentCarbs,
+        nutrition?.caloricBreakdown?.percentProtein,
+        nutrition?.caloricBreakdown?.percentFat,
+        nutrition?.nutrients?.nutritionToNutrientsItem()?.amount,
+        nutrition?.nutrients?.nutritionToNutrientsItem()?.name,
+        analyzedInstructions?.get(0)?.steps?.toStepsUiModel(),
+        extendedIngredients?.toIngredientUiModel()
+    )
+
+fun List<NutrientsItem>.nutritionToNutrientsItem(): NutrientsItem? {
+    return this.find {
+        it.name?.equals("Calories", true) ?: false
+    }
+}
+
+fun List<StepsItem>.toStepsUiModel(): List<String> {
+    return this.map {
+        it.step ?: ""
+    }
+}
+
+fun List<ExtendedIngredientsItem>.toIngredientUiModel(): List<String> {
+    return this.map {
+        it.originalString ?: ""
+    }
+}

@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.data.db.commons
 
-import com.elbehiry.model.Recipe
+import androidx.room.migration.Migration
 
-interface RecipeInformationDataSource {
-    suspend fun getRecipeInformation(
-        id: Int?
-    ): Recipe
-}
+internal val MIGRATIONS = arrayOf<Migration>()

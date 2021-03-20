@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.util
+package com.elbehiry.shared.data.db
 
-import com.squareup.moshi.JsonAdapter
-import se.ansman.kotshi.KotshiJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapter
+import javax.inject.Inject
 
-@KotshiJsonAdapterFactory
-abstract class ApplicationJsonAdapterFactory : JsonAdapter.Factory {
-    companion object {
-        val INSTANCE: ApplicationJsonAdapterFactory = KotshiApplicationJsonAdapterFactory
+internal class JsonConverter @Inject constructor(private val moshi: Moshi) {
+
+    inline fun <reified T> toJson(clazz: T): String {
+        return moshi.adapter<T>().toJson(clazz)
+    }
+
+    inline fun <reified T> fromJson(json: String): T? {
+        return moshi.adapter<T>().fromJson(json)
     }
 }

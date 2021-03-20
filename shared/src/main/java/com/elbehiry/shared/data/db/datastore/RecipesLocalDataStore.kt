@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.info.remote
+package com.elbehiry.shared.data.db.datastore
 
-import com.elbehiry.model.Recipe
+import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.result.Result
+import kotlinx.coroutines.flow.Flow
 
-interface RecipeInformationDataSource {
-    suspend fun getRecipeInformation(
-        id: Int?
-    ): Recipe
+interface RecipesLocalDataStore {
+    suspend fun saveRecipe(recipesItem: RecipesItem)
+    suspend fun getRecipes(): List<RecipesItem>
+    fun observeOnLastAdded(): Flow<Result<RecipesItem>>
 }

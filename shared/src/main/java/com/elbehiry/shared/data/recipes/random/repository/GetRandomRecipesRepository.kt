@@ -16,12 +16,12 @@
 
 package com.elbehiry.shared.data.recipes.random.repository
 
-import com.elbehiry.model.RecipesItem
+import com.elbehiry.model.Recipe
 import com.elbehiry.shared.data.recipes.random.remote.RandomRecipesRemoteDataSource
 
 class GetRandomRecipesRepository(
     private val randomRecipesRemoteDataSource: RandomRecipesRemoteDataSource
 ) : RandomRecipesRepository {
-    override suspend fun getRandomRecipes(tags: String?, number: Int?): List<RecipesItem> =
+    override suspend fun getRandomRecipes(tags: String?, number: Int?): List<Recipe> =
         randomRecipesRemoteDataSource.getRandomRecipes(tags, number).recipes
 }
