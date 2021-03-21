@@ -141,10 +141,6 @@ dependencies {
     kaptAndroidTest(Libs.HILT_COMPILER)
     kaptAndroidTest(Libs.ANDROIDX_HILT_COMPILER)
 
-    // Glide
-    implementation(Libs.GLIDE)
-    kapt(Libs.GLIDE_COMPILER)
-
     // Kotlin
     implementation(Libs.KOTLIN_STDLIB)
 
@@ -162,8 +158,6 @@ dependencies {
     testImplementation(Libs.HAMCREST)
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
-
-    implementation(Libs.GSON)
 
     // COMPOSE
     implementation(Libs.COMPOSE_RUNTIME)

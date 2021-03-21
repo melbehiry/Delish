@@ -112,7 +112,6 @@ dependencies {
 
     // Utils
     api(Libs.TIMBER)
-    implementation(Libs.GSON)
     implementation(Libs.CORE_KTX)
 
     // OkHttp
@@ -125,8 +124,6 @@ dependencies {
     api(Libs.MOSHI)
     api(Libs.MOSHI_KOTLIN)
     api(Libs.MOSHI_RETROFIT)
-    api(Libs.KOTCHI)
-    kapt(Libs.KOTCHI_COMPILER)
 
     // Kotlin
     implementation(Libs.KOTLIN_STDLIB)
