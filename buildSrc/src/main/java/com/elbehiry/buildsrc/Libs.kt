@@ -61,6 +61,7 @@ object Libs {
     const val COMPOSE_CONSTRAINT = "androidx.constraintlayout:constraintlayout-compose"
     const val COMPOSE_ICON = "androidx.compose.material:material-icons-extended"
     const val COMPOSE_PAGING = "androidx.paging:paging-compose"
+    const val COMPOSE_VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-compose"
     const val INSETS = "dev.chrisbanes.accompanist:accompanist-insets"
     const val COIL = "dev.chrisbanes.accompanist:accompanist-coil"
     const val FAKER = "com.github.javafaker:javafaker"

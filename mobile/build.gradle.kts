@@ -173,6 +173,7 @@ dependencies {
     implementation(Libs.COMPOSE_ACTIVITY)
     implementation(Libs.COMPOSE_CONSTRAINT)
     implementation(Libs.COMPOSE_PAGING)
+    implementation(Libs.COMPOSE_VIEW_MODEL)
 
     implementation(Libs.INSETS)
     implementation(Libs.COIL)
