@@ -22,6 +22,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface RecipesLocalDataStore {
     suspend fun saveRecipe(recipesItem: RecipesItem)
-    suspend fun getRecipes(): List<RecipesItem>
-    fun observeOnLastAdded(): Flow<Result<RecipesItem>>
+    fun getRecipes(): Flow<Result<List<RecipesItem>>>
 }

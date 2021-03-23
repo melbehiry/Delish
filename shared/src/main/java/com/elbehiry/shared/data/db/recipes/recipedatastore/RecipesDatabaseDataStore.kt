@@ -42,21 +42,13 @@ internal class RecipesDatabaseDataStore @Inject constructor(
         )
     }
 
-    override suspend fun getRecipes(): List<RecipesItem> {
-        return recipesTable.getRecipes().toDataRecipes()
+    override fun getRecipes(): Flow<Result<List<RecipesItem>>> {
+        return recipesTable.getRecipes().toListDataRecipeFlow()
     }
 
-    override fun observeOnLastAdded(): Flow<Result<RecipesItem>> {
-        return recipesTable.observeOnLastAdded().toDataRecipeFlow()
-    }
-
-    private fun List<RecipeEntity>.toDataRecipes(): List<RecipesItem> {
-        return this.map(recipeMapper::mapToDataRecipe)
-    }
-
-    private fun Flow<RecipeEntity>.toDataRecipeFlow(): Flow<Result<RecipesItem>> {
-        return this.map { item ->
-            Result.Success(recipeMapper.mapToDataRecipe(item))
+    private fun Flow<List<RecipeEntity>>.toListDataRecipeFlow(): Flow<Result<List<RecipesItem>>> {
+        return this.map { items ->
+            Result.Success(items.toDataRecipes())
         }
     }
 }

@@ -34,14 +34,5 @@ internal interface RecipesTable {
             SELECT * FROM ${RecipeEntity.Schema.TABLE_NAME}
             """
     )
-    suspend fun getRecipes(): List<RecipeEntity>
-
-    @Query(
-        """
-            SELECT * FROM ${RecipeEntity.Schema.TABLE_NAME}
-            ORDER BY ${RecipeEntity.Schema.RECIPE_ID} DESC
-            LIMIT 1
-            """
-    )
-    fun observeOnLastAdded(): Flow<RecipeEntity>
+    fun getRecipes(): Flow<List<RecipeEntity>>
 }

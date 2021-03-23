@@ -25,14 +25,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import com.elbehiry.delish.ui.home.InspirationItem
-import com.elbehiry.delish.ui.main.MainViewModel
 import com.elbehiry.model.RecipesItem
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
 fun BookMark(
-    viewModel: MainViewModel,
+    viewModel: BookmarkViewModel,
     onDetails: (Int) -> Unit
 ) {
     val recipes: List<RecipesItem> by viewModel.savedRecipes.observeAsState(listOf())

@@ -19,14 +19,16 @@ package com.elbehiry.shared.domain.recipes.bookmark
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
 import com.elbehiry.shared.di.IoDispatcher
-import com.elbehiry.shared.domain.UseCase
+import com.elbehiry.shared.domain.FlowUseCase
+import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetSavedRecipesUseCase @Inject constructor(
     private val dataStore: RecipesLocalDataStore,
     @IoDispatcher ioDispatcher: CoroutineDispatcher
-) : UseCase<Unit, List<RecipesItem>>(ioDispatcher) {
-    override suspend fun execute(parameters: Unit): List<RecipesItem> =
+) : FlowUseCase<Unit, List<RecipesItem>>(ioDispatcher) {
+    override fun execute(parameters: Unit): Flow<Result<List<RecipesItem>>> =
         dataStore.getRecipes()
 }
