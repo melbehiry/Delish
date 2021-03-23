@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.bookmark.BookMark
+import com.elbehiry.delish.ui.bookmark.BookmarkViewModel
 import com.elbehiry.delish.ui.home.HomeContent
 import com.elbehiry.delish.ui.plan.MealPlan
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
@@ -55,6 +56,7 @@ import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 @Composable
 fun MainContent(
     viewModel: MainViewModel,
+    bookmarkViewModel: BookmarkViewModel,
     onIngredientContent: () -> Unit,
     onCuisineSearch: (String) -> Unit,
     onDetails: (Int) -> Unit,
@@ -96,7 +98,7 @@ fun MainContent(
                 onDetails,
                 onIngredientSearch
             )
-            DelishHomeTabs.BookMark -> BookMark(viewModel, onDetails)
+            DelishHomeTabs.BookMark -> BookMark(bookmarkViewModel, onDetails)
             DelishHomeTabs.MealPlan -> MealPlan()
         }
     }

@@ -52,18 +52,19 @@ import com.elbehiry.delish.ui.theme.compositedOnSurface
 import com.elbehiry.delish.ui.widget.SearchAppBar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.elbehiry.model.RecipesItem
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @ExperimentalAnimationApi
 @Composable
 fun SearchScreen(
-    searchViewModel: SearchRecipesViewModel,
     navController: NavController,
     searchKey: String,
     type: SearchType = SearchType.QUERY,
     onItemClick: (Int?) -> Unit
 ) {
+    val searchViewModel: SearchRecipesViewModel = viewModel()
     val recipes = searchViewModel.searchRecipes(searchKey, type).collectAsLazyPagingItems()
     Column(modifier = Modifier.fillMaxSize()) {
         SearchHeaderItem(navController, searchKey) {

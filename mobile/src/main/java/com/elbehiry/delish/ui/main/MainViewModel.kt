@@ -24,8 +24,6 @@ import com.elbehiry.delish.ui.util.IngredientListProvider
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
-import com.elbehiry.shared.domain.recipes.bookmark.GetSavedRecipesUseCase
-import com.elbehiry.shared.domain.recipes.bookmark.ObserveOnLastItemAddedUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
@@ -34,7 +32,6 @@ import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,9 +39,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getRandomRecipesUseCase: GetRandomRecipesUseCase,
     private val getAvailableCuisinesUseCase: GetAvailableCuisinesUseCase,
-    private val saveRecipeUseCase: SaveRecipeUseCase,
-    private val getSavedRecipesUseCase: GetSavedRecipesUseCase,
-    private val observeOnLastItemAddedUseCase: ObserveOnLastItemAddedUseCase
+    private val saveRecipeUseCase: SaveRecipeUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -61,9 +56,6 @@ class MainViewModel @Inject constructor(
 
     private val _randomRecipes = MutableLiveData<List<RecipesItem>>()
     val randomRecipes: LiveData<List<RecipesItem>> = _randomRecipes
-
-    private val _savedRecipes = MutableLiveData<MutableList<RecipesItem>>()
-    val savedRecipes: LiveData<MutableList<RecipesItem>> = _savedRecipes
 
     init {
         getHomeContent()
@@ -85,14 +77,9 @@ class MainViewModel @Inject constructor(
                         )
                     }
 
-                    val savedRecipesDeferred = async {
-                        getSavedRecipesUseCase(Unit)
-                    }
-
                     val ingredientList = ingredientListDeferred.await()
                     val cuisinesList = cuisinesListDeferred.await()
                     val randomRecipes = randomRecipesDeferred.await()
-                    val savedRecipes = savedRecipesDeferred.await()
 
                     if (cuisinesList is Result.Error) {
                         _hasError.postValue(cuisinesList.exception.message)
@@ -103,13 +90,11 @@ class MainViewModel @Inject constructor(
                     _randomRecipes.postValue(randomRecipes.data ?: listOf())
                     _ingredientList.postValue(ingredientList)
                     _cuisinesList.postValue(cuisinesList.data ?: listOf())
-                    _savedRecipes.postValue((savedRecipes.data ?: mutableListOf()).toMutableList())
                 }
             } catch (e: Exception) {
                 _hasError.postValue(e.message)
             } finally {
                 _isLoading.value = false
-                observeOnLastAdded()
             }
         }
     }
@@ -118,19 +103,5 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             saveRecipeUseCase(recipesItem)
         }
-    }
-
-    private fun observeOnLastAdded() {
-        viewModelScope.launch {
-            observeOnLastItemAddedUseCase(Unit).collect {
-                if (it.data != null) {
-                    _savedRecipes.value?.add(it.data!!)
-                }
-            }
-        }
-    }
-
-    fun deleteRecipe(recipe: RecipesItem) {
-        _savedRecipes.value?.remove(recipe)
     }
 }

@@ -23,7 +23,6 @@ import android.view.ViewGroup
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -33,7 +32,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val searchViewModel: SearchRecipesViewModel by viewModels()
     private val searchArgs: SearchFragmentArgs by navArgs()
 
     @ExperimentalAnimationApi
@@ -46,7 +44,6 @@ class SearchFragment : Fragment() {
             setContent {
                 DelishComposeTheme {
                     SearchScreen(
-                        searchViewModel,
                         findNavController(),
                         searchArgs.query, searchArgs.type
                     ) { recipeId ->

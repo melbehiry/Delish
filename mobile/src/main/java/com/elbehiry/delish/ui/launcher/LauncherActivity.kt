@@ -20,7 +20,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import com.elbehiry.delish.ui.main.launchMainActivity
 import com.elbehiry.delish.ui.onboarding.launchOnBoardingActivity
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
@@ -32,8 +31,6 @@ import com.elbehiry.delish.ui.util.checkAllMatched
 @AndroidEntryPoint
 class LauncherActivity : ComponentActivity() {
 
-    private val launcherViewModel: LauncherViewModel by viewModels()
-
     @SuppressLint("VisibleForTests")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +38,6 @@ class LauncherActivity : ComponentActivity() {
         setContent {
             DelishComposeTheme {
                 LauncherView(
-                    viewModel = launcherViewModel,
                     onLauncherComplete = { destination ->
                         when (destination) {
                             MAIN_ACTIVITY -> launchMainActivity(context = this)

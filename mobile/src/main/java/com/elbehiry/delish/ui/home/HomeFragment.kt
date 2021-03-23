@@ -25,9 +25,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.elbehiry.delish.ui.main.MainViewModel
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
@@ -36,8 +34,6 @@ import com.elbehiry.delish.ui.search.SearchType
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
-    private val mainViewModel: MainViewModel by viewModels()
 
     @ExperimentalFoundationApi
     @ExperimentalAnimationApi
@@ -52,7 +48,6 @@ class HomeFragment : Fragment() {
                 DelishComposeTheme {
                     ProvideWindowInsets {
                         HomeNavGraph(
-                            mainViewModel,
                             onCuisineSearch = { cuisine ->
                                 val action = HomeFragmentDirections
                                     .goToSearchScreen(cuisine, SearchType.CUISINE)
