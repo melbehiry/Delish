@@ -21,6 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.GetSavedRecipesUseCase
 import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +31,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(
-    private val getSavedRecipesUseCase: GetSavedRecipesUseCase
+    private val getSavedRecipesUseCase: GetSavedRecipesUseCase,
+    private val deleteRecipeUseCase: DeleteRecipeUseCase
 ) : ViewModel() {
 
     private val _savedRecipes = MutableLiveData<List<RecipesItem>>()
@@ -51,5 +53,8 @@ class BookmarkViewModel @Inject constructor(
     }
 
     fun deleteRecipe(recipe: RecipesItem) {
+        viewModelScope.launch {
+            deleteRecipeUseCase(recipe.id)
+        }
     }
 }
