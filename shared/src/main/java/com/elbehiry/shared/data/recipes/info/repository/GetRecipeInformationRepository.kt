@@ -16,12 +16,17 @@
 
 package com.elbehiry.shared.data.recipes.info.repository
 
-import com.elbehiry.model.Recipe
+import com.elbehiry.model.RecipesItem
+import com.elbehiry.model.toUiModel
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
 import com.elbehiry.shared.data.recipes.info.remote.RecipeInformationDataSource
 
 class GetRecipeInformationRepository(
-    private val recipeInformationDataSource: RecipeInformationDataSource
+    private val recipeInformationDataSource: RecipeInformationDataSource,
+    private val recipesLocalDataStore: RecipesLocalDataStore
 ) : RecipeInformationRepository {
-    override suspend fun getRecipeInformation(id: Int?): Recipe =
-        recipeInformationDataSource.getRecipeInformation(id)
+    override suspend fun getRecipeInformation(id: Int?): RecipesItem {
+        return recipesLocalDataStore.getRecipeById(id)
+            ?: recipeInformationDataSource.getRecipeInformation(id).toUiModel()
+    }
 }

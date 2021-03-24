@@ -16,6 +16,7 @@
 
 package com.elbehiry.shared.di
 
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
 import com.elbehiry.shared.data.recipes.cuisines.remote.GetCuisinesDataSource
 import com.elbehiry.shared.data.recipes.cuisines.remote.GetCuisinesRemoteDataSource
 import com.elbehiry.shared.data.recipes.cuisines.repository.CuisinesRepository
@@ -68,9 +69,13 @@ class RecipesModule {
 
     @Provides
     fun provideRecipeInformationRepository(
-        recipeInformationDataSource: RecipeInformationDataSource
+        recipeInformationDataSource: RecipeInformationDataSource,
+        recipesLocalDataStore: RecipesLocalDataStore
     ): RecipeInformationRepository =
-        GetRecipeInformationRepository(recipeInformationDataSource)
+        GetRecipeInformationRepository(
+            recipeInformationDataSource,
+            recipesLocalDataStore
+        )
 
     @Provides
     fun provideSearchDataSource(api: DelishApi): SearchDataSource =

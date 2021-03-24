@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.db.recipes.recipedatastore
+package com.elbehiry.shared.data.db.recipes.mapper
 
 import com.elbehiry.shared.data.db.recipes.entities.RecipeEntity
 import com.elbehiry.model.RecipesItem

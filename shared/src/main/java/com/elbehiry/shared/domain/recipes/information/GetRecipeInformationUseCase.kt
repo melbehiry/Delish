@@ -29,5 +29,5 @@ class GetRecipeInformationUseCase @Inject constructor(
     @IoDispatcher ioDispatcher: CoroutineDispatcher
 ) : UseCase<Int, RecipesItem>(ioDispatcher) {
     override suspend fun execute(parameters: Int): RecipesItem =
-        recipeInformationRepository.getRecipeInformation(parameters).toUiModel()
+        recipeInformationRepository.getRecipeInformation(parameters)
 }

@@ -35,4 +35,20 @@ internal interface RecipesTable {
             """
     )
     fun getRecipes(): Flow<List<RecipeEntity>>
+
+    @Query(
+        """
+        SELECT * FROM ${RecipeEntity.Schema.TABLE_NAME} 
+        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :id
+        """
+    )
+    suspend fun getRecipe(id: Int?): RecipeEntity?
+
+    @Query(
+        """
+        DELETE FROM ${RecipeEntity.Schema.TABLE_NAME} 
+        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :id
+        """
+    )
+    suspend fun deleteRecipe(id: Int?)
 }

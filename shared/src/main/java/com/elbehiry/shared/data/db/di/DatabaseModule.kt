@@ -23,8 +23,8 @@ import com.elbehiry.shared.data.db.DelishDataBase
 import com.elbehiry.shared.data.db.JsonConverter
 import com.elbehiry.shared.data.db.commons.MIGRATIONS
 import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
-import com.elbehiry.shared.data.db.recipes.recipedatastore.RecipeMapper
-import com.elbehiry.shared.data.db.recipes.recipedatastore.RecipeMapperImpl
+import com.elbehiry.shared.data.db.recipes.mapper.RecipeMapper
+import com.elbehiry.shared.data.db.recipes.mapper.RecipeMapperImpl
 import com.elbehiry.shared.data.db.recipes.recipedatastore.RecipesDatabaseDataStore
 import com.elbehiry.shared.data.db.recipes.tables.RecipesTable
 import com.squareup.moshi.Moshi

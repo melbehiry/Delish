@@ -20,6 +20,7 @@ import com.elbehiry.shared.data.db.recipes.entities.RecipeEntity
 import com.elbehiry.shared.data.db.recipes.tables.RecipesTable
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.data.db.recipes.mapper.RecipeMapper
 import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -51,4 +52,22 @@ internal class RecipesDatabaseDataStore @Inject constructor(
             Result.Success(items.toDataRecipes())
         }
     }
+
+    private fun List<RecipeEntity>.toDataRecipes(): List<RecipesItem> {
+        return this.map {
+            recipeMapper.mapToDataRecipe(it)
+        }
+    }
+
+
+    override suspend fun getRecipeById(id: Int?): RecipesItem? {
+        val savedRecipe = recipesTable.getRecipe(id)
+        return if (savedRecipe != null) {
+            recipeMapper.mapToDataRecipe(savedRecipe)
+        } else {
+            null
+        }
+    }
+
+    override suspend fun deleteRecipe(id: Int?) = recipesTable.deleteRecipe(id)
 }

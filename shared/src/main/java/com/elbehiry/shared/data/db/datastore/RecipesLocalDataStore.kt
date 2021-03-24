@@ -23,4 +23,6 @@ import kotlinx.coroutines.flow.Flow
 interface RecipesLocalDataStore {
     suspend fun saveRecipe(recipesItem: RecipesItem)
     fun getRecipes(): Flow<Result<List<RecipesItem>>>
+    suspend fun getRecipeById(id: Int?) : RecipesItem?
+    suspend fun deleteRecipe(id: Int?)
 }

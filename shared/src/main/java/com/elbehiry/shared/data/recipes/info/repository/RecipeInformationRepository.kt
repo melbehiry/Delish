@@ -16,10 +16,10 @@
 
 package com.elbehiry.shared.data.recipes.info.repository
 
-import com.elbehiry.model.Recipe
+import com.elbehiry.model.RecipesItem
 
 interface RecipeInformationRepository {
     suspend fun getRecipeInformation(
         id: Int?
-    ): Recipe
+    ): RecipesItem
 }
