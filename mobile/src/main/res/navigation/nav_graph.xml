@@ -5,7 +5,7 @@
     app:startDestination="@+id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.elbehiry.delish.ui.home.HomeFragment"
+        android:name="com.elbehiry.delish.ui.recipes.HomeFragment"
         android:label="Home">
         <action
             android:id="@+id/goToRecipesDetails"

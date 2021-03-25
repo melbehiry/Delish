@@ -24,7 +24,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import com.elbehiry.delish.ui.home.InspirationItem
+import com.elbehiry.delish.ui.recipes.InspirationItem
 import com.elbehiry.model.RecipesItem
 
 @ExperimentalFoundationApi

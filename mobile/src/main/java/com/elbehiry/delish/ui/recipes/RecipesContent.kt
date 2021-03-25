@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.home
+package com.elbehiry.delish.ui.recipes
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -40,7 +40,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
-import com.elbehiry.delish.ui.main.MainViewModel
 import com.elbehiry.delish.ui.widget.LoadingContent
 import com.elbehiry.delish.ui.widget.NotificationBanner
 import com.elbehiry.model.CuisineItem
@@ -51,7 +50,7 @@ import com.elbehiry.model.RecipesItem
 @ExperimentalAnimationApi
 @Composable
 fun HomeContent(
-    viewModel: MainViewModel,
+    viewModel: RecipesViewModel,
     onIngredientContent: () -> Unit,
     onCuisineSearch: (String) -> Unit,
     onDetails: (Int) -> Unit,

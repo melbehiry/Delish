@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.home.graph
+package com.elbehiry.delish.ui.recipes.graph
 
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -30,7 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.elbehiry.delish.ui.bookmark.BookmarkViewModel
 import com.elbehiry.delish.ui.ingredient.IngredientFullList
 import com.elbehiry.delish.ui.main.MainContent
-import com.elbehiry.delish.ui.main.MainViewModel
+import com.elbehiry.delish.ui.recipes.RecipesViewModel
 
 object MainDestinations {
     const val MAIN_ROUTE = "main"
@@ -47,7 +47,7 @@ fun HomeNavGraph(
     onIngredientSearch: (String) -> Unit,
     onDetails: (Int) -> Unit,
 ) {
-    val mainViewModel: MainViewModel = viewModel()
+    val recipesViewModel: RecipesViewModel = viewModel()
     val bookmarkViewModel: BookmarkViewModel = viewModel()
     val navController = rememberNavController()
     val actions = remember(navController) { MainActions(navController) }
@@ -58,7 +58,7 @@ fun HomeNavGraph(
     ) {
         composable((MainDestinations.MAIN_ROUTE)) {
             MainContent(
-                viewModel = mainViewModel,
+                viewModel = recipesViewModel,
                 bookmarkViewModel = bookmarkViewModel,
                 onIngredientContent = actions.onIngredientContent,
                 onCuisineSearch,
@@ -67,7 +67,7 @@ fun HomeNavGraph(
             )
         }
         composable((MainDestinations.INGREDIENT_ROUTE)) {
-            IngredientFullList(mainViewModel, onIngredientSearch)
+            IngredientFullList(recipesViewModel, onIngredientSearch)
         }
     }
 }

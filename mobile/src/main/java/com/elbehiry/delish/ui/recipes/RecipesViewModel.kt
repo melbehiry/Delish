@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.main
+package com.elbehiry.delish.ui.recipes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class RecipesViewModel @Inject constructor(
     private val getRandomRecipesUseCase: GetRandomRecipesUseCase,
     private val getAvailableCuisinesUseCase: GetAvailableCuisinesUseCase,
     private val saveRecipeUseCase: SaveRecipeUseCase

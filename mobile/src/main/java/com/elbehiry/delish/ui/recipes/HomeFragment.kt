@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.home
+package com.elbehiry.delish.ui.recipes
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -29,7 +29,7 @@ import androidx.navigation.findNavController
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
-import com.elbehiry.delish.ui.home.graph.HomeNavGraph
+import com.elbehiry.delish.ui.recipes.graph.HomeNavGraph
 import com.elbehiry.delish.ui.search.SearchType
 
 @AndroidEntryPoint

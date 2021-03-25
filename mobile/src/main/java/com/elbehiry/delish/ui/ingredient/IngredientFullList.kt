@@ -48,14 +48,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.main.HomeTopBar
-import com.elbehiry.delish.ui.main.MainViewModel
+import com.elbehiry.delish.ui.recipes.RecipesViewModel
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import com.elbehiry.model.IngredientItem
 
 @ExperimentalFoundationApi
 @Composable
 fun IngredientFullList(
-    viewModel: MainViewModel,
+    viewModel: RecipesViewModel,
     onIngredientSearch: (String) -> Unit
 ) {
     val ingredients: List<IngredientItem> by viewModel.ingredientList.observeAsState(listOf())

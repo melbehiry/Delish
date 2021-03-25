@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.home
+package com.elbehiry.delish.ui.recipes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
