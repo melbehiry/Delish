@@ -45,7 +45,6 @@ import com.elbehiry.delish.ui.widget.BookMarkButton
 import com.elbehiry.model.RecipesItem
 import dev.chrisbanes.accompanist.coil.CoilImage
 
-// TODO: Handle pre book mark item.
 @Composable
 fun InspirationItem(
     recipe: RecipesItem,
@@ -96,7 +95,10 @@ fun InspirationItem(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(8.dp),
-                    onBookMark = onBookMark,
+                    onBookMark = {
+                        onBookMark()
+                        recipe.saved = !recipe.saved
+                    },
                     selected = recipe.saved
                 )
             }

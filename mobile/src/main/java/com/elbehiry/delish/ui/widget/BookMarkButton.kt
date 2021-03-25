@@ -25,7 +25,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.outlined.Bookmark
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,11 +38,14 @@ fun BookMarkButton(
     selected: Boolean = false,
     onBookMark: () -> Unit
 ) {
-    val icon = if (selected) Icons.Outlined.Bookmark else Icons.Filled.BookmarkBorder
+    var select by remember { mutableStateOf(selected) }
+
+    val icon = if (select) Icons.Outlined.Bookmark else Icons.Filled.BookmarkBorder
     Surface(
         color = colorResource(id = R.color.black_alpha),
         shape = CircleShape,
         modifier = modifier.requiredSize(36.dp, 36.dp).clickable {
+            select = !select
             onBookMark()
         }
     ) {

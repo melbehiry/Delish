@@ -68,7 +68,7 @@ fun HomeContent(
                 item { HeaderTitle() }
                 item {
                     DailyInspiration(recipes, onDetails) { recipe ->
-                        viewModel.saveRecipe(recipe)
+                        viewModel.onBookMark(recipe)
                     }
                 }
                 item { HomeIngredient(ingredients, onIngredientContent, onIngredientSearch) }

@@ -45,7 +45,7 @@ data class RecipesItem(
     val nutrientsName: String? = "",
     val step: List<String>? = emptyList(),
     val ingredientOriginalString: List<String>? = emptyList(),
-    val saved: Boolean = false
+    var saved: Boolean = false
 )
 
 data class Recipe(

@@ -24,6 +24,7 @@ import com.elbehiry.delish.ui.util.IngredientListProvider
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
@@ -39,7 +40,8 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     private val getRandomRecipesUseCase: GetRandomRecipesUseCase,
     private val getAvailableCuisinesUseCase: GetAvailableCuisinesUseCase,
-    private val saveRecipeUseCase: SaveRecipeUseCase
+    private val saveRecipeUseCase: SaveRecipeUseCase,
+    private val deleteRecipeUseCase: DeleteRecipeUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -99,9 +101,13 @@ class RecipesViewModel @Inject constructor(
         }
     }
 
-    fun saveRecipe(recipesItem: RecipesItem) {
+    fun onBookMark(recipesItem: RecipesItem) {
         viewModelScope.launch {
-            saveRecipeUseCase(recipesItem)
+            if (recipesItem.saved) {
+                deleteRecipeUseCase(recipesItem.id)
+            } else {
+                saveRecipeUseCase(recipesItem)
+            }
         }
     }
 }
