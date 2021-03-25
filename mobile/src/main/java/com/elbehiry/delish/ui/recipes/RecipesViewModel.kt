@@ -25,6 +25,7 @@ import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeUseCase
+import com.elbehiry.shared.domain.recipes.bookmark.IsRecipeSavedUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
@@ -36,12 +37,15 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+const val randomRecipesCount = 20
+
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     private val getRandomRecipesUseCase: GetRandomRecipesUseCase,
     private val getAvailableCuisinesUseCase: GetAvailableCuisinesUseCase,
     private val saveRecipeUseCase: SaveRecipeUseCase,
-    private val deleteRecipeUseCase: DeleteRecipeUseCase
+    private val deleteRecipeUseCase: DeleteRecipeUseCase,
+    private val isRecipeSavedUseCase: IsRecipeSavedUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -74,7 +78,7 @@ class RecipesViewModel @Inject constructor(
                         getRandomRecipesUseCase(
                             GetRandomRecipesUseCase.Params.create(
                                 null,
-                                20
+                                randomRecipesCount
                             )
                         )
                     }
@@ -103,7 +107,7 @@ class RecipesViewModel @Inject constructor(
 
     fun onBookMark(recipesItem: RecipesItem) {
         viewModelScope.launch {
-            if (recipesItem.saved) {
+            if (isRecipeSavedUseCase(recipesItem.id).data == true) {
                 deleteRecipeUseCase(recipesItem.id)
             } else {
                 saveRecipeUseCase(recipesItem)

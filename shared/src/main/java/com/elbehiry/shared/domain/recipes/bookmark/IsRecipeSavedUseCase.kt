@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.db.datastore
+package com.elbehiry.shared.domain.recipes.bookmark
 
-import com.elbehiry.model.RecipesItem
-import com.elbehiry.shared.result.Result
-import kotlinx.coroutines.flow.Flow
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.di.IoDispatcher
+import com.elbehiry.shared.domain.UseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-interface RecipesLocalDataStore {
-    suspend fun saveRecipe(recipesItem: RecipesItem)
-    fun getRecipes(): Flow<Result<List<RecipesItem>>>
-    suspend fun getRecipeById(recipeId: Int?): RecipesItem?
-    suspend fun deleteRecipe(recipeId: Int?)
-    suspend fun isRecipeSaved(recipeId: Int?): Boolean
+class IsRecipeSavedUseCase @Inject constructor(
+    private val dataStore: RecipesLocalDataStore,
+    @IoDispatcher ioDispatcher: CoroutineDispatcher
+) : UseCase<Int?, Boolean>(ioDispatcher) {
+
+    override suspend fun execute(parameters: Int?): Boolean = dataStore.isRecipeSaved(parameters)
 }

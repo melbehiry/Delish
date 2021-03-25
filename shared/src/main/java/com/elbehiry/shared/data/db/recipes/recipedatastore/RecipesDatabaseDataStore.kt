@@ -59,9 +59,8 @@ internal class RecipesDatabaseDataStore @Inject constructor(
         }
     }
 
-
-    override suspend fun getRecipeById(id: Int?): RecipesItem? {
-        val savedRecipe = recipesTable.getRecipe(id)
+    override suspend fun getRecipeById(recipeId: Int?): RecipesItem? {
+        val savedRecipe = recipesTable.getRecipe(recipeId)
         return if (savedRecipe != null) {
             recipeMapper.mapToDataRecipe(savedRecipe)
         } else {
@@ -69,5 +68,7 @@ internal class RecipesDatabaseDataStore @Inject constructor(
         }
     }
 
-    override suspend fun deleteRecipe(id: Int?) = recipesTable.deleteRecipe(id)
+    override suspend fun deleteRecipe(recipeId: Int?) = recipesTable.deleteRecipe(recipeId)
+
+    override suspend fun isRecipeSaved(recipeId: Int?) = recipesTable.isRecipeSaved(recipeId)
 }

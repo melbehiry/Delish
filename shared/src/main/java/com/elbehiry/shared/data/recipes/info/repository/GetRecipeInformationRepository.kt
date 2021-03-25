@@ -25,8 +25,8 @@ class GetRecipeInformationRepository(
     private val recipeInformationDataSource: RecipeInformationDataSource,
     private val recipesLocalDataStore: RecipesLocalDataStore
 ) : RecipeInformationRepository {
-    override suspend fun getRecipeInformation(id: Int?): RecipesItem {
-        return recipesLocalDataStore.getRecipeById(id)
-            ?: recipeInformationDataSource.getRecipeInformation(id).toUiModel()
+    override suspend fun getRecipeInformation(recipeId: Int?): RecipesItem {
+        return recipesLocalDataStore.getRecipeById(recipeId)
+            ?: recipeInformationDataSource.getRecipeInformation(recipeId).toUiModel()
     }
 }

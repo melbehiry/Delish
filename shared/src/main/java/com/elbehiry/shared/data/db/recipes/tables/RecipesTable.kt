@@ -39,16 +39,24 @@ internal interface RecipesTable {
     @Query(
         """
         SELECT * FROM ${RecipeEntity.Schema.TABLE_NAME} 
-        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :id
+        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :recipeId
         """
     )
-    suspend fun getRecipe(id: Int?): RecipeEntity?
+    suspend fun getRecipe(recipeId: Int?): RecipeEntity?
 
     @Query(
         """
         DELETE FROM ${RecipeEntity.Schema.TABLE_NAME} 
-        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :id
+        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :recipeId
         """
     )
-    suspend fun deleteRecipe(id: Int?)
+    suspend fun deleteRecipe(recipeId: Int?)
+
+    @Query(
+        """
+        SELECT COUNT(*) FROM ${RecipeEntity.Schema.TABLE_NAME} 
+        WHERE ${RecipeEntity.Schema.RECIPE_ID} = :recipeId
+        """
+    )
+    suspend fun isRecipeSaved(recipeId: Int?): Boolean
 }

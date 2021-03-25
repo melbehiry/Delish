@@ -17,7 +17,6 @@
 package com.elbehiry.shared.domain.recipes.information
 
 import com.elbehiry.model.RecipesItem
-import com.elbehiry.model.toUiModel
 import com.elbehiry.shared.data.recipes.info.repository.RecipeInformationRepository
 import com.elbehiry.shared.di.IoDispatcher
 import com.elbehiry.shared.domain.UseCase
