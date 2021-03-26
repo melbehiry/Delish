@@ -75,7 +75,7 @@ android {
         val urlName = "SPOONACULAR_BASE_URL"
         val baseUrl = "\"https://api.spoonacular.com/\""
         val keyName = "SPOONACULAR_KEY"
-        val keyValue = "\"2d1acf7218d245b9b88d52a1b8362569\""
+        val keyValue = ""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
             buildConfigField(
