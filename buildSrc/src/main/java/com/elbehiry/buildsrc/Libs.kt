@@ -17,6 +17,8 @@ object Libs {
     const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler"
     const val HILT_TESTING = "com.google.dagger:hilt-android-testing"
     const val JUNIT = "junit:junit"
+    const val ASSERT_J = "org.assertj:assertj-core"
+    const val MOCKK = "io.mockk:mockk"
     const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     const val LIFECYCLE_COMPILER = "androidx.lifecycle:lifecycle-compiler"
     const val LIFECYCLE_LIVE_DATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx"
@@ -35,6 +37,7 @@ object Libs {
     const val ROOM_COMPILER = "androidx.room:room-compiler"
     const val ROOM_KTX = "androidx.room:room-ktx"
     const val ROOM_RUNTIME = "androidx.room:room-runtime"
+    const val ROOM_TESTING = "androidx.room:room-testing"
     const val RULES = "androidx.test:rules"
     const val RUNNER = "androidx.test:runner"
     const val TIMBER = "com.jakewharton.timber:timber"
@@ -67,4 +70,5 @@ object Libs {
     const val FAKER = "com.github.javafaker:javafaker"
     const val HILT_BINDER = "com.paulrybitskyi:hilt-binder"
     const val HILT_BINDER_COMPILER = "com.paulrybitskyi:hilt-binder-compiler"
+    const val TURBINE = "app.cash.turbine:turbine"
 }

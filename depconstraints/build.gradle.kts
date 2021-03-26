@@ -30,13 +30,15 @@ val hamcrest = "1.3"
 val hilt = Versions.HILT
 val hiltJetPack = "1.0.0-alpha01"
 val junit = "4.13"
-val junitExt = "1.1.1"
+val assertJVersion = "3.19.0"
+val mockkVersion = "1.10.6"
+val junitExt = "1.1.2"
 val lifecycle = "2.2.0"
 val material = "1.1.0"
 val mockito = "3.3.1"
 val mockitoKotlin = "1.5.0"
 val okhttp = "3.10.0"
-val room = "2.2.5"
+val room = "2.2.6"
 val rules = "1.1.1"
 val runner = "1.2.0"
 val threetenabp = "1.0.5"
@@ -58,6 +60,7 @@ val fragmentKtx = "1.3.0"
 val appCompat = "1.2.0-rc01"
 val faker = "1.0.2"
 val binder = "1.0.0-alpha01"
+val turbine = "0.4.1"
 
 dependencies {
     constraints {
@@ -78,6 +81,8 @@ dependencies {
         api("${Libs.HILT_TESTING}:$hilt")
         api("${Libs.HILT_VIEWMODEL}:$hiltJetPack")
         api("${Libs.JUNIT}:$junit")
+        api("${Libs.ASSERT_J}:$assertJVersion")
+        api("${Libs.MOCKK}:$mockkVersion")
         api("${Libs.EXT_JUNIT}:$junitExt")
         api("${Libs.KOTLIN_STDLIB}:${Versions.KOTLIN}")
         api("${Libs.LIFECYCLE_COMPILER}:$lifecycle")
@@ -92,6 +97,7 @@ dependencies {
         api("${Libs.ROOM_KTX}:$room")
         api("${Libs.ROOM_RUNTIME}:$room")
         api("${Libs.ROOM_COMPILER}:$room")
+        api("${Libs.ROOM_TESTING}:$room")
         api("${Libs.OKHTTP}:$okhttp")
         api("${Libs.OKHTTP_LOGGING_INTERCEPTOR}:$okhttp")
         api("${Libs.OKHTTP_MOCK_SERVER}:$okhttp")
@@ -129,6 +135,7 @@ dependencies {
         api("${Libs.FAKER}:$faker")
         api("${Libs.HILT_BINDER}:$binder")
         api("${Libs.HILT_BINDER_COMPILER}:$binder")
+        api("${Libs.TURBINE}:$turbine")
     }
 }
 

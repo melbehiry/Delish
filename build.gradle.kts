@@ -77,7 +77,8 @@ subprojects {
                     "kotlin.Experimental," +
                     "kotlinx.coroutines.ExperimentalCoroutinesApi," +
                     "kotlinx.coroutines.InternalCoroutinesApi," +
-                    "kotlinx.coroutines.FlowPreview" +
+                    "kotlinx.coroutines.FlowPreview," +
+                    "kotlin.time.ExperimentalTime" +
                     "-Xallow-jvm-ir-dependencies"
     }
 
