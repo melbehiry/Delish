@@ -18,7 +18,8 @@ package com.elbehiry.shared.network
 
 import com.elbehiry.shared.data.remote.DelishApi
 import com.elbehiry.test_shared.MainCoroutineRule
-import com.elbehiry.test_shared.RecipesTestData
+import com.elbehiry.test_shared.recipes
+import com.elbehiry.test_shared.RECIPE_ID
 import com.elbehiry.test_shared.runBlockingTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -58,14 +59,14 @@ class DelishServiceTestUsingMockWebServer {
     fun test_get_Random_Recipes() {
         mockWebServer.enqueue(
             MockResponse()
-                .setBody(RecipesTestData.recipes)
+                .setBody(recipes)
                 .setResponseCode(200)
         )
         coroutineRule.runBlockingTest {
             val recipes = delishApiService.getRandomRecipes(tags = null, number = null)
             Assert.assertNotNull(recipes)
             val recipeItem = recipes.recipes[0]
-            Assert.assertEquals(recipeItem.id, RecipesTestData.id)
+            Assert.assertEquals(recipeItem.id, RECIPE_ID)
         }
     }
 

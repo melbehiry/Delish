@@ -23,7 +23,7 @@ import androidx.room.Entity
     tableName = RecipeEntity.Schema.TABLE_NAME,
     primaryKeys = [RecipeEntity.Schema.RECIPE_ID]
 )
-internal data class RecipeEntity(
+data class RecipeEntity(
     @ColumnInfo(name = Schema.RECIPE_ID) val recipeId: Int,
     @ColumnInfo(name = Schema.RECIPE_TITLE) val title: String,
     @ColumnInfo(name = Schema.SUSTAINABLE) val sustainable: Boolean,

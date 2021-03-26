@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.domain
+package com.elbehiry.shared.database.utils
 
-import com.elbehiry.shared.data.recipes.random.repository.RandomRecipesRepository
-import com.elbehiry.test_shared.MainCoroutineRule
-import com.elbehiry.test_shared.runBlockingTest
-import org.junit.Rule
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
+import com.elbehiry.shared.data.db.DelishDataBase
 
-class GetRandomRecipesUseCaseTest {
-
-    @get:Rule
-    var coroutineRule = MainCoroutineRule()
-
-    private lateinit var repository: RandomRecipesRepository
-
-    fun executeRandomRecipesTest() = coroutineRule.runBlockingTest {
-//        val useCase = GetRandomRecipesUseCase()
-    }
+internal fun createMemoryDataBase(): DelishDataBase {
+    return Room.inMemoryDatabaseBuilder(
+        ApplicationProvider.getApplicationContext(),
+        DelishDataBase::class.java
+    ).build()
 }

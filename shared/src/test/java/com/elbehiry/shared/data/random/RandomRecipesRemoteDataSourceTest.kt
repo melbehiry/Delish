@@ -21,20 +21,20 @@ import com.elbehiry.shared.data.recipes.random.remote.GetRandomRecipesRemoteData
 import com.elbehiry.shared.data.remote.DelishApi
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.runBlockingTest
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.whenever
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class RandomRecipesRemoteDataSourceTest {
 
-    @Mock
+    @MockK
     private lateinit var api: DelishApi
 
     @get:Rule
@@ -44,14 +44,16 @@ class RandomRecipesRemoteDataSourceTest {
 
     @Before
     fun setup() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
         randomRecipesRemoteDataSource = GetRandomRecipesRemoteDataSource(api)
     }
 
     @Test
     fun getRandomRecipesTest() = coroutineRule.runBlockingTest {
         val recipes = Recipes()
-        whenever(api.getRandomRecipes(tags = any(), number = any()))
-            .thenReturn(recipes)
+        coEvery {
+            api.getRandomRecipes(tags = any(), number = any())
+        } returns recipes
         val recipesItem = randomRecipesRemoteDataSource.getRandomRecipes("", 3)
         Assert.assertEquals(recipes, recipesItem)
     }

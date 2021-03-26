@@ -35,6 +35,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["room.incremental"] = "true"
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
             }
         }
     }
@@ -74,7 +75,7 @@ android {
         val urlName = "SPOONACULAR_BASE_URL"
         val baseUrl = "\"https://api.spoonacular.com/\""
         val keyName = "SPOONACULAR_KEY"
-        val keyValue = "\"8f544101cb524434a464b80a7b9951f6\""
+        val keyValue = "\"2d1acf7218d245b9b88d52a1b8362569\""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
             buildConfigField(
@@ -91,6 +92,16 @@ android {
                 keyValue
             )
         }
+    }
+
+    sourceSets {
+        getByName("androidTest").assets.srcDirs("$projectDir/schemas")
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/licenses/**")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 
@@ -142,6 +153,19 @@ dependencies {
     testImplementation(Libs.MOCKITO_CORE)
     testImplementation(Libs.MOCKITO_KOTLIN)
     testImplementation(Libs.FAKER)
+    testImplementation(Libs.TURBINE)
+    testImplementation(Libs.EXT_JUNIT)
+    testImplementation(Libs.ASSERT_J)
+    testImplementation(Libs.MOCKK)
+
+    androidTestImplementation(Libs.ARCH_TESTING)
+    androidTestImplementation(Libs.RUNNER)
+    androidTestImplementation(Libs.EXT_JUNIT)
+    androidTestImplementation(Libs.ASSERT_J)
+    androidTestImplementation(Libs.TURBINE)
+    androidTestImplementation(Libs.ROOM_TESTING)
+    androidTestImplementation(Libs.COROUTINES_TEST)
+    androidTestImplementation(Libs.FAKER)
 
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
