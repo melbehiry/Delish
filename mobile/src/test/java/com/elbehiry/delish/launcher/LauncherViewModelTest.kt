@@ -24,7 +24,6 @@ import com.elbehiry.shared.domain.pref.OnBoardingCompletedUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.runBlockingTest
-import com.nhaarman.mockito_kotlin.whenever
 import come.elbehiry.app.delish.androidtest.util.LiveDataTestUtil
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert
@@ -32,12 +31,11 @@ import org.junit.Rule
 import org.junit.Test
 import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.MAIN_ACTIVITY
 import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.ONBOARDING
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
 import org.junit.Before
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class LauncherViewModelTest {
 
     @get:Rule
@@ -46,7 +44,7 @@ class LauncherViewModelTest {
     @get:Rule
     val coroutineRule = MainCoroutineRule()
 
-    @Mock
+    @MockK
     lateinit var repository: DataStoreOperations
 
     private lateinit var launcherViewModel: LauncherViewModel
@@ -54,6 +52,7 @@ class LauncherViewModelTest {
 
     @Before
     fun setUp() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
         onBoardingCompletedUseCase = OnBoardingCompletedUseCase(
             repository, coroutineRule.testDispatcher
         )
@@ -63,18 +62,21 @@ class LauncherViewModelTest {
 
     @Test
     fun `not completed onBoarding should navigate to onBoarding`() = coroutineRule.runBlockingTest {
-        whenever(repository.read(PreferencesKeys.onBoardingCompletedKey)).thenReturn(
-            flowOf(Result.Success(false))
+        coEvery { repository.read(PreferencesKeys.onBoardingCompletedKey) } returns flowOf(
+            Result.Success(
+                false
+            )
         )
-
         val navigation = LiveDataTestUtil.getValue(launcherViewModel.launchDestination)
         Assert.assertEquals(ONBOARDING, navigation)
     }
 
     @Test
     fun `completed onBoarding should navigate to main`() = coroutineRule.runBlockingTest {
-        whenever(repository.read(PreferencesKeys.onBoardingCompletedKey)).thenReturn(
-            flowOf(Result.Success(true))
+        coEvery { repository.read(PreferencesKeys.onBoardingCompletedKey) } returns flowOf(
+            Result.Success(
+                true
+            )
         )
 
         val navigation = LiveDataTestUtil.getValue(launcherViewModel.launchDestination)

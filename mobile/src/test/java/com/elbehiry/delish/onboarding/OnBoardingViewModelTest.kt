@@ -22,15 +22,13 @@ import com.elbehiry.shared.data.pref.repository.DataStoreOperations
 import com.elbehiry.shared.domain.pref.OnBoardingCompleteActionUseCase
 import com.elbehiry.test_shared.MainCoroutineRule
 import come.elbehiry.app.delish.androidtest.util.LiveDataTestUtil
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.MockK
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class OnBoardingViewModelTest {
 
     @get:Rule
@@ -39,7 +37,7 @@ class OnBoardingViewModelTest {
     @get:Rule
     val coroutineRule = MainCoroutineRule()
 
-    @Mock
+    @MockK
     lateinit var repository: DataStoreOperations
 
     private lateinit var onBoardingCompleteActionUseCase: OnBoardingCompleteActionUseCase
@@ -47,6 +45,7 @@ class OnBoardingViewModelTest {
 
     @Before
     fun setUp() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
         onBoardingCompleteActionUseCase = OnBoardingCompleteActionUseCase(
             repository, coroutineRule.testDispatcher
         )

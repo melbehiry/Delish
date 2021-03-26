@@ -65,7 +65,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         // Eliminates UnusedResources false positives for resources used in DataBinding layouts
         isCheckGeneratedSources = true
         // Running lint over the debug variant is enough
@@ -100,9 +100,9 @@ android {
     }
 
     packagingOptions {
-        exclude("META-INF/licenses/**")
-        exclude("META-INF/AL2.0")
-        exclude("META-INF/LGPL2.1")
+        resources.excludes.add("META-INF/licenses/**")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 
@@ -147,17 +147,20 @@ dependencies {
     // Instrumentation tests
     androidTestImplementation(Libs.ESPRESSO_CORE)
     androidTestImplementation(Libs.ESPRESSO_CONTRIB)
-    androidTestImplementation(Libs.EXT_JUNIT)
     androidTestImplementation(Libs.RUNNER)
     androidTestImplementation(Libs.RULES)
 
     // Local unit tests
     testImplementation(Libs.JUNIT)
-    testImplementation(Libs.MOCKITO_CORE)
-    testImplementation(Libs.MOCKITO_KOTLIN)
-    testImplementation(Libs.HAMCREST)
+    testImplementation(Libs.EXT_JUNIT)
+    testImplementation(Libs.ASSERT_J)
+    testImplementation(Libs.MOCKK)
+
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
+
+    //flow
+    testImplementation(Libs.TURBINE)
 
     // COMPOSE
     implementation(Libs.COMPOSE_RUNTIME)
