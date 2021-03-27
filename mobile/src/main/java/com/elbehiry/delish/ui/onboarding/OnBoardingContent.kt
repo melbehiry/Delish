@@ -53,11 +53,8 @@ import androidx.compose.material.icons.filled.Album
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowRight
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -81,7 +78,7 @@ fun OnBoardingContent(
 ) {
     val viewModel: OnBoardingViewModel = viewModel()
     val onBoardingItemsList = viewModel.getOnBoardingItemsList()
-    val launchDestination: Boolean by viewModel.navigateToMainActivity.observeAsState(false)
+    val launchDestination: Boolean by viewModel.viewState.collectAsState()
 
     if (launchDestination) {
         launchMainActivity(context = LocalContext.current)

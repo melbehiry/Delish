@@ -17,18 +17,21 @@
 package com.elbehiry.delish.onboarding
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import app.cash.turbine.test
 import com.elbehiry.delish.ui.onboarding.OnBoardingViewModel
 import com.elbehiry.shared.data.pref.repository.DataStoreOperations
 import com.elbehiry.shared.domain.pref.OnBoardingCompleteActionUseCase
 import com.elbehiry.test_shared.MainCoroutineRule
-import come.elbehiry.app.delish.androidtest.util.LiveDataTestUtil
+import com.elbehiry.test_shared.runBlockingTest
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
-import org.junit.Assert
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class OnBoardingViewModelTest {
 
     @get:Rule
@@ -53,9 +56,10 @@ class OnBoardingViewModelTest {
     }
 
     @Test
-    fun `get started clicked should update the pref`() {
+    fun `get started clicked should update the pref`() = coroutineRule.runBlockingTest {
         onBoardingViewModel.getStartedClick()
-        val navigateValue = LiveDataTestUtil.getValue(onBoardingViewModel.navigateToMainActivity)
-        Assert.assertNotNull(navigateValue)
+        onBoardingViewModel.viewState.test {
+            assertThat(expectItem()).isEqualTo(true)
+        }
     }
 }
