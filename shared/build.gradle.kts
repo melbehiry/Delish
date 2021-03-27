@@ -40,7 +40,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         disable("InvalidPackage", "MissingTranslation")
         // Version changes are beyond our control, so don't warn. The IDE will still mark these.
         disable("GradleDependency")

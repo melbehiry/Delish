@@ -30,7 +30,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    lintOptions {
+    lint {
         // Version changes are beyond our control, so don't warn. The IDE will still mark these.
         disable("GradleDependency")
     }
