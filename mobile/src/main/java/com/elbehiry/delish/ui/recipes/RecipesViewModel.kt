@@ -67,7 +67,7 @@ class RecipesViewModel @Inject constructor(
         getHomeContent()
     }
 
-    private fun getHomeContent() {
+    fun getHomeContent() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
