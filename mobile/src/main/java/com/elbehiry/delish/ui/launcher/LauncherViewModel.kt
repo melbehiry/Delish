@@ -16,37 +16,52 @@
 
 package com.elbehiry.delish.ui.launcher
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.elbehiry.shared.domain.pref.OnBoardingCompletedUseCase
 import com.elbehiry.shared.result.Result
-import kotlinx.coroutines.flow.collect
-import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.MAIN_ACTIVITY
-import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.ONBOARDING
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LauncherViewModel @Inject constructor(
-    val onBoardingCompletedUseCase: OnBoardingCompletedUseCase
+    private val onBoardingCompletedUseCase: OnBoardingCompletedUseCase
 ) : ViewModel() {
-    val launchDestination: LiveData<LaunchDestination> = liveData {
-        onBoardingCompletedUseCase(Unit).collect { result ->
-            if (result is Result.Success) {
-                if (result.data) {
-                    emit(MAIN_ACTIVITY)
+
+    private val _state = MutableStateFlow(LauncherViewState())
+    val state: StateFlow<LauncherViewState>
+        get() = _state
+
+    init {
+        getLaunchDestination()
+    }
+
+    private fun getLaunchDestination() {
+        viewModelScope.launch {
+            onBoardingCompletedUseCase(Unit).collect { result ->
+                if (result is Result.Success) {
+                    if (result.data) {
+                        _state.value = LauncherViewState(LaunchDestination.MAIN_ACTIVITY)
+                    } else {
+                        LauncherViewState(LaunchDestination.ON_BOARDING)
+                    }
                 } else {
-                    emit(ONBOARDING)
+                    LauncherViewState(LaunchDestination.ON_BOARDING)
                 }
-            } else {
-                emit(ONBOARDING)
             }
         }
     }
-
-    enum class LaunchDestination {
-        ONBOARDING,
-        MAIN_ACTIVITY
-    }
 }
+
+enum class LaunchDestination {
+    ON_BOARDING,
+    MAIN_ACTIVITY
+}
+
+data class LauncherViewState(
+    val launchDestination: LaunchDestination = LaunchDestination.ON_BOARDING,
+)
