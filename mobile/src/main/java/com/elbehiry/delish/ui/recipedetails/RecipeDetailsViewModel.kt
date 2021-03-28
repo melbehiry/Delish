@@ -24,8 +24,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.liveData
 import com.elbehiry.model.RecipesItem
-import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeUseCase
-import com.elbehiry.shared.domain.recipes.information.GetRecipeInformationUseCase
+import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
+import com.elbehiry.shared.domain.recipes.information.GetRecipeInformationSuspendUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,8 +34,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailsViewModel @Inject constructor(
-    private val getRecipeInformationUseCase: GetRecipeInformationUseCase,
-    private val saveRecipeUseCase: SaveRecipeUseCase
+    private val getRecipeInformationUseCase: GetRecipeInformationSuspendUseCase,
+    private val saveRecipeUseCase: SaveRecipeSuspendUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()

@@ -20,7 +20,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import com.elbehiry.delish.ui.onboarding.OnBoardingViewModel
 import com.elbehiry.shared.data.pref.repository.DataStoreOperations
-import com.elbehiry.shared.domain.pref.OnBoardingCompleteActionUseCase
+import com.elbehiry.shared.domain.pref.OnBoardingCompleteActionSuspendUseCase
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.runBlockingTest
 import io.mockk.MockKAnnotations
@@ -43,13 +43,13 @@ class OnBoardingViewModelTest {
     @MockK
     lateinit var repository: DataStoreOperations
 
-    private lateinit var onBoardingCompleteActionUseCase: OnBoardingCompleteActionUseCase
+    private lateinit var onBoardingCompleteActionUseCase: OnBoardingCompleteActionSuspendUseCase
     private lateinit var onBoardingViewModel: OnBoardingViewModel
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        onBoardingCompleteActionUseCase = OnBoardingCompleteActionUseCase(
+        onBoardingCompleteActionUseCase = OnBoardingCompleteActionSuspendUseCase(
             repository, coroutineRule.testDispatcher
         )
         onBoardingViewModel = OnBoardingViewModel(onBoardingCompleteActionUseCase)
