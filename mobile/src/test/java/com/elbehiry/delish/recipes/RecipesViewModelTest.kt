@@ -73,8 +73,8 @@ class RecipesViewModelTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        coEvery { getRandomRecipesUseCase(any()) } returns flowOf(RECIPES_ITEMS)
-        coEvery { getAvailableCuisinesUseCase(Unit) } returns flowOf(CUISINES_ITEMS)
+        coEvery { getRandomRecipesUseCase(any()) } returns flowOf(Result.Success(RECIPES_ITEMS))
+        coEvery { getAvailableCuisinesUseCase(Unit) } returns flowOf(Result.Success(CUISINES_ITEMS))
         saveRecipeUseCase = mockk()
         deleteRecipeUseCase = mockk()
         isRecipeSavedUseCase = mockk()

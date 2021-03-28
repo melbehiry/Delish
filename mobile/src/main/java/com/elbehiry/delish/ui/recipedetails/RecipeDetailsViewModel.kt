@@ -16,17 +16,8 @@
 
 package com.elbehiry.delish.ui.recipedetails
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.liveData
-import com.elbehiry.delish.ui.recipes.RecipesViewModel
-import com.elbehiry.delish.ui.util.IngredientListProvider
-import com.elbehiry.model.CuisineItem
-import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.information.GetRecipeInformationSuspendUseCase
@@ -59,10 +50,10 @@ class RecipeDetailsViewModel @Inject constructor(
                     _state.value = RecipesDetailsViewState(hasError = true)
                 }
                 else -> _state.value = if (recipeDetail.data != null) {
-                        RecipesDetailsViewState(recipe = recipeDetail.data!!)
-                    } else {
-                        RecipesDetailsViewState(isEmpty = true)
-                    }
+                    RecipesDetailsViewState(recipe = recipeDetail.data!!)
+                } else {
+                    RecipesDetailsViewState(isEmpty = true)
+                }
             }
             isloading.value = false
         }

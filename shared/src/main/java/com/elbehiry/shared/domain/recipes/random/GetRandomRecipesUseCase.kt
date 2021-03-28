@@ -20,6 +20,7 @@ import com.elbehiry.model.RecipesItem
 import com.elbehiry.model.toUiModel
 import com.elbehiry.shared.data.recipes.random.repository.RandomRecipesRepository
 import com.elbehiry.shared.domain.UseCase
+import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -28,15 +29,21 @@ const val defaultRecipesNumber = 10
 
 class GetRandomRecipesUseCase @Inject constructor(
     private val randomRecipesRepository: RandomRecipesRepository
-) : UseCase<GetRandomRecipesUseCase.Params, Flow<List<RecipesItem>>>() {
+) : UseCase<GetRandomRecipesUseCase.Params, Flow<Result<List<RecipesItem>>>>() {
 
-    override fun execute(parameters: Params): Flow<List<RecipesItem>> =
+    override fun execute(parameters: Params): Flow<Result<List<RecipesItem>>> =
         flow {
-            emit(
-                randomRecipesRepository.getRandomRecipes(parameters.tags, parameters.number).map {
+            try {
+                val randomRecipes = randomRecipesRepository.getRandomRecipes(
+                    parameters.tags, parameters.number
+                ).map {
                     it.toUiModel()
                 }
-            )
+                emit(Result.Success(randomRecipes))
+            } catch (e: Exception) {
+                emit(Result.Error(e))
+
+            }
         }
 
     class Params private constructor(

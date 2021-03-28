@@ -27,6 +27,7 @@ import com.elbehiry.shared.domain.recipes.bookmark.IsRecipeSavedSuspendUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
+import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.combine
@@ -73,18 +74,17 @@ class RecipesViewModel @Inject constructor(
                     )
                 )
             ) { ingredients, cuisines, randomRecipes ->
-
                 RecipesViewState(
                     ingredientList = ingredients,
-                    cuisinesList = cuisines,
-                    randomRecipes = randomRecipes
+                    cuisinesList = cuisines.data ?: emptyList(),
+                    randomRecipes = randomRecipes.data ?: emptyList(),
+                    hasError = cuisines is Result.Error || randomRecipes is Result.Error
                 )
             }.onStart {
                 emit(RecipesViewState(loading = true))
             }.catch {
                 hasError.value = true
                 emit(RecipesViewState(hasError = true))
-                emit(RecipesViewState(loading = false))
             }.onCompletion {
                 emit(RecipesViewState(loading = false))
             }.collect {

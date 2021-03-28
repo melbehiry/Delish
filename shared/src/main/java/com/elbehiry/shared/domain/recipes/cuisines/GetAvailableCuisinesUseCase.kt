@@ -19,16 +19,23 @@ package com.elbehiry.shared.domain.recipes.cuisines
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.shared.data.recipes.cuisines.repository.CuisinesRepository
 import com.elbehiry.shared.domain.UseCase
+import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetAvailableCuisinesUseCase @Inject constructor(
     private val cuisinesRepository: CuisinesRepository
-) : UseCase<Unit, Flow<List<CuisineItem>>>() {
+) : UseCase<Unit, Flow<Result<List<CuisineItem>>>>() {
 
-    override fun execute(parameters: Unit): Flow<List<CuisineItem>> =
+    override fun execute(parameters: Unit): Flow<Result<List<CuisineItem>>> =
         flow {
-            emit(cuisinesRepository.getAvailableCuisines())
+            try {
+                val cuisines = cuisinesRepository.getAvailableCuisines()
+                emit(Result.Success(cuisines))
+            } catch (e: Exception) {
+                emit(Result.Error(e))
+
+            }
         }
 }
