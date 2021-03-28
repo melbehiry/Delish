@@ -21,7 +21,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-abstract class UseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
+abstract class SuspendUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
 
     /** Executes the use case asynchronously and returns a [Result].
      *

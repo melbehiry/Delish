@@ -17,7 +17,7 @@
 package com.elbehiry.shared.usecase
 
 import com.elbehiry.test_shared.MainCoroutineRule
-import com.elbehiry.shared.domain.UseCase
+import com.elbehiry.shared.domain.SuspendUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.test_shared.runBlockingTest
 import kotlinx.coroutines.CoroutineDispatcher
@@ -25,19 +25,19 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class UseCaseTest {
+class SuspendUseCaseTest {
 
     @get:Rule
     var coroutineRule = MainCoroutineRule()
 
     private lateinit var testDispatcher: CoroutineDispatcher
 
-    private lateinit var useCase: TestUseCase
+    private lateinit var useCase: TestSuspendUseCase
 
     @Before
     fun setup() {
         testDispatcher = coroutineRule.testDispatcher
-        useCase = TestUseCase(testDispatcher)
+        useCase = TestSuspendUseCase(testDispatcher)
     }
 
     @Test
@@ -51,9 +51,9 @@ class UseCaseTest {
         assert(result is Result.Success)
     }
 
-    private inner class TestUseCase(
+    private inner class TestSuspendUseCase(
         dispatcher: CoroutineDispatcher
-    ) : UseCase<Unit, Result<Unit>>(dispatcher) {
+    ) : SuspendUseCase<Unit, Result<Unit>>(dispatcher) {
         override suspend fun execute(parameters: Unit): Result<Unit> {
             return Result.Success(Unit)
         }

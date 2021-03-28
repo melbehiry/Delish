@@ -16,24 +16,27 @@
 
 package com.elbehiry.shared.domain.recipes.random
 
-import com.elbehiry.shared.domain.UseCase
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.model.toUiModel
 import com.elbehiry.shared.data.recipes.random.repository.RandomRecipesRepository
-import com.elbehiry.shared.di.IoDispatcher
-import kotlinx.coroutines.CoroutineDispatcher
+import com.elbehiry.shared.domain.UseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 const val defaultRecipesNumber = 10
 
 class GetRandomRecipesUseCase @Inject constructor(
-    private val randomRecipesRepository: RandomRecipesRepository,
-    @IoDispatcher ioDispatcher: CoroutineDispatcher
-) : UseCase<GetRandomRecipesUseCase.Params, List<RecipesItem>>(ioDispatcher) {
+    private val randomRecipesRepository: RandomRecipesRepository
+) : UseCase<GetRandomRecipesUseCase.Params, Flow<List<RecipesItem>>>() {
 
-    override suspend fun execute(parameters: Params): List<RecipesItem> =
-        randomRecipesRepository.getRandomRecipes(parameters.tags, parameters.number).map {
-            it.toUiModel()
+    override fun execute(parameters: Params): Flow<List<RecipesItem>> =
+        flow {
+            emit(
+                randomRecipesRepository.getRandomRecipes(parameters.tags, parameters.number).map {
+                    it.toUiModel()
+                }
+            )
         }
 
     class Params private constructor(

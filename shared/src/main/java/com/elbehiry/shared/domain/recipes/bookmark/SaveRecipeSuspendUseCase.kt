@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.domain.recipes.cuisines
+package com.elbehiry.shared.domain.recipes.bookmark
 
-import com.elbehiry.model.CuisineItem
-import com.elbehiry.shared.data.recipes.cuisines.repository.CuisinesRepository
-import com.elbehiry.shared.domain.UseCase
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.elbehiry.model.RecipesItem
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.di.IoDispatcher
+import com.elbehiry.shared.domain.SuspendUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class GetAvailableCuisinesUseCase @Inject constructor(
-    private val cuisinesRepository: CuisinesRepository
-) : UseCase<Unit, Flow<List<CuisineItem>>>() {
-
-    override fun execute(parameters: Unit): Flow<List<CuisineItem>> =
-        flow {
-            emit(cuisinesRepository.getAvailableCuisines())
-        }
+class SaveRecipeSuspendUseCase @Inject constructor(
+    private val dataStore: RecipesLocalDataStore,
+    @IoDispatcher ioDispatcher: CoroutineDispatcher
+) : SuspendUseCase<RecipesItem, Unit>(ioDispatcher) {
+    override suspend fun execute(
+        parameters: RecipesItem
+    ) = dataStore.saveRecipe(parameters)
 }
