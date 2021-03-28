@@ -23,12 +23,19 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.liveData
+import com.elbehiry.delish.ui.recipes.RecipesViewModel
+import com.elbehiry.delish.ui.util.IngredientListProvider
+import com.elbehiry.model.CuisineItem
+import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.information.GetRecipeInformationSuspendUseCase
+import com.elbehiry.delish.ui.recipedetails.RecipeDetailsViewModel.RecipesDetailsViewState
 import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,33 +45,27 @@ class RecipeDetailsViewModel @Inject constructor(
     private val saveRecipeUseCase: SaveRecipeSuspendUseCase
 ) : ViewModel() {
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-    private val _hasError = MutableLiveData<Exception>()
-    val hasError: LiveData<Exception> = _hasError
-
-    private val recipeParam = MutableLiveData<Int>()
-    private val recipeItemInfo: LiveData<Result<RecipesItem>> =
-        recipeParam.switchMap { params ->
-            liveData {
-                emit(getRecipeInformationUseCase(params))
-            }
-        }
-
-    val recipeInfo: LiveData<RecipesItem> = recipeItemInfo.map {
-        when (it) {
-            is Result.Error -> {
-                _hasError.value = it.exception
-            }
-            else -> it.data
-        }
-        _isLoading.value = false
-        it.data ?: RecipesItem()
-    }
+    val isloading = MutableStateFlow(false)
+    private val _state = MutableStateFlow(RecipesDetailsViewState())
+    val viewState: StateFlow<RecipesDetailsViewState>
+        get() = _state
 
     fun getRecipeDetails(id: Int) {
-        _isLoading.value = true
-        recipeParam.value = id
+        isloading.value = true
+        viewModelScope.launch {
+            val recipeDetail = getRecipeInformationUseCase(id)
+            when (recipeDetail) {
+                is Result.Error -> {
+                    _state.value = RecipesDetailsViewState(hasError = true)
+                }
+                else -> _state.value = if (recipeDetail.data != null) {
+                        RecipesDetailsViewState(recipe = recipeDetail.data!!)
+                    } else {
+                        RecipesDetailsViewState(isEmpty = true)
+                    }
+            }
+            isloading.value = false
+        }
     }
 
     fun saveRecipe(recipesItem: RecipesItem) {
@@ -72,4 +73,10 @@ class RecipeDetailsViewModel @Inject constructor(
             saveRecipeUseCase(recipesItem)
         }
     }
+
+    data class RecipesDetailsViewState(
+        val recipe: RecipesItem = RecipesItem(),
+        val isEmpty: Boolean = false,
+        val hasError: Boolean = false
+    )
 }
