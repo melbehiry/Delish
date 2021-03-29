@@ -112,7 +112,6 @@ dependencies {
     kapt(platform(project(":depconstraints")))
     implementation(project(":shared"))
     testImplementation(project(":test-shared"))
-    testImplementation(project(":androidTest-shared"))
     api(project(":model"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))

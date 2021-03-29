@@ -75,7 +75,7 @@ android {
         val urlName = "SPOONACULAR_BASE_URL"
         val baseUrl = "\"https://api.spoonacular.com/\""
         val keyName = "SPOONACULAR_KEY"
-        val keyValue = ""
+        val keyValue = "\"8f544101cb524434a464b80a7b9951f6\""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
             buildConfigField(
@@ -110,7 +110,6 @@ dependencies {
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     testImplementation(project(":test-shared"))
-    testImplementation(project(":androidTest-shared"))
     api(project(":model"))
 
     // Architecture Components
