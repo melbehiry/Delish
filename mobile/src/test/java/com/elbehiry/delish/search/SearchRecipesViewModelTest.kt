@@ -35,7 +35,6 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class SearchRecipesViewModelTest {
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()

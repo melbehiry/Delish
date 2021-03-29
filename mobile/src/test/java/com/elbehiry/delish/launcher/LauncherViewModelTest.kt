@@ -38,7 +38,6 @@ import org.junit.Before
 import org.assertj.core.api.Assertions.assertThat
 import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class LauncherViewModelTest {
 
     @get:Rule

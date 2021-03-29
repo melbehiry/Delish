@@ -38,7 +38,6 @@ import kotlin.time.ExperimentalTime
 import org.assertj.core.api.Assertions.assertThat
 import java.lang.Exception
 
-@ExperimentalTime
 class RecipeDetailsViewModelTest {
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
