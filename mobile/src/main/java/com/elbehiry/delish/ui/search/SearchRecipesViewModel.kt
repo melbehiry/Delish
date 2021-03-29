@@ -41,7 +41,7 @@ class SearchRecipesViewModel @Inject constructor(
             query,
             cuisine
         )
-        return searchRecipesUseCase.execute(params)
+        return searchRecipesUseCase(params)
     }
 }
 
