@@ -22,10 +22,9 @@ import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import com.elbehiry.delish.ui.recipes.InspirationItem
-import com.elbehiry.model.RecipesItem
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -34,9 +33,9 @@ fun BookMark(
     viewModel: BookmarkViewModel,
     onDetails: (Int) -> Unit
 ) {
-    val recipes: List<RecipesItem> by viewModel.savedRecipes.observeAsState(listOf())
+    val recipes by viewModel.state.collectAsState()
     LazyVerticalGrid(cells = GridCells.Fixed(2)) {
-        items(recipes.distinct()) { recipe ->
+        items(recipes.recipes.distinct()) { recipe ->
             InspirationItem(recipe, onDetails = onDetails) {
                 viewModel.deleteRecipe(recipe)
             }

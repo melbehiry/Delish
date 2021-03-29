@@ -35,7 +35,6 @@ class GetAvailableCuisinesUseCase @Inject constructor(
                 emit(Result.Success(cuisines))
             } catch (e: Exception) {
                 emit(Result.Error(e))
-
             }
         }
 }

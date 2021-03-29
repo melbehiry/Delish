@@ -42,7 +42,6 @@ class GetRandomRecipesUseCase @Inject constructor(
                 emit(Result.Success(randomRecipes))
             } catch (e: Exception) {
                 emit(Result.Error(e))
-
             }
         }
 

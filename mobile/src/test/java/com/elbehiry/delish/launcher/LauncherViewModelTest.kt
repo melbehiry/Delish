@@ -36,7 +36,6 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.assertj.core.api.Assertions.assertThat
-import kotlin.time.ExperimentalTime
 
 class LauncherViewModelTest {
 
