@@ -140,7 +140,7 @@ fun SearchItem(
             color = Color.White,
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+            modifier = Modifier.fillMaxWidth().padding(top = 4.dp, start = 8.dp)
 
         )
     }
