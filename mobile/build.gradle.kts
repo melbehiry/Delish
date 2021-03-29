@@ -71,6 +71,7 @@ android {
         // Running lint over the debug variant is enough
         isCheckReleaseBuilds = false
         // See lint.xml for rules configuration
+        isAbortOnError = false
     }
 
     // Required for AR because it includes a library built with Java 8
@@ -111,7 +112,6 @@ dependencies {
     kapt(platform(project(":depconstraints")))
     implementation(project(":shared"))
     testImplementation(project(":test-shared"))
-    testImplementation(project(":androidTest-shared"))
     api(project(":model"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -135,7 +135,6 @@ dependencies {
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
     implementation(Libs.HILT_VIEWMODEL)
-    androidTestImplementation(Libs.HILT_TESTING)
     kapt(Libs.HILT_COMPILER)
     kapt(Libs.ANDROIDX_HILT_COMPILER)
     kaptAndroidTest(Libs.HILT_COMPILER)
@@ -143,12 +142,6 @@ dependencies {
 
     // Kotlin
     implementation(Libs.KOTLIN_STDLIB)
-
-    // Instrumentation tests
-    androidTestImplementation(Libs.ESPRESSO_CORE)
-    androidTestImplementation(Libs.ESPRESSO_CONTRIB)
-    androidTestImplementation(Libs.RUNNER)
-    androidTestImplementation(Libs.RULES)
 
     // Local unit tests
     testImplementation(Libs.JUNIT)
@@ -159,7 +152,7 @@ dependencies {
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
 
-    //flow
+    // flow
     testImplementation(Libs.TURBINE)
 
     // COMPOSE

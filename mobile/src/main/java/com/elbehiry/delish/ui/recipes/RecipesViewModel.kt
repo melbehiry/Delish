@@ -16,24 +16,27 @@
 
 package com.elbehiry.delish.ui.recipes
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.elbehiry.delish.ui.util.IngredientListProvider
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
-import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeUseCase
-import com.elbehiry.shared.domain.recipes.bookmark.IsRecipeSavedUseCase
-import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeUseCase
+import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeSuspendUseCase
+import com.elbehiry.shared.domain.recipes.bookmark.IsRecipeSavedSuspendUseCase
+import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,64 +46,49 @@ const val randomRecipesCount = 20
 class RecipesViewModel @Inject constructor(
     private val getRandomRecipesUseCase: GetRandomRecipesUseCase,
     private val getAvailableCuisinesUseCase: GetAvailableCuisinesUseCase,
-    private val saveRecipeUseCase: SaveRecipeUseCase,
-    private val deleteRecipeUseCase: DeleteRecipeUseCase,
-    private val isRecipeSavedUseCase: IsRecipeSavedUseCase
+    private val saveRecipeUseCase: SaveRecipeSuspendUseCase,
+    private val deleteRecipeUseCase: DeleteRecipeSuspendUseCase,
+    private val isRecipeSavedUseCase: IsRecipeSavedSuspendUseCase
 ) : ViewModel() {
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val ingredientList = MutableStateFlow(IngredientListProvider.ingredientList)
+    val hasError = MutableStateFlow(false)
 
-    private val _hasError = MutableLiveData<String>()
-    val hasError: LiveData<String> = _hasError
-
-    private val _ingredientList = MutableLiveData<List<IngredientItem>>()
-    val ingredientList: LiveData<List<IngredientItem>> = _ingredientList
-
-    private val _cuisinesList = MutableLiveData<List<CuisineItem>>()
-    val cuisinesList: LiveData<List<CuisineItem>> = _cuisinesList
-
-    private val _randomRecipes = MutableLiveData<List<RecipesItem>>()
-    val randomRecipes: LiveData<List<RecipesItem>> = _randomRecipes
+    private val _state = MutableStateFlow(RecipesViewState())
+    val viewState: StateFlow<RecipesViewState>
+        get() = _state
 
     init {
         getHomeContent()
     }
 
     fun getHomeContent() {
-        _isLoading.value = true
         viewModelScope.launch {
-            try {
-                coroutineScope {
-                    val ingredientListDeferred = async { IngredientListProvider.ingredientList }
-                    val cuisinesListDeferred = async { getAvailableCuisinesUseCase(Unit) }
-                    val randomRecipesDeferred = async {
-                        getRandomRecipesUseCase(
-                            GetRandomRecipesUseCase.Params.create(
-                                null,
-                                randomRecipesCount
-                            )
-                        )
-                    }
-
-                    val ingredientList = ingredientListDeferred.await()
-                    val cuisinesList = cuisinesListDeferred.await()
-                    val randomRecipes = randomRecipesDeferred.await()
-
-                    if (cuisinesList is Result.Error) {
-                        _hasError.postValue(cuisinesList.exception.message)
-                    } else if (randomRecipes is Result.Error) {
-                        _hasError.postValue(randomRecipes.exception.message)
-                    }
-
-                    _randomRecipes.postValue(randomRecipes.data ?: listOf())
-                    _ingredientList.postValue(ingredientList)
-                    _cuisinesList.postValue(cuisinesList.data ?: listOf())
-                }
-            } catch (e: Exception) {
-                _hasError.postValue(e.message)
-            } finally {
-                _isLoading.value = false
+            combine(
+                ingredientList,
+                getAvailableCuisinesUseCase(Unit),
+                getRandomRecipesUseCase(
+                    GetRandomRecipesUseCase.Params.create(
+                        null,
+                        randomRecipesCount
+                    )
+                )
+            ) { ingredients, cuisines, randomRecipes ->
+                RecipesViewState(
+                    ingredientList = ingredients,
+                    cuisinesList = cuisines.data ?: emptyList(),
+                    randomRecipes = randomRecipes.data ?: emptyList(),
+                    hasError = cuisines is Result.Error || randomRecipes is Result.Error
+                )
+            }.onStart {
+                emit(RecipesViewState(loading = true))
+            }.catch {
+                hasError.value = true
+                emit(RecipesViewState(hasError = true))
+            }.onCompletion {
+                emit(RecipesViewState(loading = false))
+            }.collect {
+                _state.value = it
             }
         }
     }
@@ -114,4 +102,12 @@ class RecipesViewModel @Inject constructor(
             }
         }
     }
+
+    data class RecipesViewState(
+        val loading: Boolean = false,
+        val ingredientList: List<IngredientItem> = emptyList(),
+        val cuisinesList: List<CuisineItem> = emptyList(),
+        val randomRecipes: List<RecipesItem> = emptyList(),
+        val hasError: Boolean = false
+    )
 }

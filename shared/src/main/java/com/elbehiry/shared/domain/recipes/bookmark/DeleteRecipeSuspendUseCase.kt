@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.domain.recipes.information
+package com.elbehiry.shared.domain.recipes.bookmark
 
-import com.elbehiry.model.RecipesItem
-import com.elbehiry.shared.data.recipes.info.repository.RecipeInformationRepository
+import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
 import com.elbehiry.shared.di.IoDispatcher
-import com.elbehiry.shared.domain.UseCase
+import com.elbehiry.shared.domain.SuspendUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class GetRecipeInformationUseCase @Inject constructor(
-    private val recipeInformationRepository: RecipeInformationRepository,
+class DeleteRecipeSuspendUseCase @Inject constructor(
+    private val dataStore: RecipesLocalDataStore,
     @IoDispatcher ioDispatcher: CoroutineDispatcher
-) : UseCase<Int, RecipesItem>(ioDispatcher) {
-    override suspend fun execute(parameters: Int): RecipesItem =
-        recipeInformationRepository.getRecipeInformation(parameters)
+) : SuspendUseCase<Int?, Unit>(ioDispatcher) {
+    override suspend fun execute(parameters: Int?) = dataStore.deleteRecipe(parameters)
 }

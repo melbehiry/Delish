@@ -17,6 +17,7 @@
 package com.elbehiry.delish.launcher
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import app.cash.turbine.test
 import com.elbehiry.delish.ui.launcher.LauncherViewModel
 import com.elbehiry.shared.data.pref.PreferencesKeys
 import com.elbehiry.shared.data.pref.repository.DataStoreOperations
@@ -24,17 +25,17 @@ import com.elbehiry.shared.domain.pref.OnBoardingCompletedUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.runBlockingTest
-import come.elbehiry.app.delish.androidtest.util.LiveDataTestUtil
 import kotlinx.coroutines.flow.flowOf
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
-import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.MAIN_ACTIVITY
-import com.elbehiry.delish.ui.launcher.LauncherViewModel.LaunchDestination.ONBOARDING
+import com.elbehiry.delish.ui.launcher.LaunchDestination.MAIN_ACTIVITY
+import com.elbehiry.delish.ui.launcher.LaunchDestination.ON_BOARDING
+import com.elbehiry.delish.ui.launcher.LauncherViewState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
+import org.assertj.core.api.Assertions.assertThat
 
 class LauncherViewModelTest {
 
@@ -56,8 +57,6 @@ class LauncherViewModelTest {
         onBoardingCompletedUseCase = OnBoardingCompletedUseCase(
             repository, coroutineRule.testDispatcher
         )
-
-        launcherViewModel = LauncherViewModel(onBoardingCompletedUseCase)
     }
 
     @Test
@@ -67,8 +66,10 @@ class LauncherViewModelTest {
                 false
             )
         )
-        val navigation = LiveDataTestUtil.getValue(launcherViewModel.launchDestination)
-        Assert.assertEquals(ONBOARDING, navigation)
+        launcherViewModel = LauncherViewModel(onBoardingCompletedUseCase)
+        launcherViewModel.state.test {
+            assertThat(expectItem()).isEqualTo(LauncherViewState(ON_BOARDING))
+        }
     }
 
     @Test
@@ -78,8 +79,10 @@ class LauncherViewModelTest {
                 true
             )
         )
+        launcherViewModel = LauncherViewModel(onBoardingCompletedUseCase)
 
-        val navigation = LiveDataTestUtil.getValue(launcherViewModel.launchDestination)
-        Assert.assertEquals(MAIN_ACTIVITY, navigation)
+        launcherViewModel.state.test {
+            assertThat(expectItem()).isEqualTo(LauncherViewState(MAIN_ACTIVITY))
+        }
     }
 }

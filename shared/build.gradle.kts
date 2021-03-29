@@ -40,7 +40,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         disable("InvalidPackage", "MissingTranslation")
         // Version changes are beyond our control, so don't warn. The IDE will still mark these.
         disable("GradleDependency")
@@ -110,7 +110,6 @@ dependencies {
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     testImplementation(project(":test-shared"))
-    testImplementation(project(":androidTest-shared"))
     api(project(":model"))
 
     // Architecture Components

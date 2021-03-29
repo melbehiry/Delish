@@ -19,14 +19,16 @@ package com.elbehiry.shared.domain.recipes.search
 import androidx.paging.PagingData
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.shared.data.recipes.search.repository.SearchRepository
+import com.elbehiry.shared.domain.UseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SearchRecipesUseCase @Inject constructor(
     private val searchRepository: SearchRepository
-) {
-    fun execute(params: Params): Flow<PagingData<RecipesItem>> =
-        searchRepository.searchRecipes(params.query, params.cuisine)
+) : UseCase<SearchRecipesUseCase.Params, Flow<PagingData<RecipesItem>>>() {
+
+    override fun execute(parameters: Params): Flow<PagingData<RecipesItem>> =
+        searchRepository.searchRecipes(parameters.query, parameters.cuisine)
 
     class Params private constructor(
         val query: String?,

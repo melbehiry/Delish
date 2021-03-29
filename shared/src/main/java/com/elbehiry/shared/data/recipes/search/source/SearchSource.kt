@@ -23,6 +23,7 @@ import com.elbehiry.model.toUiModel
 import com.elbehiry.shared.data.recipes.search.remote.SearchDataSource
 import javax.inject.Inject
 
+const val initialPageIndex = 1
 class SearchSource @Inject constructor(
     private val searchDataSource: SearchDataSource,
     private val query: String?,
@@ -31,7 +32,7 @@ class SearchSource @Inject constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RecipesItem> {
         return try {
-            val page = params.key ?: 1
+            val page = params.key ?: initialPageIndex
             val searchItem = searchDataSource.searchRecipes(
                 offset = page,
                 query = query,
@@ -39,8 +40,8 @@ class SearchSource @Inject constructor(
             )
             LoadResult.Page(
                 data = searchItem.results.map { it.toUiModel() },
-                prevKey = if (page == 1) null else page - 1,
-                nextKey = page.plus(1)
+                prevKey = if (page == initialPageIndex) null else page - 1,
+                nextKey = if (searchItem.results.isEmpty()) null else page.plus(1)
             )
         } catch (e: Exception) {
             LoadResult.Error(e)

@@ -24,8 +24,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -38,11 +38,10 @@ private const val SplashWaitTime: Long = 2000
 @Composable
 fun LauncherView(
     modifier: Modifier = Modifier,
-    onLauncherComplete: (LauncherViewModel.LaunchDestination) -> Unit
+    onLauncherComplete: (LaunchDestination) -> Unit
 ) {
     val viewModel: LauncherViewModel = viewModel()
-    val launchDestination: LauncherViewModel.LaunchDestination by
-    viewModel.launchDestination.observeAsState(LauncherViewModel.LaunchDestination.ONBOARDING)
+    val viewState by viewModel.state.collectAsState()
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -52,7 +51,7 @@ fun LauncherView(
         val currentOnTimeout by rememberUpdatedState(onLauncherComplete)
         LaunchedEffect(Unit) {
             delay(SplashWaitTime)
-            currentOnTimeout(launchDestination)
+            currentOnTimeout(viewState.launchDestination)
         }
 
         Image(

@@ -16,15 +16,15 @@
 
 package com.elbehiry.delish.ui.bookmark
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elbehiry.model.RecipesItem
-import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeUseCase
+import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.GetSavedRecipesUseCase
 import com.elbehiry.shared.result.data
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,11 +32,12 @@ import javax.inject.Inject
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(
     private val getSavedRecipesUseCase: GetSavedRecipesUseCase,
-    private val deleteRecipeUseCase: DeleteRecipeUseCase
+    private val deleteRecipeUseCase: DeleteRecipeSuspendUseCase
 ) : ViewModel() {
 
-    private val _savedRecipes = MutableLiveData<List<RecipesItem>>()
-    val savedRecipes: LiveData<List<RecipesItem>> = _savedRecipes
+    private val _state = MutableStateFlow(BookmarkViewState())
+    val state: StateFlow<BookmarkViewState>
+        get() = _state
 
     init {
         getSavedRecipes()
@@ -45,8 +46,10 @@ class BookmarkViewModel @Inject constructor(
     private fun getSavedRecipes() {
         viewModelScope.launch {
             getSavedRecipesUseCase(Unit).collect {
-                if (it.data != null) {
-                    _savedRecipes.postValue(it.data)
+                if (it.data.isNullOrEmpty()) {
+                    _state.value = BookmarkViewState(isEmpty = true)
+                } else {
+                    _state.value = BookmarkViewState(recipes = it.data!!)
                 }
             }
         }
@@ -57,4 +60,9 @@ class BookmarkViewModel @Inject constructor(
             deleteRecipeUseCase(recipe.id)
         }
     }
+
+    data class BookmarkViewState(
+        val recipes: List<RecipesItem> = emptyList(),
+        val isEmpty: Boolean = false
+    )
 }
