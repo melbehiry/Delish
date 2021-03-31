@@ -173,4 +173,6 @@ dependencies {
 
     implementation(Libs.INSETS)
     implementation(Libs.COIL)
+
+    androidTestImplementation(Libs.COMPOSE_TEST)
 }
