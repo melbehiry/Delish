@@ -20,6 +20,7 @@ import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.Recipes
 import com.elbehiry.model.Recipe
 import com.elbehiry.model.SearchItem
+import com.elbehiry.model.MealsPlan
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -53,4 +54,10 @@ interface DelishApi {
         @Query("number") number: Int?,
         @Query("offset") offset: Int
     ): SearchItem
+
+    @GET("/mealplanner/generate")
+    suspend fun getMealsPlan(
+        @Query("apiKey") apiKey: String = BuildConfig.SPOONACULAR_KEY,
+        @Query("timeFrame") timeFrame: String = "week"
+    ): MealsPlan
 }
