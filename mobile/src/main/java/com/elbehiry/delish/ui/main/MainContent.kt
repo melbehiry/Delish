@@ -49,6 +49,7 @@ import com.elbehiry.delish.ui.bookmark.BookMark
 import com.elbehiry.delish.ui.bookmark.BookmarkViewModel
 import com.elbehiry.delish.ui.recipes.HomeContent
 import com.elbehiry.delish.ui.plan.MealPlan
+import com.elbehiry.delish.ui.plan.MealPlanViewModel
 import com.elbehiry.delish.ui.recipes.RecipesViewModel
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
@@ -58,6 +59,7 @@ import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 fun MainContent(
     viewModel: RecipesViewModel,
     bookmarkViewModel: BookmarkViewModel,
+    mealPlanViewModel: MealPlanViewModel,
     onIngredientContent: () -> Unit,
     onCuisineSearch: (String) -> Unit,
     onDetails: (Int) -> Unit,
@@ -100,7 +102,7 @@ fun MainContent(
                 onIngredientSearch
             )
             DelishHomeTabs.BookMark -> BookMark(bookmarkViewModel, onDetails)
-            DelishHomeTabs.MealPlan -> MealPlan()
+            DelishHomeTabs.MealPlan -> MealPlan(mealPlanViewModel, onDetails)
         }
     }
 }

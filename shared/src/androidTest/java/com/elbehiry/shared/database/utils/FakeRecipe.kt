@@ -46,5 +46,6 @@ internal val RECIPE_FAKE = RecipeEntity(
     nutrientsAmount = faker.number().digit().toDouble(),
     nutrientsName = faker.lorem().word(),
     ingredientOriginalString = faker.lorem().sentence(),
-    steps = faker.lorem().paragraph()
+    steps = faker.lorem().paragraph(),
+    servings = faker.number().digit().toInt()
 )

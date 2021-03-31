@@ -53,7 +53,8 @@ internal class RecipeMapperImpl @Inject constructor(
             recipesItem.nutrientsAmount ?: 0.0,
             recipesItem.nutrientsName ?: "",
             jsonConverter.toJson(recipesItem.ingredientOriginalString),
-            jsonConverter.toJson(recipesItem.step)
+            jsonConverter.toJson(recipesItem.step),
+            recipesItem.servings ?: 0
         )
 
     override fun mapToDataRecipe(recipeEntity: RecipeEntity): RecipesItem =
@@ -80,6 +81,7 @@ internal class RecipeMapperImpl @Inject constructor(
             recipeEntity.percentFat,
             recipeEntity.nutrientsAmount,
             recipeEntity.nutrientsName,
+            recipeEntity.servings,
             jsonConverter.fromJson(recipeEntity.steps) ?: emptyList(),
             jsonConverter.fromJson(recipeEntity.ingredientOriginalString) ?: emptyList(),
             true

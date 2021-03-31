@@ -59,7 +59,6 @@ fun HomeContent(
     LoadingContent(viewState.loading) {
         Surface(modifier = Modifier.fillMaxSize()) {
             LazyColumn {
-//                item { NotificationItem(errorMessage) }
                 item { HeaderTitle() }
                 item {
                     DailyInspiration(viewState.randomRecipes, onDetails) { recipe ->

@@ -125,6 +125,7 @@ dependencies {
         api("${Libs.COMPOSE_ANIMATION}:$compose")
         api("${Libs.COMPOSE_ANIMATION_CORE}:$compose")
         api("${Libs.COMPOSE_ICON}:$compose")
+        api(Libs.COMPOSE_TEST)
         api("${Libs.COMPOSE_PAGING}:$composePaging")
         api("${Libs.COMPOSE_VIEW_MODEL}:$composeViewModel")
         api("${Libs.COMPOSE_ACTIVITY}:$composeActivity")

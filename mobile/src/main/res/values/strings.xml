@@ -72,4 +72,6 @@
     <string name="method">Method</string>
     <string name="search">Search</string>
     <string name="search_hint">Find recipes...</string>
+    <string name="remove">remove</string>
+    <string name="add">add</string>
 </resources>
