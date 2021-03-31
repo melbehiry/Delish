@@ -23,9 +23,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -36,9 +39,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.Dimension
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.widget.LoadingContent
 import com.elbehiry.delish.ui.widget.NotificationBanner
@@ -119,6 +125,21 @@ fun DailyInspiration(
     onDetails: (Int) -> Unit,
     onBookMark: (RecipesItem) -> Unit
 ) {
+    if (!recipes.isNullOrEmpty()) {
+        InspirationContent(
+            recipes, onDetails, onBookMark
+        )
+    } else {
+        InspirationEmptyContent()
+    }
+}
+
+@Composable
+fun InspirationContent(
+    recipes: List<RecipesItem>,
+    onDetails: (Int) -> Unit,
+    onBookMark: (RecipesItem) -> Unit
+) {
     LazyRow(
         contentPadding = PaddingValues(
             8.dp, 8.dp, 16.dp, 16.dp
@@ -129,5 +150,24 @@ fun DailyInspiration(
                 onBookMark(recipe)
             }
         }
+    }
+}
+
+@Composable
+fun InspirationEmptyContent() {
+    Surface(
+        modifier = Modifier
+            .padding(vertical = 16.dp)
+            .fillMaxWidth()
+            .height(150.dp),
+        color = MaterialTheme.colors.background,
+        elevation = 8.dp,
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.place_holder),
+            contentScale= ContentScale.Crop,
+            contentDescription = "empty view"
+        )
     }
 }
