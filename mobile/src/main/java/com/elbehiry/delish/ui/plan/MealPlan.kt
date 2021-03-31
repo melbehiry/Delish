@@ -132,7 +132,7 @@ fun MealItem(
                 RecipeReadTime(recipe = recipe)
             }
             ToggleAddButton(
-                isAdded = false,
+                isAdded = recipe?.saved ?: false,
                 modifier = Modifier.clearAndSetSemantics {}
             ) {}
         }
