@@ -20,7 +20,7 @@ import com.elbehiry.delish.R
 import com.elbehiry.model.IngredientItem
 
 object IngredientListProvider {
-    val ingredientList = mutableListOf(
+    val ingredientList = listOf(
         IngredientItem(
             1,
             R.string.basil,

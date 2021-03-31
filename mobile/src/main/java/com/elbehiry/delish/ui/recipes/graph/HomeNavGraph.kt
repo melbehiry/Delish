@@ -30,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.elbehiry.delish.ui.bookmark.BookmarkViewModel
 import com.elbehiry.delish.ui.ingredient.IngredientFullList
 import com.elbehiry.delish.ui.main.MainContent
+import com.elbehiry.delish.ui.plan.MealPlanViewModel
 import com.elbehiry.delish.ui.recipes.RecipesViewModel
 
 object MainDestinations {
@@ -49,6 +50,7 @@ fun HomeNavGraph(
 ) {
     val recipesViewModel: RecipesViewModel = viewModel()
     val bookmarkViewModel: BookmarkViewModel = viewModel()
+    val mealPlanViewModel: MealPlanViewModel = viewModel()
     val navController = rememberNavController()
     val actions = remember(navController) { MainActions(navController) }
 
@@ -60,6 +62,7 @@ fun HomeNavGraph(
             MainContent(
                 viewModel = recipesViewModel,
                 bookmarkViewModel = bookmarkViewModel,
+                mealPlanViewModel = mealPlanViewModel,
                 onIngredientContent = actions.onIngredientContent,
                 onCuisineSearch,
                 onDetails,
