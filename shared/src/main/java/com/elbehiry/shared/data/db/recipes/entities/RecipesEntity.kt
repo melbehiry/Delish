@@ -46,7 +46,8 @@ data class RecipeEntity(
     @ColumnInfo(name = Schema.NUTRIENTS_AMOUNT) val nutrientsAmount: Double,
     @ColumnInfo(name = Schema.NUTRIENTS_NAME) val nutrientsName: String,
     @ColumnInfo(name = Schema.INGREDIENT_TITLE) val ingredientOriginalString: String,
-    @ColumnInfo(name = Schema.STEPS) val steps: String
+    @ColumnInfo(name = Schema.STEPS) val steps: String,
+    @ColumnInfo(name = Schema.SERVINGS) val servings: Int,
 ) {
     object Schema {
         const val TABLE_NAME = "recipes"
@@ -73,5 +74,6 @@ data class RecipeEntity(
         const val NUTRIENTS_AMOUNT = "nutrientsAmount"
         const val NUTRIENTS_NAME = "nutrientsName"
         const val SPOON_SCORE = "spoonScore"
+        const val SERVINGS = "servings"
     }
 }

@@ -43,6 +43,7 @@ data class RecipesItem(
     val percentFat: Double? = null,
     val nutrientsAmount: Double? = 0.0,
     val nutrientsName: String? = "",
+    val servings: Int? = 0,
     val step: List<String>? = emptyList(),
     val ingredientOriginalString: List<String>? = emptyList(),
     var saved: Boolean = false
@@ -67,6 +68,7 @@ data class Recipe(
     val spoonacularScore: Double? = null,
     val sourceName: String? = null,
     val nutrition: Nutrition? = null,
+    val servings: Int? = 0,
     val analyzedInstructions: List<AnalyzedInstructionsItem>? = null,
     val extendedIngredients: List<ExtendedIngredientsItem>? = null
 )
@@ -117,6 +119,7 @@ fun Recipe.toUiModel(): RecipesItem =
         nutrition?.caloricBreakdown?.percentFat,
         nutrition?.nutrients?.nutritionToNutrientsItem()?.amount,
         nutrition?.nutrients?.nutritionToNutrientsItem()?.name,
+        servings,
         analyzedInstructions?.get(0)?.steps?.toStepsUiModel(),
         extendedIngredients?.toIngredientUiModel()
     )

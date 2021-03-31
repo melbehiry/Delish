@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "deb6e2a85a70040c6edc5770f3df3b80",
+    "identityHash": "aaeb156a1e40ab9167bab71a36e9e437",
     "entities": [
       {
         "tableName": "recipes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`recipeId` INTEGER NOT NULL, `recipeTitle` TEXT NOT NULL, `sustainable` INTEGER NOT NULL, `glutenFree` INTEGER NOT NULL, `veryPopular` INTEGER NOT NULL, `vegetarian` INTEGER NOT NULL, `dairyFree` INTEGER NOT NULL, `veryHealthy` INTEGER NOT NULL, `vegan` INTEGER NOT NULL, `cheap` INTEGER NOT NULL, `spoonScore` REAL NOT NULL, `aggregateLikes` INTEGER NOT NULL, `sourceName` TEXT NOT NULL, `creditsText` TEXT NOT NULL, `readyInMinutes` INTEGER NOT NULL, `image` TEXT NOT NULL, `percentCarbs` REAL NOT NULL, `percentProtein` REAL NOT NULL, `percentFat` REAL NOT NULL, `nutrientsAmount` REAL NOT NULL, `nutrientsName` TEXT NOT NULL, `ingredientOriginalString` TEXT NOT NULL, `steps` TEXT NOT NULL, PRIMARY KEY(`recipeId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`recipeId` INTEGER NOT NULL, `recipeTitle` TEXT NOT NULL, `sustainable` INTEGER NOT NULL, `glutenFree` INTEGER NOT NULL, `veryPopular` INTEGER NOT NULL, `vegetarian` INTEGER NOT NULL, `dairyFree` INTEGER NOT NULL, `veryHealthy` INTEGER NOT NULL, `vegan` INTEGER NOT NULL, `cheap` INTEGER NOT NULL, `spoonScore` REAL NOT NULL, `aggregateLikes` INTEGER NOT NULL, `sourceName` TEXT NOT NULL, `creditsText` TEXT NOT NULL, `readyInMinutes` INTEGER NOT NULL, `image` TEXT NOT NULL, `percentCarbs` REAL NOT NULL, `percentProtein` REAL NOT NULL, `percentFat` REAL NOT NULL, `nutrientsAmount` REAL NOT NULL, `nutrientsName` TEXT NOT NULL, `ingredientOriginalString` TEXT NOT NULL, `steps` TEXT NOT NULL, `servings` INTEGER NOT NULL, PRIMARY KEY(`recipeId`))",
         "fields": [
           {
             "fieldPath": "recipeId",
@@ -145,6 +145,12 @@
             "columnName": "steps",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "servings",
+            "columnName": "servings",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -160,7 +166,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'deb6e2a85a70040c6edc5770f3df3b80')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aaeb156a1e40ab9167bab71a36e9e437')"
     ]
   }
 }

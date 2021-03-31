@@ -45,7 +45,8 @@ internal class FakeRecipeMapper : RecipeMapper {
             recipesItem.percentFat ?: 0.0,
             recipesItem.nutrientsAmount ?: 0.0,
             recipesItem.nutrientsName ?: "",
-            "", ""
+            "", "",
+            recipesItem.servings ?: 0
         )
 
     override fun mapToDataRecipe(recipeEntity: RecipeEntity): RecipesItem =
@@ -72,6 +73,7 @@ internal class FakeRecipeMapper : RecipeMapper {
             recipeEntity.percentFat,
             recipeEntity.nutrientsAmount,
             recipeEntity.nutrientsName,
+            recipeEntity.servings,
             emptyList(),
             emptyList()
         )
