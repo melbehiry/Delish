@@ -17,6 +17,10 @@
 package com.elbehiry.shared.di
 
 import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
+import com.elbehiry.shared.data.plan.remote.GetMealPlanRemoteDataSource
+import com.elbehiry.shared.data.plan.remote.MealPlanDataSource
+import com.elbehiry.shared.data.plan.repository.GetMealPlanRepository
+import com.elbehiry.shared.data.plan.repository.MealPlanRepository
 import com.elbehiry.shared.data.recipes.cuisines.remote.GetCuisinesDataSource
 import com.elbehiry.shared.data.recipes.cuisines.remote.GetCuisinesRemoteDataSource
 import com.elbehiry.shared.data.recipes.cuisines.repository.CuisinesRepository
@@ -86,4 +90,14 @@ class RecipesModule {
         rearchDataSource: SearchDataSource
     ): SearchRepository =
         SearchRecipesRepository(rearchDataSource)
+
+    @Provides
+    fun provideMealPlanDataSource(api: DelishApi): MealPlanDataSource =
+        GetMealPlanRemoteDataSource(api)
+
+    @Provides
+    fun provideMealPlanRepository(
+        mealPlanDataSource: MealPlanDataSource
+    ): MealPlanRepository =
+        GetMealPlanRepository(mealPlanDataSource)
 }
