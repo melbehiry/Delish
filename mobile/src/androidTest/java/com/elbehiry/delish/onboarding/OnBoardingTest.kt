@@ -78,6 +78,7 @@ class OnBoardingTest {
     @Test
     fun thirdPageDescriptionTitleAndDescIsDisplayedTest() {
         findNextButton().performClick()
+        findNextButton().performClick()
         val firstOnBoardingItem = OnBoardingProvider.onBoardingDataList[2]
         composeTestRule.onNodeWithText(
             activity.getString(firstOnBoardingItem.titleId)
