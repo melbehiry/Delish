@@ -76,12 +76,19 @@ android {
         val baseUrl = "\"https://api.spoonacular.com/\""
         val keyName = "SPOONACULAR_KEY"
         val keyValue = "\"8f544101cb524434a464b80a7b9951f6\""
+        val cuisinesName = "CUISINES_DATA_URL"
+        val cuisinesValue = "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=022c4c32-3a10-41e2-950a-429ba0cac765\""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
             buildConfigField(
                 "String",
                 keyName,
                 keyValue
+            )
+            buildConfigField(
+                "String",
+                cuisinesName,
+                cuisinesValue
             )
         }
         getByName("debug") {
@@ -90,6 +97,11 @@ android {
                 "String",
                 keyName,
                 keyValue
+            )
+            buildConfigField(
+                "String",
+                cuisinesName,
+                cuisinesValue
             )
         }
     }
