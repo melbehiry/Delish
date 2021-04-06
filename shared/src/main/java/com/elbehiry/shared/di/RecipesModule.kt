@@ -29,6 +29,10 @@ import com.elbehiry.shared.data.recipes.info.remote.RecipeInformationDataSource
 import com.elbehiry.shared.data.recipes.info.remote.RecipeInformationRemoteDataSource
 import com.elbehiry.shared.data.recipes.info.repository.GetRecipeInformationRepository
 import com.elbehiry.shared.data.recipes.info.repository.RecipeInformationRepository
+import com.elbehiry.shared.data.recipes.ingredients.remote.GetIngredientsDataSource
+import com.elbehiry.shared.data.recipes.ingredients.remote.GetIngredientsRemoteDataSource
+import com.elbehiry.shared.data.recipes.ingredients.repository.GetIngredientsRepository
+import com.elbehiry.shared.data.recipes.ingredients.repository.IngredientsRepository
 import com.elbehiry.shared.data.recipes.random.remote.GetRandomRecipesRemoteDataSource
 import com.elbehiry.shared.data.recipes.random.remote.RandomRecipesRemoteDataSource
 import com.elbehiry.shared.data.recipes.random.repository.GetRandomRecipesRepository
@@ -100,4 +104,14 @@ class RecipesModule {
         mealPlanDataSource: MealPlanDataSource
     ): MealPlanRepository =
         GetMealPlanRepository(mealPlanDataSource)
+
+    @Provides
+    fun provideIngredientsDataSource(api: DelishApi): GetIngredientsDataSource =
+        GetIngredientsRemoteDataSource(api)
+
+    @Provides
+    fun provideIngredientsRepository(
+        getIngredientsDataSource: GetIngredientsDataSource
+    ): IngredientsRepository =
+        GetIngredientsRepository(getIngredientsDataSource)
 }
