@@ -64,21 +64,23 @@ fun MealPlan(
     var select by remember { mutableStateOf(0) }
 
     LoadingContent(state.loading) {
-        val mealItem = state.meals[select]
-        Column(modifier = Modifier.fillMaxSize()) {
-            DaysHeader(
-                selectedTextColor = MaterialTheme.colors.secondary,
-                selectedBackgroundColor = MaterialTheme.colors.secondary,
-            ) {
-                if (select != it && it < state.meals.size) {
-                    select = it
+        if (!state.meals.isNullOrEmpty()) {
+            val mealItem = state.meals[select]
+            Column(modifier = Modifier.fillMaxSize()) {
+                DaysHeader(
+                    selectedTextColor = MaterialTheme.colors.secondary,
+                    selectedBackgroundColor = MaterialTheme.colors.secondary,
+                ) {
+                    if (select != it && it < state.meals.size) {
+                        select = it
+                    }
                 }
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            LazyColumn {
-                items(mealItem?.meals ?: emptyList()) { item ->
-                    MealItem(item) {
-                        onDetail(it ?: 0)
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyColumn {
+                    items(mealItem?.meals ?: emptyList()) { item ->
+                        MealItem(item) {
+                            onDetail(it ?: 0)
+                        }
                     }
                 }
             }
