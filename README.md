@@ -55,6 +55,19 @@ just create your own Api Key [here](https://spoonacular.com/food-api/) and add i
 Support it by joining __[stargazers](https://github.com/elbehiry/delish/stargazers)__ for this repository. :star: <br>
 And __[follow](https://github.com/elbehiry)__ me for my next creations! 🤩
 
+## Download
+
+Go to the [Releases](https://github.com/elbehiry/delish/releases) to download the latest APK.
+
+## Contribution
+
+See the [CONTRIBUTION.md](/CONTRIBUTION.md) file.
+
+## Questions
+
+If you have any questions regarding the codebase, hit me up on [Twitter](https://twitter.com/el6ehiry).
+
+
 ## License
 ```xml
 Designed and developed by 2021 elbehiry
