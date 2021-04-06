@@ -44,4 +44,8 @@
     <string name="search_hint">Find recipes...</string>
     <string name="remove">remove</string>
     <string name="add">add</string>
+    <string name="book_mark_empty">The book mark list is empty, let\'s start add some!</string>
+    <string name="ops">Ops!</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="no_search_result">No search result</string>
 </resources>

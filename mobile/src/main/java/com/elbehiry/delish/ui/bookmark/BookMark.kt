@@ -16,6 +16,7 @@
 
 package com.elbehiry.delish.ui.bookmark
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.GridCells
@@ -24,7 +25,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
+import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.recipes.InspirationItem
+import com.elbehiry.delish.ui.widget.EmptyView
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -40,5 +44,11 @@ fun BookMark(
                 viewModel.deleteRecipe(recipe)
             }
         }
+    }
+
+    AnimatedVisibility(visible = recipes.isEmpty) {
+        EmptyView(
+            descText = stringResource(id = R.string.book_mark_empty)
+        )
     }
 }

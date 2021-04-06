@@ -50,7 +50,7 @@ class MealPlanViewModel @Inject constructor(
                     _state.value = MealPlanViewState(hasError = true)
                 }
                 else -> _state.value = if (!recipeDetail.data.isNullOrEmpty()) {
-                    MealPlanViewState(meals = recipeDetail.data!!)
+                    MealPlanViewState(meals = recipeDetail.data!!, isEmpty = false)
                 } else {
                     MealPlanViewState(isEmpty = true)
                 }
@@ -62,7 +62,7 @@ class MealPlanViewModel @Inject constructor(
     data class MealPlanViewState(
         val loading: Boolean = false,
         val meals: List<DayMeal?> = emptyList(),
-        val isEmpty: Boolean = false,
+        val isEmpty: Boolean = true,
         val hasError: Boolean = false
     )
 }

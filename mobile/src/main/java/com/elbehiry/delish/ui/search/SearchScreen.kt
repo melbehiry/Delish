@@ -16,6 +16,7 @@
 
 package com.elbehiry.delish.ui.search
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -53,6 +54,7 @@ import com.elbehiry.delish.ui.widget.SearchAppBar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.elbehiry.delish.ui.widget.EmptyView
 import com.elbehiry.model.RecipesItem
 import dev.chrisbanes.accompanist.coil.CoilImage
 
@@ -66,6 +68,8 @@ fun SearchScreen(
 ) {
     val searchViewModel: SearchRecipesViewModel = viewModel()
     val recipes = searchViewModel.searchRecipes(searchKey, type).collectAsLazyPagingItems()
+    val isEmpty by remember { mutableStateOf(recipes.itemCount == 0) }
+
     Column(modifier = Modifier.fillMaxSize()) {
         SearchHeaderItem(navController, searchKey) {
             // TODO: Handle query search next release.
@@ -74,6 +78,11 @@ fun SearchScreen(
             items(recipes) { recipe ->
                 SearchItem(recipe = recipe, onItemClick = onItemClick)
             }
+        }
+        AnimatedVisibility(visible = isEmpty) {
+            EmptyView(
+                descText = stringResource(id = R.string.no_search_result)
+            )
         }
     }
 }

@@ -75,8 +75,7 @@ class RecipesViewModel @Inject constructor(
                 getIngredientsUseCase(Unit),
                 getAvailableCuisinesUseCase(Unit)
             ) { randomRecipes, ingredients, cuisines ->
-                hasError.value = cuisines is Result.Error || randomRecipes is Result.Error
-                        || ingredients is Result.Error
+                hasError.value = cuisines is Result.Error || ingredients is Result.Error
                 RecipesViewState(
                     ingredientList = ingredients.data ?: emptyList(),
                     cuisinesList = cuisines.data ?: emptyList(),

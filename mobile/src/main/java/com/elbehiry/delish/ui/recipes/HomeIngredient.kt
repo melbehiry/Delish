@@ -183,6 +183,7 @@ fun PreviewIngredientList() {
                 background = "#d0efb3",
                 title = "basil"
             )
-        ),{}
-    ){}
+        ),
+        {}
+    ) {}
 }
