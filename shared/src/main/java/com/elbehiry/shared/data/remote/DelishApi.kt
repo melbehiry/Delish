@@ -16,11 +16,7 @@
 
 package com.elbehiry.shared.data.remote
 
-import com.elbehiry.model.CuisineItem
-import com.elbehiry.model.Recipes
-import com.elbehiry.model.Recipe
-import com.elbehiry.model.SearchItem
-import com.elbehiry.model.MealsPlan
+import com.elbehiry.model.*
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.*
 
@@ -35,6 +31,9 @@ interface DelishApi {
 
     @GET(BuildConfig.CUISINES_DATA_URL)
     suspend fun getAvailableCuisines(): List<CuisineItem>
+
+    @GET(BuildConfig.INGREDIENTS_DATA_URL)
+    suspend fun getIngredients(): List<IngredientItem>
 
     @GET("recipes/{id}/information")
     suspend fun getRecipeInformation(
