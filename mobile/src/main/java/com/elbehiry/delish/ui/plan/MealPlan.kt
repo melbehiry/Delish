@@ -16,6 +16,8 @@
 
 package com.elbehiry.delish.ui.plan
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -53,8 +55,10 @@ import com.elbehiry.delish.ui.widget.DaysHeader
 import com.elbehiry.delish.ui.widget.LoadingContent
 import com.elbehiry.model.RecipesItem
 import com.elbehiry.delish.R
+import com.elbehiry.delish.ui.widget.EmptyView
 import com.elbehiry.delish.ui.widget.ToggleAddButton
 
+@ExperimentalAnimationApi
 @Composable
 fun MealPlan(
     viewModel: MealPlanViewModel,
@@ -64,7 +68,7 @@ fun MealPlan(
     var select by remember { mutableStateOf(0) }
 
     LoadingContent(state.loading) {
-        if (!state.meals.isNullOrEmpty()) {
+        if (!state.isEmpty) {
             val mealItem = state.meals[select]
             Column(modifier = Modifier.fillMaxSize()) {
                 DaysHeader(
@@ -84,6 +88,13 @@ fun MealPlan(
                     }
                 }
             }
+        }
+
+        AnimatedVisibility(visible = state.isEmpty) {
+            EmptyView(
+                titleText = stringResource(id = R.string.ops),
+                descText = stringResource(id = R.string.something_went_wrong)
+            )
         }
     }
 }
