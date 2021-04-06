@@ -26,7 +26,12 @@ import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
 import com.elbehiry.shared.domain.recipes.ingredients.GetIngredientsUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
 import com.elbehiry.shared.result.Result
-import com.elbehiry.test_shared.*
+import com.elbehiry.test_shared.MainCoroutineRule
+import com.elbehiry.test_shared.RECIPES_ITEMS
+import com.elbehiry.test_shared.INGREDIENTS
+import com.elbehiry.test_shared.CUISINES_ITEMS
+import com.elbehiry.test_shared.RECIPE_ITEM
+import com.elbehiry.test_shared.runBlockingTest
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
