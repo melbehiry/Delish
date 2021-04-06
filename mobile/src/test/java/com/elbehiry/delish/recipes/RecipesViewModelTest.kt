@@ -19,18 +19,14 @@ package com.elbehiry.delish.recipes
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import com.elbehiry.delish.ui.recipes.RecipesViewModel
-import com.elbehiry.delish.ui.util.IngredientListProvider
 import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.IsRecipeSavedSuspendUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
+import com.elbehiry.shared.domain.recipes.ingredients.GetIngredientsUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
 import com.elbehiry.shared.result.Result
-import com.elbehiry.test_shared.MainCoroutineRule
-import com.elbehiry.test_shared.RECIPES_ITEMS
-import com.elbehiry.test_shared.CUISINES_ITEMS
-import com.elbehiry.test_shared.RECIPE_ITEM
-import com.elbehiry.test_shared.runBlockingTest
+import com.elbehiry.test_shared.*
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -66,6 +62,9 @@ class RecipesViewModelTest {
     @MockK
     private lateinit var isRecipeSavedUseCase: IsRecipeSavedSuspendUseCase
 
+    @MockK
+    private lateinit var getIngredientsUseCase: GetIngredientsUseCase
+
     private lateinit var recipesViewModel: RecipesViewModel
 
     @Before
@@ -73,6 +72,8 @@ class RecipesViewModelTest {
         MockKAnnotations.init(this, relaxUnitFun = true)
         coEvery { getRandomRecipesUseCase(any()) } returns flowOf(Result.Success(RECIPES_ITEMS))
         coEvery { getAvailableCuisinesUseCase(Unit) } returns flowOf(Result.Success(CUISINES_ITEMS))
+        coEvery { getIngredientsUseCase(Unit) } returns flowOf(Result.Success(INGREDIENTS))
+
         saveRecipeUseCase = mockk()
         deleteRecipeUseCase = mockk()
         isRecipeSavedUseCase = mockk()
@@ -82,15 +83,16 @@ class RecipesViewModelTest {
             getAvailableCuisinesUseCase,
             saveRecipeUseCase,
             deleteRecipeUseCase,
-            isRecipeSavedUseCase
+            isRecipeSavedUseCase,
+            getIngredientsUseCase
         )
     }
 
     @Test
     fun `get content emits loading state successfully`() = mainCoroutineRule.runBlockingTest {
         recipesViewModel.getHomeContent()
-        recipesViewModel.viewState.test {
-            assertThat(expectItem().loading).isNotNull()
+        recipesViewModel.loading.test {
+            assertThat(expectItem()).isNotNull()
         }
     }
 
@@ -114,15 +116,25 @@ class RecipesViewModelTest {
     fun `get content emits ingredient list successfully`() = mainCoroutineRule.runBlockingTest {
         recipesViewModel.getHomeContent()
         recipesViewModel.viewState.test {
-            assertThat(expectItem().ingredientList).isEqualTo(IngredientListProvider.ingredientList)
+            assertThat(expectItem().ingredientList).isEqualTo(INGREDIENTS)
         }
     }
 
     @Test
+    fun `get content emits error state when get ingredients use case failed`() =
+        mainCoroutineRule.runBlockingTest {
+            coEvery { getIngredientsUseCase(Unit) } returns flow { throw Exception("error") }
+            recipesViewModel.getHomeContent()
+            recipesViewModel.hasError.test {
+                assertThat(expectItem()).isTrue()
+            }
+        }
+
+    @Test
     fun `get content success should not emits error`() = mainCoroutineRule.runBlockingTest {
         recipesViewModel.getHomeContent()
-        recipesViewModel.viewState.test {
-            assertThat(expectItem().hasError).isFalse()
+        recipesViewModel.hasError.test {
+            assertThat(expectItem()).isFalse()
         }
     }
 

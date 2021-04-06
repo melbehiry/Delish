@@ -18,7 +18,6 @@ package com.elbehiry.delish.ui.recipes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elbehiry.delish.ui.util.IngredientListProvider
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
@@ -26,6 +25,7 @@ import com.elbehiry.shared.domain.recipes.bookmark.DeleteRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.IsRecipeSavedSuspendUseCase
 import com.elbehiry.shared.domain.recipes.bookmark.SaveRecipeSuspendUseCase
 import com.elbehiry.shared.domain.recipes.cuisines.GetAvailableCuisinesUseCase
+import com.elbehiry.shared.domain.recipes.ingredients.GetIngredientsUseCase
 import com.elbehiry.shared.domain.recipes.random.GetRandomRecipesUseCase
 import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
@@ -48,11 +48,12 @@ class RecipesViewModel @Inject constructor(
     private val getAvailableCuisinesUseCase: GetAvailableCuisinesUseCase,
     private val saveRecipeUseCase: SaveRecipeSuspendUseCase,
     private val deleteRecipeUseCase: DeleteRecipeSuspendUseCase,
-    private val isRecipeSavedUseCase: IsRecipeSavedSuspendUseCase
+    private val isRecipeSavedUseCase: IsRecipeSavedSuspendUseCase,
+    private val getIngredientsUseCase: GetIngredientsUseCase
 ) : ViewModel() {
 
-    private val ingredientList = MutableStateFlow(IngredientListProvider.ingredientList)
     val hasError = MutableStateFlow(false)
+    val loading = MutableStateFlow(false)
 
     private val _state = MutableStateFlow(RecipesViewState())
     val viewState: StateFlow<RecipesViewState>
@@ -65,28 +66,28 @@ class RecipesViewModel @Inject constructor(
     fun getHomeContent() {
         viewModelScope.launch {
             combine(
-                ingredientList,
-                getAvailableCuisinesUseCase(Unit),
                 getRandomRecipesUseCase(
                     GetRandomRecipesUseCase.Params.create(
                         null,
                         randomRecipesCount
                     )
-                )
-            ) { ingredients, cuisines, randomRecipes ->
+                ),
+                getIngredientsUseCase(Unit),
+                getAvailableCuisinesUseCase(Unit)
+            ) { randomRecipes, ingredients, cuisines ->
+                hasError.value = cuisines is Result.Error || randomRecipes is Result.Error
+                        || ingredients is Result.Error
                 RecipesViewState(
-                    ingredientList = ingredients,
+                    ingredientList = ingredients.data ?: emptyList(),
                     cuisinesList = cuisines.data ?: emptyList(),
-                    randomRecipes = randomRecipes.data ?: emptyList(),
-                    hasError = cuisines is Result.Error || randomRecipes is Result.Error
+                    randomRecipes = randomRecipes.data ?: emptyList()
                 )
             }.onStart {
-                emit(RecipesViewState(loading = true))
+                loading.value = true
             }.catch {
                 hasError.value = true
-                emit(RecipesViewState(hasError = true))
             }.onCompletion {
-                emit(RecipesViewState(loading = false))
+                loading.value = false
             }.collect {
                 _state.value = it
             }
@@ -104,10 +105,8 @@ class RecipesViewModel @Inject constructor(
     }
 
     data class RecipesViewState(
-        val loading: Boolean = false,
         val ingredientList: List<IngredientItem> = emptyList(),
         val cuisinesList: List<CuisineItem> = emptyList(),
-        val randomRecipes: List<RecipesItem> = emptyList(),
-        val hasError: Boolean = false
+        val randomRecipes: List<RecipesItem> = emptyList()
     )
 }

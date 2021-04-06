@@ -17,7 +17,6 @@
 package com.elbehiry.delish.ui.recipes
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -27,27 +26,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
-import com.elbehiry.delish.ui.util.IngredientListProvider
+import com.elbehiry.delish.ui.theme.compositedOnSurface
 import com.elbehiry.delish.ui.widget.VerticalGrid
 import com.elbehiry.model.IngredientItem
+import dev.chrisbanes.accompanist.coil.CoilImage
 
 @ExperimentalFoundationApi
 @Composable
@@ -95,10 +95,9 @@ fun HomeIngredientItem(
     onIngredientSearch: (String) -> Unit
 ) {
 
-    val itemTitle = stringResource(id = ingredientItem.titleId)
     Column(
         modifier = Modifier.clickable {
-            onIngredientSearch(itemTitle)
+            onIngredientSearch(ingredientItem.title)
         },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -106,21 +105,34 @@ fun HomeIngredientItem(
             modifier = Modifier
                 .requiredSize(70.dp)
                 .clip(CircleShape)
-                .background(colorResource(id = ingredientItem.background))
+                .background(Color(android.graphics.Color.parseColor(ingredientItem.background)))
         ) {
-            Image(
-                painter = painterResource(id = ingredientItem.imageId),
-                contentScale = ContentScale.Crop,
+            CoilImage(
+                data = ingredientItem.image,
                 contentDescription = null,
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
                     .padding(8.dp)
-                    .align(Alignment.Center)
+                    .align(Alignment.Center),
+                contentScale = ContentScale.Crop,
+                loading = {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                            .background(
+                                MaterialTheme.colors.compositedOnSurface(alpha = 0.2f)
+                            )
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
             )
         }
         Text(
-            text = itemTitle,
+            text = ingredientItem.title,
             style = MaterialTheme.typography.caption,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
@@ -134,12 +146,11 @@ fun PreviewIngredient() {
     HomeIngredientItem(
         IngredientItem(
             id = 1,
-            imageId = R.drawable.basil,
-            background = R.color.basil_background,
-            titleId = R.string.basil
-        ),
-        {}
-    )
+            image = "",
+            background = "#d0efb3",
+            title = "basil"
+        )
+    ) {}
 }
 
 @ExperimentalFoundationApi
@@ -147,6 +158,31 @@ fun PreviewIngredient() {
 @Preview
 fun PreviewIngredientList() {
     HomeIngredient(
-        IngredientListProvider.ingredientList.take(4), {}, {}
-    )
+        listOf(
+            IngredientItem(
+                id = 1,
+                image = "",
+                background = "#d0efb3",
+                title = "basil"
+            ),
+            IngredientItem(
+                id = 1,
+                image = "",
+                background = "#d0efb3",
+                title = "basil"
+            ),
+            IngredientItem(
+                id = 1,
+                image = "",
+                background = "#d0efb3",
+                title = "basil"
+            ),
+            IngredientItem(
+                id = 1,
+                image = "",
+                background = "#d0efb3",
+                title = "basil"
+            )
+        ),{}
+    ){}
 }

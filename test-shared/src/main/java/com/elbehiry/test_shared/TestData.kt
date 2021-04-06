@@ -17,6 +17,7 @@
 package com.elbehiry.test_shared
 
 import com.elbehiry.model.CuisineItem
+import com.elbehiry.model.IngredientItem
 import com.elbehiry.model.RecipesItem
 import com.github.javafaker.Faker
 
@@ -64,3 +65,15 @@ val CUISINE_ITEM = CuisineItem(
 )
 
 val CUISINES_ITEMS = listOf(CUISINE_ITEM, CUISINE_ITEM, CUISINE_ITEM)
+
+val INGREDIENT_ITEM = IngredientItem(
+    id = faker.number().digits(3).toInt(),
+    title = faker.lorem().sentence(),
+    image = faker.internet().image(),
+    background = faker.color().hex()
+)
+
+val INGREDIENTS = listOf(
+    INGREDIENT_ITEM.copy(id = faker.number().digits(3).toInt()),
+    INGREDIENT_ITEM.copy(id = faker.number().digits(3).toInt())
+)

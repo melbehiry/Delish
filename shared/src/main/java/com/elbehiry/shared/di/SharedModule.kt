@@ -77,15 +77,13 @@ class SharedModule {
     @Singleton
     @Provides
     fun provideOkHttp(
-        @Named("logging") httpLoggingInterceptor: Interceptor,
-        @Named("header") headerInterceptor: Interceptor
+        @Named("logging") httpLoggingInterceptor: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(10L, TimeUnit.SECONDS)
             .writeTimeout(10L, TimeUnit.SECONDS)
             .readTimeout(30L, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(headerInterceptor)
             .build()
     }
 

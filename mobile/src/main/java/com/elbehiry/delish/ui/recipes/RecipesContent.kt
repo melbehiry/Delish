@@ -61,8 +61,9 @@ fun HomeContent(
     onIngredientSearch: (String) -> Unit
 ) {
     val viewState by viewModel.viewState.collectAsState()
+    val loading by viewModel.loading.collectAsState()
 
-    LoadingContent(viewState.loading) {
+    LoadingContent(loading) {
         Surface(modifier = Modifier.fillMaxSize()) {
             LazyColumn {
                 item { HeaderTitle() }
