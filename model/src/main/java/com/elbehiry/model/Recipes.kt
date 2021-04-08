@@ -120,9 +120,17 @@ fun Recipe.toUiModel(): RecipesItem =
         nutrition?.nutrients?.nutritionToNutrientsItem()?.amount,
         nutrition?.nutrients?.nutritionToNutrientsItem()?.name,
         servings,
-        analyzedInstructions?.get(0)?.steps?.toStepsUiModel(),
+        createStepsList(analyzedInstructions),
         extendedIngredients?.toIngredientUiModel()
     )
+
+fun createStepsList(analyzedInstructions: List<AnalyzedInstructionsItem>?): List<String>? {
+    return if (analyzedInstructions.isNullOrEmpty()) {
+        emptyList()
+    } else {
+        analyzedInstructions[0].steps?.toStepsUiModel()
+    }
+}
 
 fun List<NutrientsItem>.nutritionToNutrientsItem(): NutrientsItem? {
     return this.find {

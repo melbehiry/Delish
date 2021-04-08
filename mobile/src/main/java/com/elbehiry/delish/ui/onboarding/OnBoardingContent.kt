@@ -73,6 +73,9 @@ import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.main.launchMainActivity
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
+const val currentPageAnimation = "currentPageAnimation"
+const val rotateAnimation = "rotateAnimation"
+
 @ExperimentalAnimationApi
 @VisibleForTesting
 @Composable
@@ -89,10 +92,13 @@ fun OnBoardingContent(
     }
 
     val currentPage = remember { mutableStateOf(0) }
-    val transition = updateTransition(targetState = currentPage)
-    val rotation by transition.animateFloat({
-        tween(durationMillis = 1000)
-    }) {
+    val transition = updateTransition(targetState = currentPage, label = currentPageAnimation)
+    val rotation by transition.animateFloat(
+        {
+            tween(durationMillis = 1000)
+        },
+        label = rotateAnimation
+    ) {
         if (it.value == 0) 0f else it.value * 360f
     }
 
@@ -133,7 +139,9 @@ fun OnBoardingContent(
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier =
-                    Modifier.fillMaxWidth().padding(8.dp)
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
                 ) {
                     IconButton(
                         modifier = Modifier.align(Alignment.CenterVertically),
@@ -185,7 +193,9 @@ fun OnBoardingContent(
 
         Surface(
             color = MaterialTheme.colors.background,
-            modifier = Modifier.requiredHeight(550.dp).fillMaxWidth(),
+            modifier = Modifier
+                .requiredHeight(550.dp)
+                .fillMaxWidth(),
             shape = RoundedCornerShape(bottomStart = 60.dp, bottomEnd = 60.dp)
         ) {
             Column(
@@ -196,7 +206,9 @@ fun OnBoardingContent(
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Image(
                         painter = painterResource(R.drawable.ic_delish_logo),
-                        modifier = Modifier.padding(16.dp).width(80.dp),
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .width(80.dp),
                         contentDescription = null
                     )
                 }
@@ -248,7 +260,9 @@ fun OnBoardingContent(
 fun OnBoardingSlide(selected: Boolean, color: Color, icon: ImageVector) {
     Icon(
         imageVector = icon,
-        modifier = Modifier.padding(4.dp).requiredSize(12.dp),
+        modifier = Modifier
+            .padding(4.dp)
+            .requiredSize(12.dp),
         contentDescription = null,
         tint = if (selected) color else Color.Gray
     )

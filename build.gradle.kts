@@ -7,7 +7,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:${Versions.ANDROID_GRADLE_PLUGIN}")
@@ -80,12 +79,11 @@ subprojects {
         )
     }
 
-    tasks.withType(KotlinCompile::class.java).all {
+    tasks.withType<KotlinCompile>().all {
         kotlinOptions {
             freeCompilerArgs = freeCompilerArgs + listOf(
                 "-Xuse-experimental=kotlin.ExperimentalStdlibApi"
             )
         }
     }
-
 }
