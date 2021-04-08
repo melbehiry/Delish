@@ -73,6 +73,9 @@ import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.main.launchMainActivity
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
+const val currentPageAnimation = "currentPageAnimation"
+const val rotateAnimation = "rotateAnimation"
+
 @ExperimentalAnimationApi
 @VisibleForTesting
 @Composable
@@ -89,10 +92,13 @@ fun OnBoardingContent(
     }
 
     val currentPage = remember { mutableStateOf(0) }
-    val transition = updateTransition(targetState = currentPage, label = "currentPageAnimation")
-    val rotation by transition.animateFloat({
-        tween(durationMillis = 1000)
-    }, label = "rotateAnimation") {
+    val transition = updateTransition(targetState = currentPage, label = currentPageAnimation)
+    val rotation by transition.animateFloat(
+        {
+            tween(durationMillis = 1000)
+        },
+        label = rotateAnimation
+    ) {
         if (it.value == 0) 0f else it.value * 360f
     }
 
