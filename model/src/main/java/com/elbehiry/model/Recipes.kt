@@ -125,7 +125,7 @@ fun Recipe.toUiModel(): RecipesItem =
     )
 
 fun createStepsList(analyzedInstructions: List<AnalyzedInstructionsItem>?): List<String>? {
-    return if (analyzedInstructions.isNullOrEmpty()){
+    return if (analyzedInstructions.isNullOrEmpty()) {
         emptyList()
     } else {
         analyzedInstructions[0].steps?.toStepsUiModel()

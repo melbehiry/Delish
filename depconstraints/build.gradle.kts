@@ -33,7 +33,8 @@ val junit = "4.13"
 val assertJVersion = "3.19.0"
 val mockkVersion = "1.10.6"
 val junitExt = "1.1.2"
-val lifecycle = "2.2.0"
+val lifecycle = "2.3.1"
+val lifecycleExt = "2.2.0"
 val material = "1.1.0"
 val mockito = "3.3.1"
 val mockitoKotlin = "1.5.0"
@@ -49,14 +50,14 @@ val retrofit = "2.9.0"
 val moshi = "1.11.0"
 val kotchi = "2.3.3"
 val datastore = "1.0.0-alpha05"
-val compose = "1.0.0-beta01"
-val composeNavigation = "1.0.0-alpha08"
-val composeActivity = "1.3.0-alpha03"
+val compose = "1.0.0-beta04"
+val composeNavigation = "1.0.0-alpha10"
+val composeActivity = "1.3.0-alpha06"
 val composeConstraint = "1.0.0-alpha03"
 val composePaging = "1.0.0-alpha08"
 val composeViewModel = "1.0.0-alpha02"
 val accompanist = "0.6.0"
-val fragmentKtx = "1.3.0"
+val fragmentKtx = "1.3.2"
 val appCompat = "1.2.0-rc01"
 val faker = "1.0.2"
 val binder = "1.0.0-alpha01"
@@ -113,7 +114,7 @@ dependencies {
         api("${Libs.KOTCHI}:$kotchi")
         api("${Libs.KOTCHI_COMPILER}:$kotchi")
         api("${Libs.DATA_STORE}:$datastore")
-        api("${Libs.LIFECYCLE_EXTENSION}:$lifecycle")
+        api("${Libs.LIFECYCLE_EXTENSION}:$lifecycleExt")
         api("${Libs.LIFECYCLE_RUN_TIME}:$lifecycle")
         api("${Libs.COMPOSE_UI}:$compose")
         api("${Libs.COMPOSE_UI_GRAPHICS}:$compose")
