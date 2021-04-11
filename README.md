@@ -34,8 +34,8 @@
 - [Accompanist](https://github.com/google/accompanist)
 
 - JetPack
-  - [Jetpack Compose](https://developer.android.com/jetpack/compose)
-  - [Compose Paging](https://developer.android.com/reference/kotlin/androidx/paging/compose/package-summary)
+  - [Jetpack Compose](https://developer.android.com/jetpack/compose) 1.0.0-beta04
+  - [Compose Paging](https://developer.android.com/reference/kotlin/androidx/paging/compose/package-summary) 1.0.0-alpha08
   - [Navigation](https://developer.android.com/guide/navigation)
   - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
@@ -51,6 +51,10 @@ Delish is under development a lot of stuff to be done, feel free to contribute �
 just create your own Api Key [here](https://spoonacular.com/food-api/) and add it into [build.gradle.kts](https://github.com/Elbehiry/Delish/blob/97b3f13e37113f78ad26252d39a2bd9b2ab99d6a/shared/build.gradle.kts#L77) file. 😉
 
 ## Find this repository useful? :heart:
+<a href="https://www.buymeacoffee.com/elbehiry" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+</a>
+
 Support it by joining __[stargazers](https://github.com/elbehiry/delish/stargazers)__ for this repository. :star: <br>
 And __[follow](https://github.com/elbehiry)__ me for my next creations! 🤩
 
