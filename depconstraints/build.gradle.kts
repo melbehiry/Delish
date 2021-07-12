@@ -20,8 +20,7 @@ plugins {
 }
 
 val core = "1.3.2"
-val coroutines = "1.4.2"
-val coroutinesTest = "1.4.2"
+val coroutines = "1.5.1"
 val drawerLayout = "1.1.0-rc01"
 val espresso = "3.1.1"
 val glide = "4.9.0"
@@ -51,6 +50,7 @@ val moshi = "1.11.0"
 val kotchi = "2.3.3"
 val datastore = "1.0.0-alpha05"
 val compose = "1.0.0-rc01"
+val composeTest = "1.0.0-beta01"
 val composeNavigation = "2.4.0-alpha04"
 val composeActivity = "1.3.0-rc01"
 val composeConstraint = "1.0.0-alpha08"
@@ -61,7 +61,7 @@ val fragmentKtx = "1.3.2"
 val appCompat = "1.2.0-rc01"
 val faker = "1.0.2"
 val binder = "1.0.0-alpha01"
-val turbine = "0.4.1"
+val turbine = "0.5.2"
 
 dependencies {
     constraints {
@@ -126,7 +126,7 @@ dependencies {
         api("${Libs.COMPOSE_ANIMATION}:$compose")
         api("${Libs.COMPOSE_ANIMATION_CORE}:$compose")
         api("${Libs.COMPOSE_ICON}:$compose")
-        api(Libs.COMPOSE_TEST)
+        api("${Libs.COMPOSE_TEST}:$composeTest")
         api("${Libs.COMPOSE_PAGING}:$composePaging")
         api("${Libs.COMPOSE_VIEW_MODEL}:$composeViewModel")
         api("${Libs.COMPOSE_ACTIVITY}:$composeActivity")
