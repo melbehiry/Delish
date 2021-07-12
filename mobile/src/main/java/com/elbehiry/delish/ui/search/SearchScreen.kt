@@ -38,7 +38,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -55,8 +54,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.elbehiry.delish.ui.widget.EmptyView
+import com.elbehiry.delish.ui.widget.NetworkImage
 import com.elbehiry.model.RecipesItem
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @ExperimentalAnimationApi
 @Composable
@@ -127,19 +126,16 @@ fun SearchItem(
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomStart
         ) {
-            CoilImage(
-                data = recipe?.image ?: "",
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop,
-                loading = {
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colors.compositedOnSurface(alpha = 0.2f))
-                    )
-                }
-            )
+            NetworkImage(
+                url = recipe?.image ?: "",
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colors.compositedOnSurface(alpha = 0.2f))
+                )
+            }
         }
         RecipeGradient(modifier = Modifier.fillMaxSize())
         Text(
@@ -149,8 +145,9 @@ fun SearchItem(
             color = Color.White,
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth().padding(top = 4.dp, start = 8.dp)
-
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp, start = 8.dp)
         )
     }
 }

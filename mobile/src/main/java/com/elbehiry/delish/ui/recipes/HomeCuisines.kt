@@ -38,14 +38,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.theme.compositedOnSurface
+import com.elbehiry.delish.ui.widget.NetworkImage
 import com.elbehiry.model.CuisineItem
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun HomeCuisines(
@@ -60,7 +59,9 @@ fun HomeCuisines(
                 text = stringResource(id = R.string.cuisines_you_looking),
                 style = MaterialTheme.typography.h6,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(16.dp).fillMaxWidth()
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
             )
             CuisinesList(cuisines, onCuisineSearch)
         }
@@ -91,37 +92,37 @@ fun CuisineItem(
     Surface(
         modifier = Modifier
             .requiredSize(180.dp, 180.dp)
-            .padding(8.dp).clickable {
+            .padding(8.dp)
+            .clickable {
                 onCuisineSearch(item.title)
             },
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(Color(android.graphics.Color.parseColor(item.color)))
         ) {
-            CoilImage(
-                data = item.image,
-                contentDescription = null,
+            NetworkImage(
+                url = item.image,
                 modifier = Modifier
-                    .padding(8.dp).requiredSize(100.dp)
-                    .align(Alignment.CenterHorizontally),
-                contentScale = ContentScale.Crop,
-                loading = {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(CircleShape)
-                            .background(
-                                MaterialTheme.colors.compositedOnSurface(alpha = 0.2f)
-                            )
-                    ) {
-                        CircularProgressIndicator()
-                    }
+                    .padding(8.dp)
+                    .requiredSize(100.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                        .background(
+                            MaterialTheme.colors.compositedOnSurface(alpha = 0.2f)
+                        )
+                ) {
+                    CircularProgressIndicator()
                 }
-            )
+            }
             Text(
                 text = item.title,
                 style = MaterialTheme.typography.body2,
