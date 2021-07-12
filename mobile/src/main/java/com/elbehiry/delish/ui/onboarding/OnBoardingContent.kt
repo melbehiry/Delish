@@ -71,7 +71,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.main.launchMainActivity
-import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import com.google.accompanist.insets.statusBarsPadding
 
 const val currentPageAnimation = "currentPageAnimation"
 const val rotateAnimation = "rotateAnimation"

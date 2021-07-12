@@ -38,16 +38,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.elbehiry.delish.R
 import com.elbehiry.delish.ui.theme.compositedOnSurface
+import com.elbehiry.delish.ui.widget.NetworkImage
 import com.elbehiry.delish.ui.widget.VerticalGrid
 import com.elbehiry.model.IngredientItem
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @ExperimentalFoundationApi
 @Composable
@@ -107,29 +106,26 @@ fun HomeIngredientItem(
                 .clip(CircleShape)
                 .background(Color(android.graphics.Color.parseColor(ingredientItem.background)))
         ) {
-            CoilImage(
-                data = ingredientItem.image,
-                contentDescription = null,
+            NetworkImage(
+                url = ingredientItem.image,
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
                     .padding(8.dp)
-                    .align(Alignment.Center),
-                contentScale = ContentScale.Crop,
-                loading = {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(CircleShape)
-                            .background(
-                                MaterialTheme.colors.compositedOnSurface(alpha = 0.2f)
-                            )
-                    ) {
-                        CircularProgressIndicator()
-                    }
+                    .align(Alignment.Center)
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                        .background(
+                            MaterialTheme.colors.compositedOnSurface(alpha = 0.2f)
+                        )
+                ) {
+                    CircularProgressIndicator()
                 }
-            )
+            }
         }
         Text(
             text = ingredientItem.title,

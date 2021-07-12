@@ -24,8 +24,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
+import com.google.accompanist.insets.ProvideWindowInsets
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 fun launchOnBoardingActivity(context: Context) {
     context.startActivity(Intent(context, OnBoardingActivity::class.java))

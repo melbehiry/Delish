@@ -28,9 +28,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 import com.elbehiry.delish.ui.recipes.graph.HomeNavGraph
 import com.elbehiry.delish.ui.search.SearchType
+import com.google.accompanist.insets.ProvideWindowInsets
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {

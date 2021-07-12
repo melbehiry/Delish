@@ -32,7 +32,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,8 +41,8 @@ import androidx.constraintlayout.compose.Dimension
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import com.elbehiry.delish.ui.theme.compositedOnSurface
 import com.elbehiry.delish.ui.widget.BookMarkButton
+import com.elbehiry.delish.ui.widget.NetworkImage
 import com.elbehiry.model.RecipesItem
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun InspirationItem(
@@ -78,19 +77,17 @@ fun InspirationItem(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                CoilImage(
-                    data = recipe.image ?: "", contentDescription = null,
+                NetworkImage(
+                    url = recipe.image ?: "",
                     modifier = Modifier
-                        .fillMaxSize(),
-                    contentScale = ContentScale.Crop,
-                    loading = {
-                        Spacer(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colors.compositedOnSurface(alpha = 0.2f))
-                        )
-                    }
-                )
+                        .fillMaxSize()
+                ) {
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colors.compositedOnSurface(alpha = 0.2f))
+                    )
+                }
                 BookMarkButton(
                     modifier = Modifier
                         .align(Alignment.TopEnd)

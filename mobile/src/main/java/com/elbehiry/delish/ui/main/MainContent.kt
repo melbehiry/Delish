@@ -51,7 +51,7 @@ import com.elbehiry.delish.ui.recipes.HomeContent
 import com.elbehiry.delish.ui.plan.MealPlan
 import com.elbehiry.delish.ui.plan.MealPlanViewModel
 import com.elbehiry.delish.ui.recipes.RecipesViewModel
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+import com.google.accompanist.insets.navigationBarsPadding
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi

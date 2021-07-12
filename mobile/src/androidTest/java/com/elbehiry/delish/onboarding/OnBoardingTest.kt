@@ -26,7 +26,7 @@ import com.elbehiry.delish.ui.onboarding.OnBoardingActivity
 import com.elbehiry.delish.ui.onboarding.OnBoardingContent
 import com.elbehiry.delish.ui.theme.DelishComposeTheme
 import com.elbehiry.delish.ui.util.OnBoardingProvider
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.insets.ProvideWindowInsets
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -44,7 +44,7 @@ class OnBoardingTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            ProvideWindowInsets {
+            ProvideWindowInsets() {
                 DelishComposeTheme {
                     OnBoardingContent {}
                 }

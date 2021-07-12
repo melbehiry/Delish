@@ -38,15 +38,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
+import com.elbehiry.delish.ui.widget.NetworkImage
 import com.elbehiry.delish.ui.widget.verticalGradient
 import com.elbehiry.model.RecipesItem
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun RecipesHeader(
@@ -54,12 +53,13 @@ fun RecipesHeader(
     navController: NavController
 ) {
     ConstraintLayout(
-        modifier = Modifier.fillMaxWidth().height(300.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
     ) {
         val (image, info, topBar, title) = createRefs()
-        CoilImage(
-            data = recipe.image ?: "",
-            contentDescription = null,
+        NetworkImage(
+            url = recipe.image ?: "",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(346.dp)
@@ -73,14 +73,12 @@ fun RecipesHeader(
                     )
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
-                },
-            contentScale = ContentScale.Crop,
-            loading = {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
+        ) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
-        )
+        }
 
         DetailsAppBar(
             modifier = Modifier
@@ -104,7 +102,8 @@ fun RecipesHeader(
                     start = 16.dp,
                     end = 100.dp,
                     bottom = 8.dp
-                ).constrainAs(title) {
+                )
+                .constrainAs(title) {
                     linkTo(
                         start = parent.start,
                         end = parent.end
@@ -124,7 +123,9 @@ fun RecipesHeader(
                 }
         ) {
             Spacer(
-                modifier = Modifier.height(40.dp).background(MaterialTheme.colors.background)
+                modifier = Modifier
+                    .height(40.dp)
+                    .background(MaterialTheme.colors.background)
             )
         }
     }
