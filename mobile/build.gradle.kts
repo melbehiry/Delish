@@ -175,4 +175,14 @@ dependencies {
     implementation(Libs.COIL)
 
     androidTestImplementation(Libs.COMPOSE_TEST)
+    // play service
+    implementation(Libs.COROUTINES_PLAY_SERVICE)
+    implementation(Libs.PLAY_SERVICE_LOCATION)
+
+    // Maps
+    api(Libs.GOOGLE_MAP_UTILS_KTX) {
+        exclude(group = "com.google.android.gms")
+    }
+    api(Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX)
 }
+apply(plugin = "com.google.gms.google-services")

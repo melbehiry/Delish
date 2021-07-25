@@ -13,4 +13,6 @@ object Versions {
     const val HILT = "2.37"
     const val COMPOSE = "1.0.0-rc01"
     const val snapshot = ""
+    const val GOOGLE_SERVICES = "4.3.3"
+    const val SECRETS_SERVICES = "1.3.0"
 }

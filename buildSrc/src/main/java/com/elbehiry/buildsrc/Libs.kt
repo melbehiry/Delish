@@ -5,6 +5,7 @@ object Libs {
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
     const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
     const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test"
+    const val COROUTINES_PLAY_SERVICE = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services"
     const val ESPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib"
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core"
     const val EXT_JUNIT = "androidx.test.ext:junit"
@@ -72,4 +73,8 @@ object Libs {
     const val HILT_BINDER = "com.paulrybitskyi:hilt-binder"
     const val HILT_BINDER_COMPILER = "com.paulrybitskyi:hilt-binder-compiler"
     const val TURBINE = "app.cash.turbine:turbine"
+    const val PLAY_SERVICE_LOCATION = "com.google.android.gms:play-services-location"
+    const val GOOGLE_MAP_UTILS_KTX = "com.google.maps.android:maps-utils-ktx"
+    const val GOOGLE_PLAY_SERVICES_MAPS_KTX = "com.google.maps.android:maps-ktx"
+    const val GOOGLE_PLAY_SERVICES_VISION = "com.google.android.gms:play-services-vision"
 }

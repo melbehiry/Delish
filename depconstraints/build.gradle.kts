@@ -61,6 +61,9 @@ val appCompat = "1.2.0-rc01"
 val faker = "1.0.2"
 val binder = "1.0.0-alpha01"
 val turbine = "0.5.2"
+val playServiceLocation = "18.0.0"
+val googlePlayServicesMapsKtx = "3.0.0"
+val googlePlayServicesVision = "17.0.2"
 
 dependencies {
     constraints {
@@ -70,6 +73,7 @@ dependencies {
         api("${Libs.COROUTINES}:$coroutines")
         api("${Libs.COROUTINES_ANDROID}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")
+        api("${Libs.COROUTINES_PLAY_SERVICE}:$coroutines")
         api("${Libs.ESPRESSO_CORE}:$espresso")
         api("${Libs.ESPRESSO_CONTRIB}:$espresso")
         api("${Libs.GLIDE}:$glide")
@@ -137,6 +141,10 @@ dependencies {
         api("${Libs.HILT_BINDER}:$binder")
         api("${Libs.HILT_BINDER_COMPILER}:$binder")
         api("${Libs.TURBINE}:$turbine")
+        api("${Libs.PLAY_SERVICE_LOCATION}:$playServiceLocation")
+        api("${Libs.GOOGLE_MAP_UTILS_KTX}:$googlePlayServicesMapsKtx")
+        api("${Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX}:$googlePlayServicesMapsKtx")
+        api("${Libs.GOOGLE_PLAY_SERVICES_VISION}:$googlePlayServicesVision")
     }
 }
 
