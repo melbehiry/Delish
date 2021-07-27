@@ -75,44 +75,34 @@ android {
         val keyName = "SPOONACULAR_KEY"
         val keyValue = "\"2d1acf7218d245b9b88d52a1b8362569\""
         val cuisinesName = "CUISINES_DATA_URL"
-        val cuisinesValue = "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\""
+        val cuisinesValue =
+            "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\""
         val ingredientsName = "INGREDIENTS_DATA_URL"
-        val ingredientsValue = "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media&token=9361ddbe-b7e9-4d18-b9a9-530f222e4890\""
+        val fourSquareSearchUrl = "FOURSQUARE_Search_Url"
+        val fourSquareClientKeyName = "FOURSQUARE_CLIENT_ID"
+        val fourSquareSecretKeyName = "FOURSQUARE_SECRET_ID"
+        val ingredientsValue =
+            "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media&token=9361ddbe-b7e9-4d18-b9a9-530f222e4890\""
+        val fourSquareClientKeyValue = "\"TGXNNR0CV15HF05YCZPMYDJWEEQZHRDPGWYYCRJWXF0LJNRB\""
+        val fourSquareSecretKeyValue = "\"MZ5Q1A0HPCBFI3FZLTBCMQIWU3R1GYNPTZNBMI4JTB23ZRKA\""
+        val fourSquareSearchUrlValue = "\"https://api.foursquare.com/v2/venues/search\""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
-            buildConfigField(
-                "String",
-                keyName,
-                keyValue
-            )
-            buildConfigField(
-                "String",
-                cuisinesName,
-                cuisinesValue
-            )
-            buildConfigField(
-                "String",
-                ingredientsName,
-                ingredientsValue
-            )
+            buildConfigField("String", keyName, keyValue)
+            buildConfigField("String", cuisinesName, cuisinesValue)
+            buildConfigField("String", ingredientsName, ingredientsValue)
+            buildConfigField("String", fourSquareSearchUrl, fourSquareSearchUrlValue)
+            buildConfigField("String", fourSquareClientKeyName, fourSquareClientKeyValue)
+            buildConfigField("String", fourSquareSecretKeyName, fourSquareSecretKeyValue)
         }
         getByName("debug") {
             buildConfigField("String", urlName, baseUrl)
-            buildConfigField(
-                "String",
-                keyName,
-                keyValue
-            )
-            buildConfigField(
-                "String",
-                cuisinesName,
-                cuisinesValue
-            )
-            buildConfigField(
-                "String",
-                ingredientsName,
-                ingredientsValue
-            )
+            buildConfigField("String", keyName, keyValue)
+            buildConfigField("String", cuisinesName, cuisinesValue)
+            buildConfigField("String", ingredientsName, ingredientsValue)
+            buildConfigField("String", fourSquareSearchUrl, fourSquareSearchUrlValue)
+            buildConfigField("String", fourSquareClientKeyName, fourSquareClientKeyValue)
+            buildConfigField("String", fourSquareSecretKeyName, fourSquareSecretKeyValue)
         }
     }
 
@@ -163,6 +153,7 @@ dependencies {
     // Coroutines
     api(Libs.COROUTINES)
     testImplementation(Libs.COROUTINES_TEST)
+    implementation(Libs.COROUTINES_PLAY_SERVICE)
 
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
@@ -194,4 +185,6 @@ dependencies {
     api(Libs.DATA_STORE)
 
     implementation(Libs.COMPOSE_PAGING)
+
+    implementation(Libs.PLAY_SERVICE_LOCATION)
 }
