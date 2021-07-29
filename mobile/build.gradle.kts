@@ -148,6 +148,7 @@ dependencies {
     testImplementation(Libs.EXT_JUNIT)
     testImplementation(Libs.ASSERT_J)
     testImplementation(Libs.MOCKK)
+    testImplementation(Libs.FAKER)
 
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
