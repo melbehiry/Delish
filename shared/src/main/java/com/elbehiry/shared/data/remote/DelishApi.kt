@@ -16,7 +16,13 @@
 
 package com.elbehiry.shared.data.remote
 
-import com.elbehiry.model.*
+import com.elbehiry.model.Recipes
+import com.elbehiry.model.CuisineItem
+import com.elbehiry.model.IngredientItem
+import com.elbehiry.model.SearchItem
+import com.elbehiry.model.MealsPlan
+import com.elbehiry.model.VenuesResult
+import com.elbehiry.model.Recipe
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Query

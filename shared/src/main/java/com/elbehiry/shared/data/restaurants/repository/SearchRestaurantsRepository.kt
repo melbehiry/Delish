@@ -33,7 +33,9 @@ class SearchRestaurantsRepository @Inject constructor(
         limit: Int?
     ): Flow<Result<List<VenuesItem>>> {
         return flow {
-            val items = restaurantsSearchDataSource.search(latLng, version, radius, limit).response?.venues
+            val items = restaurantsSearchDataSource.search(
+                latLng, version, radius, limit
+            ).response?.venues
                 ?: emptyList()
             emit(Result.Success(items))
         }
