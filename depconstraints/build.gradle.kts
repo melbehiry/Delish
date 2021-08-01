@@ -137,6 +137,7 @@ dependencies {
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
         api("${Libs.INSETS}:$accompanist")
         api("${Libs.COIL}:$accompanist")
+        api("${Libs.ACCOMPANIST_PERMISSION}:$accompanist")
         api("${Libs.FAKER}:$faker")
         api("${Libs.HILT_BINDER}:$binder")
         api("${Libs.HILT_BINDER_COMPILER}:$binder")

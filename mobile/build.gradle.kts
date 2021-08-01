@@ -41,6 +41,7 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
+        manifestPlaceholders["googleMapsKey"] = "AIzaSyCeWgfOFYvG7PYq4tfKUOFw5LTp4-eCBG8"
     }
     buildTypes {
         getByName("release") {
@@ -174,6 +175,7 @@ dependencies {
 
     implementation(Libs.INSETS)
     implementation(Libs.COIL)
+    implementation(Libs.ACCOMPANIST_PERMISSION)
 
     androidTestImplementation(Libs.COMPOSE_TEST)
     // play service

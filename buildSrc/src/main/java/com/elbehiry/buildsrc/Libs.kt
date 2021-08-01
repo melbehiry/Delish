@@ -69,6 +69,7 @@ object Libs {
     const val COMPOSE_VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-compose"
     const val INSETS = "com.google.accompanist:accompanist-insets"
     const val COIL = "com.google.accompanist:accompanist-coil"
+    const val ACCOMPANIST_PERMISSION = "com.google.accompanist:accompanist-permissions"
     const val FAKER = "com.github.javafaker:javafaker"
     const val HILT_BINDER = "com.paulrybitskyi:hilt-binder"
     const val HILT_BINDER_COMPILER = "com.paulrybitskyi:hilt-binder-compiler"
