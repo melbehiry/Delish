@@ -41,7 +41,7 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
-        manifestPlaceholders["googleMapsKey"] = "AIzaSyCeWgfOFYvG7PYq4tfKUOFw5LTp4-eCBG8"
+        manifestPlaceholders["googleMapsKey"] = "AIzaSyAlPDIoP7vmHfGJwQrTjA8-29OToUIESBA"
     }
     buildTypes {
         getByName("release") {
