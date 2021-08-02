@@ -19,7 +19,7 @@ plugins {
     id("maven-publish")
 }
 
-val core = "1.3.2"
+val core = "1.6.0"
 val coroutines = "1.5.1"
 val drawerLayout = "1.1.0-rc01"
 val espresso = "3.1.1"
@@ -50,17 +50,20 @@ val moshi = "1.11.0"
 val kotchi = "2.3.3"
 val datastore = "1.0.0-alpha05"
 val compose = "1.0.0-rc01"
-val composeNavigation = "2.4.0-alpha04"
-val composeActivity = "1.3.0-rc01"
-val composeConstraint = "1.0.0-alpha08"
+val composeNavigation = "2.4.0-alpha05"
+val composeActivity = "1.3.0"
+val composeConstraint = "1.0.0-beta01"
 val composePaging = "1.0.0-alpha11"
 val composeViewModel = "1.0.0-alpha07"
-val accompanist = "0.13.0"
+val accompanist = "0.15.0"
 val fragmentKtx = "1.3.2"
 val appCompat = "1.2.0-rc01"
 val faker = "1.0.2"
 val binder = "1.0.0-alpha01"
 val turbine = "0.5.2"
+val playServiceLocation = "18.0.0"
+val googlePlayServicesMapsKtx = "3.0.0"
+val googlePlayServicesVision = "17.0.2"
 
 dependencies {
     constraints {
@@ -70,6 +73,7 @@ dependencies {
         api("${Libs.COROUTINES}:$coroutines")
         api("${Libs.COROUTINES_ANDROID}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")
+        api("${Libs.COROUTINES_PLAY_SERVICE}:$coroutines")
         api("${Libs.ESPRESSO_CORE}:$espresso")
         api("${Libs.ESPRESSO_CONTRIB}:$espresso")
         api("${Libs.GLIDE}:$glide")
@@ -133,10 +137,15 @@ dependencies {
         api("${Libs.COMPOSE_NAVIGATION}:$composeNavigation")
         api("${Libs.INSETS}:$accompanist")
         api("${Libs.COIL}:$accompanist")
+        api("${Libs.ACCOMPANIST_PERMISSION}:$accompanist")
         api("${Libs.FAKER}:$faker")
         api("${Libs.HILT_BINDER}:$binder")
         api("${Libs.HILT_BINDER_COMPILER}:$binder")
         api("${Libs.TURBINE}:$turbine")
+        api("${Libs.PLAY_SERVICE_LOCATION}:$playServiceLocation")
+        api("${Libs.GOOGLE_MAP_UTILS_KTX}:$googlePlayServicesMapsKtx")
+        api("${Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX}:$googlePlayServicesMapsKtx")
+        api("${Libs.GOOGLE_PLAY_SERVICES_VISION}:$googlePlayServicesVision")
     }
 }
 

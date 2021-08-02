@@ -58,6 +58,7 @@ import com.elbehiry.model.IngredientItem
 @Composable
 fun IngredientFullList(
     viewModel: RecipesViewModel,
+    onExploreClicked: () -> Unit,
     onIngredientSearch: (String) -> Unit
 ) {
     val viewState by viewModel.viewState.collectAsState()
@@ -65,7 +66,7 @@ fun IngredientFullList(
     DelishComposeTheme {
         Scaffold(
             backgroundColor = MaterialTheme.colors.primarySurface,
-            topBar = { HomeTopBar() }
+            topBar = { HomeTopBar { onExploreClicked() } }
         ) {
             Column {
                 Text(

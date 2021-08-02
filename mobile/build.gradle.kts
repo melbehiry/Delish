@@ -41,6 +41,7 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
+        manifestPlaceholders["googleMapsKey"] = "AIzaSyAlPDIoP7vmHfGJwQrTjA8-29OToUIESBA"
     }
     buildTypes {
         getByName("release") {
@@ -148,6 +149,7 @@ dependencies {
     testImplementation(Libs.EXT_JUNIT)
     testImplementation(Libs.ASSERT_J)
     testImplementation(Libs.MOCKK)
+    testImplementation(Libs.FAKER)
 
     // unit tests livedata
     testImplementation(Libs.ARCH_TESTING)
@@ -173,6 +175,17 @@ dependencies {
 
     implementation(Libs.INSETS)
     implementation(Libs.COIL)
+    implementation(Libs.ACCOMPANIST_PERMISSION)
 
     androidTestImplementation(Libs.COMPOSE_TEST)
+    // play service
+    implementation(Libs.COROUTINES_PLAY_SERVICE)
+    implementation(Libs.PLAY_SERVICE_LOCATION)
+
+    // Maps
+    api(Libs.GOOGLE_MAP_UTILS_KTX) {
+        exclude(group = "com.google.android.gms")
+    }
+    api(Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX)
 }
+apply(plugin = "com.google.gms.google-services")

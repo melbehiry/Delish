@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-plugins {
-    id("java-library")
-    kotlin("jvm")
-}
+package com.elbehiry.shared.domain.restaurants
 
-dependencies {
-    api(platform(project(":depconstraints")))
+import com.elbehiry.shared.utils.fourSquareVersionFormat
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import javax.inject.Inject
 
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    // ThreeTenBP for the shared module only. Date and time API for Java.
-    implementation(Libs.KOTLIN_STDLIB)
-    implementation(Libs.MOSHI)
-}
+class CreateFoursquareVersionUseCase @Inject constructor() {
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    operator fun invoke(date: Date): String {
+        val outputFormatter: DateFormat =
+            SimpleDateFormat(fourSquareVersionFormat, Locale.getDefault())
+        return outputFormatter.format(date)
+    }
 }

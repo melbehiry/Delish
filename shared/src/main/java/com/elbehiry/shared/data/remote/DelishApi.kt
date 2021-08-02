@@ -19,13 +19,16 @@ package com.elbehiry.shared.data.remote
 import com.elbehiry.model.Recipes
 import com.elbehiry.model.CuisineItem
 import com.elbehiry.model.IngredientItem
-import com.elbehiry.model.MealsPlan
 import com.elbehiry.model.SearchItem
+import com.elbehiry.model.MealsPlan
+import com.elbehiry.model.VenuesResult
 import com.elbehiry.model.Recipe
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Path
+
+const val foodDefaultCategoryId = "4d4b7105d754a06374d81259"
 
 interface DelishApi {
 
@@ -64,4 +67,15 @@ interface DelishApi {
         @Query("apiKey") apiKey: String = BuildConfig.SPOONACULAR_KEY,
         @Query("timeFrame") timeFrame: String = "week"
     ): MealsPlan
+
+    @GET(BuildConfig.FOURSQUARE_Search_Url)
+    suspend fun search(
+        @Query("ll") latLng: String,
+        @Query("v") version: String,
+        @Query("client_id") clientId: String = BuildConfig.FOURSQUARE_CLIENT_ID,
+        @Query("client_secret") clientSecret: String = BuildConfig.FOURSQUARE_SECRET_ID,
+        @Query("radius") radius: Int,
+        @Query("limit") limit: Int,
+        @Query("categoryId") categoryId: String = foodDefaultCategoryId
+    ): VenuesResult
 }

@@ -57,6 +57,9 @@ class HomeFragment : Fragment() {
                                 val action =
                                     HomeFragmentDirections.goToSearchScreen(query, SearchType.QUERY)
                                 findNavController().navigate(action)
+                            },
+                            onExplore = {
+                                findNavController().navigate(HomeFragmentDirections.goToMapScreen())
                             }
                         ) { recipeId ->
                             val action = HomeFragmentDirections.goToRecipesDetails(recipeId)
