@@ -26,6 +26,7 @@
 <img src="https://github.com/Elbehiry/Delish/blob/master/images/vid1.gif" width="15%"/>
 <img src="https://github.com/Elbehiry/Delish/blob/master/images/vid2.gif" width="15%"/>
 <img src="https://github.com/Elbehiry/Delish/blob/master/images/vid3.gif" width="15%"/>
+<img src="https://user-images.githubusercontent.com/8813304/127920672-a1c03b1d-321d-4ad5-aba9-897e7ea88354.gif" width="15%"/>
 </p>
 
 ## Tech stack & Open-source libraries
