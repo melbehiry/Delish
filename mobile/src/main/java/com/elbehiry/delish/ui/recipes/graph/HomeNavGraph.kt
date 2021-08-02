@@ -45,6 +45,7 @@ fun HomeNavGraph(
     startDestination: String = MainDestinations.MAIN_ROUTE,
     onCuisineSearch: (String) -> Unit,
     onIngredientSearch: (String) -> Unit,
+    onExplore: () -> Unit,
     onDetails: (Int) -> Unit,
 ) {
     val recipesViewModel: RecipesViewModel = viewModel()
@@ -63,13 +64,18 @@ fun HomeNavGraph(
                 bookmarkViewModel = bookmarkViewModel,
                 mealPlanViewModel = mealPlanViewModel,
                 onIngredientContent = actions.onIngredientContent,
-                onCuisineSearch,
-                onDetails,
-                onIngredientSearch
+                onCuisineSearch = onCuisineSearch,
+                onDetails = onDetails,
+                onExploreClicked = onExplore,
+                onIngredientSearch = onIngredientSearch
             )
         }
         composable((MainDestinations.INGREDIENT_ROUTE)) {
-            IngredientFullList(recipesViewModel, onIngredientSearch)
+            IngredientFullList(
+                viewModel = recipesViewModel,
+                onExploreClicked = onExplore,
+                onIngredientSearch = onIngredientSearch,
+            )
         }
     }
 }

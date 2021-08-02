@@ -20,7 +20,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elbehiry.delish.ui.util.WhileViewSubscribed
-import com.elbehiry.model.Location
 import com.elbehiry.model.LocationModel
 import com.elbehiry.model.VenuesItem
 import com.elbehiry.shared.domain.location.GetCurrentLocationUseCase
@@ -70,8 +69,8 @@ class MapViewModel @Inject constructor(
     private val _mapCenterEvent = Channel<CameraUpdate>(Channel.CONFLATED)
     val mapCenterEvent = _mapCenterEvent.receiveAsFlow()
 
-    private val _bottomSheetStateEvent = Channel<Int>(Channel.CONFLATED)
-    val bottomSheetStateEvent = _bottomSheetStateEvent.receiveAsFlow()
+    private val _mapVariant = MutableStateFlow<MapVariant?>(null)
+    val mapVariant: StateFlow<MapVariant?> = _mapVariant
 
     private val _selectedMarkerInfo = MutableStateFlow<VenuesItem?>(null)
     val selectedMarkerInfo: StateFlow<VenuesItem?> = _selectedMarkerInfo
@@ -196,15 +195,7 @@ class MapViewModel @Inject constructor(
         _mapCenterEvent.trySend(update)
     }
 
-    fun onMapDestroyed() {
-        _selectedMarkerInfo.value = null
-    }
-
-    fun dismissFeatureDetails() {
-        _selectedMarkerInfo.value = null
-    }
-
-    fun saveCurrentSelectedMarkerLocation(location: Location) {
-        saveCurrentLatLng(LatLng(location.lat, location.lng))
+    fun setMapVariant(variant: MapVariant) {
+        _mapVariant.value = variant
     }
 }
