@@ -31,12 +31,12 @@
 
 ## Tech stack & Open-source libraries
 - 100% [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) for asynchronous.
-- [Dagger Hilt](https://dagger.dev/hilt) (Beta)
+- [Dagger Hilt](https://dagger.dev/hilt) 2.37
 - [Accompanist](https://github.com/google/accompanist)
 
 - JetPack
-  - [Jetpack Compose](https://developer.android.com/jetpack/compose) 1.0.0-beta04
-  - [Compose Paging](https://developer.android.com/reference/kotlin/androidx/paging/compose/package-summary) 1.0.0-alpha08
+  - [Jetpack Compose](https://developer.android.com/jetpack/compose) 1.0.0
+  - [Compose Paging](https://developer.android.com/reference/kotlin/androidx/paging/compose/package-summary) 1.0.0-alpha11
   - [Navigation](https://developer.android.com/guide/navigation)
   - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
