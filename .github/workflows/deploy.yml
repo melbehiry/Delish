@@ -27,5 +27,5 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: group1
-          file: /app/build/outputs/apk/debug/app-debug.apk
+          file: /mobile/build/outputs/apk/debug/mobile-debug.apk
           releaseNotes: just CI/CD Github Action Deployment test
