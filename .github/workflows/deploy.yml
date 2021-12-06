@@ -20,6 +20,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: Build Android project
         run: ./gradlew assembleDebug
+      - name: print the apk file location
+        run: ls /mobile/build/outputs/apk/debug
       # Deploy apk to firebase app distribution
       - name: Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
