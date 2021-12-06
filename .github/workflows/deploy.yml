@@ -1,0 +1,32 @@
+name: Android Deploy Ci/CD
+on:
+  push:
+    branches: [ feature/automated_builds ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2.3.2
+      # add gradle wrapper to work using "gradlew" commands
+      - name: gradle wrapper
+        run: gradle wrapper --gradle-version 6.8.2 --distribution-type all
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Bump version
+        id: bump_version
+        uses: oflynned/Android-Semantic-Release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Build Android project
+        run: ./gradlew assembleDebug
+      # Deploy apk to firebase app distribution
+      - name: Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: group1
+          file: ./app/build/outputs/apk/debug/app-debug.apk
+          releaseNotes: just CI/CD Github Action Deployment test
+          debug: true
