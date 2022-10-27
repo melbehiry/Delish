@@ -13,20 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
-    id("com.android.library")
+    `android-library`
     kotlin("android")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    hilt
 }
 
 android {
-    compileSdk = Versions.COMPILE_SDK
+    compileSdk = libs.versions.compile.sdk.version.get().toInt()
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
+        minSdk = libs.versions.min.sdk.version.get().toInt()
+        targetSdk = libs.versions.target.sdk.version.get().toInt()
+        namespace = "com.ncorti.kotlin.template.library.compose"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
 
         consumerProguardFiles("consumer-proguard-rules.pro")
 
@@ -36,14 +41,6 @@ android {
                 arguments["room.schemaLocation"] = "$projectDir/schemas"
             }
         }
-    }
-
-    lint {
-        disable("InvalidPackage", "MissingTranslation")
-        // Version changes are beyond our control, so don't warn. The IDE will still mark these.
-        disable("GradleDependency")
-        // Timber needs to update to new Lint API
-        disable("ObsoleteLintCustomCheck")
     }
 
     // debug and release variants share the same source dir
@@ -65,8 +62,7 @@ android {
     // To avoid the compile error: "Cannot inline bytecode built with JVM target 1.8
     // into bytecode that is being built with JVM target 1.6"
     kotlinOptions {
-        val options = this
-        options.jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildTypes {
@@ -118,73 +114,68 @@ android {
 }
 
 dependencies {
-    api(platform(project(":depconstraints")))
-    kapt(platform(project(":depconstraints")))
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    testImplementation(project(":test-shared"))
-    api(project(":model"))
+    implementation(projects.testShared)
+    api(projects.model)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    api(libs.timber)
+    implementation(libs.androidx.core.ktx)
 
-    // Architecture Components
-    implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)
-    implementation(Libs.LIFECYCLE_VIEW_MODEL_KTX)
-    implementation(Libs.ROOM_KTX)
-    implementation(Libs.ROOM_RUNTIME)
-    kapt(Libs.ROOM_COMPILER)
-    testImplementation(Libs.ARCH_TESTING)
-
-    // Utils
-    api(Libs.TIMBER)
-    implementation(Libs.CORE_KTX)
-
+//    // Architecture Components
+//    testImplementation(Libs.ARCH_TESTING)
+//
+//
     // OkHttp
-    implementation(Libs.OKHTTP)
-    implementation(Libs.OKHTTP_LOGGING_INTERCEPTOR)
-    testImplementation(Libs.OKHTTP_MOCK_SERVER)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.interceptor)
+    testImplementation(libs.okhttp.mockwebserver)
 
     // Retrofit
-    api(Libs.RETROFIT)
-    api(Libs.MOSHI)
-    api(Libs.MOSHI_KOTLIN)
-    api(Libs.MOSHI_RETROFIT)
+    api(libs.retrofit)
+    api(libs.moshi)
+    api(libs.retrofit.converter.moshi)
+//    api(Libs.MOSHI_KOTLIN)
 
-    // Kotlin
-    implementation(Libs.KOTLIN_STDLIB)
-
+//    // Kotlin
+//    implementation(Libs.KOTLIN_STDLIB)
+//
     // Coroutines
-    api(Libs.COROUTINES)
-    testImplementation(Libs.COROUTINES_TEST)
-    implementation(Libs.COROUTINES_PLAY_SERVICE)
-
-    // Dagger Hilt
-    implementation(Libs.HILT_ANDROID)
-    kapt(Libs.HILT_COMPILER)
-
-    // Unit tests
-    testImplementation(Libs.JUNIT)
-    testImplementation(Libs.HAMCREST)
-    testImplementation(Libs.MOCKITO_CORE)
-    testImplementation(Libs.MOCKITO_KOTLIN)
-    testImplementation(Libs.FAKER)
-    testImplementation(Libs.TURBINE)
-    testImplementation(Libs.EXT_JUNIT)
-    testImplementation(Libs.ASSERT_J)
-    testImplementation(Libs.MOCKK)
-
-    androidTestImplementation(Libs.ARCH_TESTING)
-    androidTestImplementation(Libs.RUNNER)
-    androidTestImplementation(Libs.EXT_JUNIT)
-    androidTestImplementation(Libs.ASSERT_J)
-    androidTestImplementation(Libs.TURBINE)
-    androidTestImplementation(Libs.ROOM_TESTING)
-    androidTestImplementation(Libs.COROUTINES_TEST)
-    androidTestImplementation(Libs.FAKER)
-
-    // unit tests livedata
-    testImplementation(Libs.ARCH_TESTING)
+    api(libs.coroutines.core)
+//    testImplementation(Libs.COROUTINES_TEST)
+//    implementation(Libs.COROUTINES_PLAY_SERVICE)
+//
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+//
+//    // Unit tests
+//    testImplementation(Libs.JUNIT)
+//    testImplementation(Libs.HAMCREST)
+//    testImplementation(Libs.MOCKITO_CORE)
+//    testImplementation(Libs.MOCKITO_KOTLIN)
+//    testImplementation(Libs.FAKER)
+//    testImplementation(Libs.TURBINE)
+//    testImplementation(Libs.EXT_JUNIT)
+//    testImplementation(Libs.ASSERT_J)
+//    testImplementation(Libs.MOCKK)
+//
+//    androidTestImplementation(Libs.ARCH_TESTING)
+//    androidTestImplementation(Libs.RUNNER)
+//    androidTestImplementation(Libs.EXT_JUNIT)
+//    androidTestImplementation(Libs.ASSERT_J)
+//    androidTestImplementation(Libs.TURBINE)
+//    androidTestImplementation(Libs.ROOM_TESTING)
+//    androidTestImplementation(Libs.COROUTINES_TEST)
+//    androidTestImplementation(Libs.FAKER)
+//
+//    // unit tests livedata
+//    testImplementation(Libs.ARCH_TESTING)
     // Data store
-    api(Libs.DATA_STORE)
-
-    implementation(Libs.COMPOSE_PAGING)
-
-    implementation(Libs.PLAY_SERVICE_LOCATION)
+    api(libs.datastore)
+//
+    implementation(libs.compose.paging)
+//
+//    implementation(Libs.PLAY_SERVICE_LOCATION)
 }

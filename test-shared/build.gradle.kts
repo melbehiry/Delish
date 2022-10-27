@@ -20,16 +20,16 @@ plugins {
 }
 
 dependencies {
-    api(platform(project(":depconstraints")))
-    implementation(project(":model"))
-
-    // Kotlin
-    implementation(Libs.KOTLIN_STDLIB)
-
-    // Test
-    implementation(Libs.JUNIT)
-    implementation(Libs.FAKER)
-    api(Libs.COROUTINES_TEST)
+//    api(platform(project(":depconstraints")))
+//    implementation(project(":model"))
+//
+//    // Kotlin
+//    implementation(Libs.KOTLIN_STDLIB)
+//
+//    // Test
+//    implementation(Libs.JUNIT)
+//    implementation(Libs.FAKER)
+//    api(Libs.COROUTINES_TEST)
 }
 
 java {

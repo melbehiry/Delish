@@ -1,6 +1,24 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = ("Delish")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(
     ":mobile",
-    ":depconstraints",
     ":shared",
     ":test-shared",
     ":model"
