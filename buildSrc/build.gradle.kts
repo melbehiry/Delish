@@ -5,12 +5,13 @@ plugins {
 repositories {
     google()
     mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
-    implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.android.gradle.plugin)
-    implementation(libs.hilt.gradle.plugin)
+//    implementation(libs.kotlin.gradle.plugin)
+//    implementation(libs.android.gradle.plugin)
+//    implementation(libs.hilt.gradle.plugin)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
