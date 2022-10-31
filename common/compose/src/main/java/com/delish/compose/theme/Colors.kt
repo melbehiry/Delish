@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.theme
+package com.delish.compose.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable

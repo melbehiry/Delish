@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.theme
+package com.delish.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -35,40 +35,11 @@ private val DarkColorPalette = darkColors(
     onSurface = Color.White
 )
 
-private val LightColorPalette = lightColors(
-    background = Color.White,
-    onBackground = Color.White,
-    surface = Color.White,
-    primary = purple200,
-    primaryVariant = purple500,
-    secondary = purple500,
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    error = orangeError
-)
-
 @Composable
 fun DelishComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    /**
-     * support just dark color for this release.
-     */
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
-
-    /**
-     * support just dark color for this release.
-     */
-    val typography = if (darkTheme) {
-        DarkTypography
-    } else {
-        LightTypography
-    }
 
     MaterialTheme(
         colors = DarkColorPalette,
