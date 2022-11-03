@@ -2,20 +2,19 @@ package com.delish.base.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.delish.base.vm.MviViewModel.MviEvent
+import com.delish.base.vm.MviViewModel.MviViewResult
+import com.delish.base.vm.MviViewModel.MviViewState
+import com.delish.base.vm.MviViewModel.MviSideEffect
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.scan
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
-import com.delish.base.vm.MviViewModel.MviViewState
-import com.delish.base.vm.MviViewModel.MviEvent
-import com.delish.base.vm.MviViewModel.MviSideEffect
-import com.delish.base.vm.MviViewModel.MviViewResult
 
 abstract class MviViewModel<Event : MviEvent, Result : MviViewResult, State : MviViewState, Effect : MviSideEffect>(
     initialState: State
@@ -26,10 +25,6 @@ abstract class MviViewModel<Event : MviEvent, Result : MviViewResult, State : Mv
 
     init {
         events
-            .onSubscription {
-                check(events.subscriptionCount.value == 1)
-                onStart()
-            }
             .share()
             .toResults()
             .share()
@@ -50,7 +45,6 @@ abstract class MviViewModel<Event : MviEvent, Result : MviViewResult, State : Mv
         }
     }
 
-    protected open fun onStart() = Unit
     protected abstract fun Flow<Event>.toResults(): Flow<Result>
     protected abstract fun Result.reduce(state: State): State
     protected open fun Flow<Result>.toEffects(): Flow<Effect> = emptyFlow()
