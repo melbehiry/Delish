@@ -55,4 +55,8 @@
     <string name="map_variant_after_dark">Night</string>
     <string name="map_variant_daytime">Silver</string>
     <string name="map_variant_standard">Standard</string>
+    <string name="discover_title">Discover</string>
+    <string name="search_title">Search</string>
+    <string name="bookmark_title">BookMarl</string>
+    <string name="settings_title">Settings</string>
 </resources>
