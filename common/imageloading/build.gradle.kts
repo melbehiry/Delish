@@ -16,5 +16,5 @@ dependencies {
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)
 
-    api(libs.accompanist.coil)
+    api(libs.coil.coil)
 }

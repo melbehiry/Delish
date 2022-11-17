@@ -32,5 +32,8 @@ dependencies {
     implementation(libs.compose.material.material)
     implementation(libs.compose.material.iconsext)
     implementation(libs.compose.animation.animation)
+    implementation(libs.compose.constraint.layout)
     implementation(libs.compose.ui.tooling)
+
+    implementation(libs.coil.compose)
 }
