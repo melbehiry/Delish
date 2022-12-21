@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.onboarding
+package com.delish.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elbehiry.delish.ui.util.OnBoardingProvider
-import com.elbehiry.shared.domain.pref.OnBoardingCompleteActionSuspendUseCase
+import com.delish.domain.usecases.InitHomeUseCase
+import com.delish.domain.usecases.OnBoardingCompleteActionSuspendUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,12 +28,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    val onBoardingCompleteActionUseCase: OnBoardingCompleteActionSuspendUseCase
+    val onBoardingCompleteActionUseCase: OnBoardingCompleteActionSuspendUseCase,
+    val initHomeUseCase: InitHomeUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(false)
     val viewState: StateFlow<Boolean>
         get() = _state
+
+    init {
+        viewModelScope.launch {
+            initHomeUseCase(Unit)
+        }
+    }
 
     fun getStartedClick() {
         viewModelScope.launch {
@@ -42,5 +49,5 @@ class OnBoardingViewModel @Inject constructor(
         }
     }
 
-    fun getOnBoardingItemsList() = OnBoardingProvider.onBoardingDataList
+    fun getOnBoardingItemsList() = OnBoardingProvider.onBoardingItems
 }
