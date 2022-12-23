@@ -48,8 +48,9 @@ mockito = "4.8.1"
 mockito_kotlin = "4.0.0"
 turbine = "1.0.2"
 faker = "1.0.2"
-paging = "1.0.0-alpha17"
+paging = "3.1.1"
 lottie = "5.2.0"
+splash = "1.0.0"
 
 [libraries]
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -67,6 +68,7 @@ androidx_test_ext_junit_ktx = { module = "androidx.test.ext:junit-ktx", version.
 androidx-navigation-compose = "androidx.navigation:navigation-compose:2.5.3"
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
 
 junit_ext = { module = "androidx.test.ext:junit", version.ref = "junit" }
 hamcrest = { module = "org.hamcrest:hamcrest-library", version.ref = "hamcrest" }
@@ -90,7 +92,6 @@ compose-ui-ui = { module = "androidx.compose.ui:ui" }
 compose-ui-uitextfonts = { module = "androidx.compose.ui:ui-text-google-fonts" }
 compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding" }
-compose-paging = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 compose_constraint_layout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "compose_constraintlayout" }
 
 accompanist_insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
@@ -139,10 +140,18 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
 play_services_location = { module = "com.google.android.gms:play-services-location", version.ref = "location_service"}
 maps_utils_ktx = { module = "com.google.maps.android:maps-utils-ktx", version.ref = "maps_ktx"}
 maps_ktx = { module = "com.google.maps.android:maps-ktx", version.ref = "maps_ktx"}
-room_compiler = { module = "androidx.room:room-compiler", version.ref = "room"}
-room_ktx = { module = "androidx.room:room-ktx", version.ref = "room"}
-room_runtime = { module = "androidx.room:room-runtime", version.ref = "room"}
-room_testing = { module = "androidx.room:room-testing", version.ref = "room"}
+
+androidx-room-common = { module = "androidx.room:room-common", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+
+androidx-paging-common = { module = "androidx.paging:paging-common-ktx", version.ref = "paging" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "compose_paging" }
+
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 dokka_gradle_plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka"}
@@ -161,3 +170,4 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = "com.google.devtools.ksp:1.7.21-1.0.8"
