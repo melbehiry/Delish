@@ -14,19 +14,27 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.db
+package com.delish.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.elbehiry.shared.data.db.recipes.entities.RecipeEntity
-import com.elbehiry.shared.data.db.recipes.tables.RecipesTable
+import com.delish.data.db.recipes.dao.CuisineDao
+import com.delish.data.db.recipes.dao.IngredientDao
+import com.delish.data.db.recipes.dao.RecipesDao
+import com.delish.data.db.recipes.entities.CuisineEntity
+import com.delish.data.db.recipes.entities.IngredientEntity
+import com.delish.data.db.recipes.entities.RecipeEntity
 
 @Database(
     entities = [
-        RecipeEntity::class
+        RecipeEntity::class,
+        CuisineEntity::class,
+        IngredientEntity::class,
     ],
     version = Constants.VERSION
 )
 internal abstract class DelishDataBase : RoomDatabase() {
-    abstract val recipesTable: RecipesTable
+    abstract val recipesTable: RecipesDao
+    abstract val cuisineDao : CuisineDao
+    abstract val ingredientDao : IngredientDao
 }

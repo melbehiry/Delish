@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 plugins {
-    `android-library`
-    kotlin("android")
-    kotlin("kapt")
-    hilt
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         minSdk = libs.versions.min.sdk.version.get().toInt()
         targetSdk = libs.versions.target.sdk.version.get().toInt()
-        namespace = "com.ncorti.kotlin.template.library.compose"
+        namespace = "com.delish.shared"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -70,6 +70,7 @@ android {
         val baseUrl = "\"https://api.spoonacular.com/\""
         val keyName = "SPOONACULAR_KEY"
         val keyValue = "\"2d1acf7218d245b9b88d52a1b8362569\""
+//        val keyValue = "\"34410d759eb443e5a0b6fa9f01af0f94\""
         val cuisinesName = "CUISINES_DATA_URL"
         val cuisinesValue =
             "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\""
@@ -113,14 +114,26 @@ android {
     }
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
+}
+
 dependencies {
+    implementation(projects.base)
     implementation(projects.testShared)
     api(projects.model)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.room.ktx)
-    implementation(libs.room.runtime)
-    kapt(libs.room.compiler)
+
+    api(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.paging.runtime)
+
+    api(libs.androidx.room.common)
+    api(libs.androidx.paging.common)
     api(libs.timber)
     implementation(libs.androidx.core.ktx)
 
@@ -147,35 +160,34 @@ dependencies {
 //    testImplementation(Libs.COROUTINES_TEST)
 //    implementation(Libs.COROUTINES_PLAY_SERVICE)
 //
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.hamcrest)
+//    testImplementation(libs.mockito.core)
+//    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.javafaker)
+//    testImplementation(libs.turbine)
+//    testImplementation(libs.junit.ext)
+    testImplementation(libs.assertj.core)
+    testImplementation(libs.mockk)
+
+    androidTestImplementation(libs.androidx.arc.testing)
+    androidTestImplementation(libs.androidx.test.runner)
+//    androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.assertj.core)
+//    androidTestImplementation(libs.turbine)
+//    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(libs.coroutines.test)
+    androidTestImplementation(libs.javafaker)
 //
-//    // Unit tests
-//    testImplementation(Libs.JUNIT)
-//    testImplementation(Libs.HAMCREST)
-//    testImplementation(Libs.MOCKITO_CORE)
-//    testImplementation(Libs.MOCKITO_KOTLIN)
-//    testImplementation(Libs.FAKER)
-//    testImplementation(Libs.TURBINE)
-//    testImplementation(Libs.EXT_JUNIT)
-//    testImplementation(Libs.ASSERT_J)
-//    testImplementation(Libs.MOCKK)
-//
-//    androidTestImplementation(Libs.ARCH_TESTING)
-//    androidTestImplementation(Libs.RUNNER)
-//    androidTestImplementation(Libs.EXT_JUNIT)
-//    androidTestImplementation(Libs.ASSERT_J)
-//    androidTestImplementation(Libs.TURBINE)
-//    androidTestImplementation(Libs.ROOM_TESTING)
-//    androidTestImplementation(Libs.COROUTINES_TEST)
-//    androidTestImplementation(Libs.FAKER)
-//
-//    // unit tests livedata
-//    testImplementation(Libs.ARCH_TESTING)
+    // unit tests livedata
+    testImplementation(libs.androidx.arc.testing)
+
     // Data store
     api(libs.datastore)
-//
-    implementation(libs.compose.paging)
+
 //
 //    implementation(Libs.PLAY_SERVICE_LOCATION)
 }

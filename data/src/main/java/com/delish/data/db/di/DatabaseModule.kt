@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.db.di
+package com.delish.data.db.di
 
 import android.content.Context
 import androidx.room.Room
-import com.elbehiry.shared.data.db.Constants
-import com.elbehiry.shared.data.db.DelishDataBase
-import com.elbehiry.shared.data.db.JsonConverter
-import com.elbehiry.shared.data.db.commons.MIGRATIONS
-import com.elbehiry.shared.data.db.datastore.RecipesLocalDataStore
-import com.elbehiry.shared.data.db.recipes.mapper.RecipeMapper
-import com.elbehiry.shared.data.db.recipes.mapper.RecipeMapperImpl
-import com.elbehiry.shared.data.db.recipes.recipedatastore.RecipesDatabaseDataStore
-import com.elbehiry.shared.data.db.recipes.tables.RecipesTable
+import com.delish.data.db.DelishDataBase
+import com.delish.data.db.JsonConverter
+import com.delish.data.db.MIGRATIONS
+import com.delish.data.db.recipes.dao.CuisineDao
+import com.delish.data.db.recipes.dao.IngredientDao
+import com.delish.data.db.recipes.dao.RecipesDao
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -45,33 +42,30 @@ internal object DatabaseModule {
         return Room.databaseBuilder(
             context,
             DelishDataBase::class.java,
-            Constants.DATABASE_NAME
+            com.delish.data.db.Constants.DATABASE_NAME
         ).addMigrations(*MIGRATIONS)
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideRecipesTable(delishDataBase: DelishDataBase): RecipesTable {
+    fun provideRecipesTable(delishDataBase: DelishDataBase): RecipesDao {
         return delishDataBase.recipesTable
     }
 
     @Provides
     @Singleton
+    fun provideCuisineDao(delishDataBase: DelishDataBase): CuisineDao {
+        return delishDataBase.cuisineDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideIngredientDao(delishDataBase: DelishDataBase): IngredientDao {
+        return delishDataBase.ingredientDao
+    }
+
+    @Provides
+    @Singleton
     fun provideJsonConverter(moshi: Moshi): JsonConverter = JsonConverter(moshi)
-
-    @Provides
-    @Singleton
-    fun provideRecipesMapper(jsonConverter: JsonConverter): RecipeMapper {
-        return RecipeMapperImpl(jsonConverter)
-    }
-
-    @Provides
-    @Singleton
-    fun provideRecipeDataStore(
-        recipesTable: RecipesTable,
-        recipeMapper: RecipeMapper,
-    ): RecipesLocalDataStore {
-        return RecipesDatabaseDataStore(recipesTable, recipeMapper)
-    }
 }

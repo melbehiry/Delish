@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.db
+package com.delish.data.db
 
-internal object Constants {
+import androidx.room.migration.Migration
 
-    const val DATABASE_NAME = "delish.db"
-    const val VERSION = 1
-}
+internal val MIGRATIONS = arrayOf<Migration>()

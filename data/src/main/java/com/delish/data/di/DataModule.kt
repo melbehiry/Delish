@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.di
+package com.delish.data.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.createDataStore
-import com.elbehiry.shared.BuildConfig
-import com.elbehiry.shared.data.network.CommonHeaderInterceptor
-import com.elbehiry.shared.data.pref.repository.DataStoreOperations
-import com.elbehiry.shared.data.pref.repository.DataStoreRepository
-import com.elbehiry.shared.data.remote.DelishApi
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.preferencesDataStoreFile
+import com.delish.shared.BuildConfig
+import com.delish.data.network.CommonHeaderInterceptor
+import com.delish.data.pref.repository.DataStoreOperations
+import com.delish.data.pref.repository.DataStoreRepository
+import com.delish.data.remote.DelishApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -32,6 +35,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,6 +46,7 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
+import com.delish.inject.IoDispatcher
 
 const val dataStoreName = "DelishDataStore"
 
@@ -51,8 +57,17 @@ class SharedModule {
     @Singleton
     @Provides
     fun provideDataStore(
-        @ApplicationContext context: Context
-    ) = context.createDataStore(dataStoreName)
+        @ApplicationContext context: Context,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            corruptionHandler = ReplaceFileCorruptionHandler(
+                produceNewData = { emptyPreferences() }
+            ),
+            scope = CoroutineScope(ioDispatcher),
+            produceFile = { context.preferencesDataStoreFile(dataStoreName) }
+        )
+    }
 
     @Singleton
     @Provides
@@ -89,7 +104,7 @@ class SharedModule {
 
     @Provides
     @Singleton
-    fun provideMoshi() = Moshi.Builder()
+    fun provideMoshi(): Moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
 
