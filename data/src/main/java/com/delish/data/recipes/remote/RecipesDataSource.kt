@@ -14,15 +14,25 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data.recipes.search.repository
+package com.delish.data.recipes.remote
 
-import androidx.paging.PagingData
-import com.elbehiry.model.RecipesItem
-import kotlinx.coroutines.flow.Flow
+import com.elbehiry.model.Recipe
+import com.elbehiry.model.Recipes
+import com.elbehiry.model.SearchItem
 
-interface SearchRepository {
-    fun searchRecipes(
+interface RecipesDataSource {
+    suspend fun searchRecipes(
         query: String?,
-        cuisine: String?
-    ): Flow<PagingData<RecipesItem>>
+        cuisine: String?,
+        offset: Int
+    ): SearchItem
+
+    suspend fun getRecipeInformation(
+        id: Int?
+    ): Recipe
+
+    suspend fun getRandomRecipes(
+        tags: String?,
+        number: Int?
+    ): Recipes
 }
