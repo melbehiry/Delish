@@ -145,7 +145,7 @@ fun List<StepsItem>.toStepsUiModel(): List<String> {
 }
 
 fun List<ExtendedIngredientsItem>.toIngredientUiModel(): List<String> {
-    return this.map {
+    return this.filter { !it.originalString.isNullOrEmpty() }.map {
         it.originalString ?: ""
     }
 }
