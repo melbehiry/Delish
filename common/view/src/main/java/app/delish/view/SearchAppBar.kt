@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.widget
+package app.delish.view
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -57,8 +56,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 
-@ExperimentalAnimationApi
 @Composable
+@Suppress("LongParameterList")
 fun SearchAppBar(
     title: String,
     onTextChanged: (TextFieldValue) -> Unit,

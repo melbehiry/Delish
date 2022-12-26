@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.delish.compose.ui
+package app.delish.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
@@ -26,10 +26,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -43,16 +39,13 @@ fun BookMarkButton(
     selected: Boolean = false,
     onBookMark: () -> Unit
 ) {
-    var select by remember { mutableStateOf(selected) }
-
-    val icon = if (select) Icons.Outlined.Bookmark else Icons.Filled.BookmarkBorder
+    val icon = if (selected) Icons.Outlined.Bookmark else Icons.Filled.BookmarkBorder
     Surface(
         color = backgroundColor,
         shape = CircleShape,
         modifier = modifier
             .requiredSize(36.dp, 36.dp)
             .clickable {
-                select = !select
                 onBookMark()
             }
     ) {

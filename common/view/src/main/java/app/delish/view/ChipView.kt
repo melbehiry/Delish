@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.widget
+package app.delish.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

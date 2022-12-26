@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.delish.compose.ui
+package app.delish.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize

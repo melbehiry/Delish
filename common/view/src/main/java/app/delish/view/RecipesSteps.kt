@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.widget
+package app.delish.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,6 +54,7 @@ fun RecipesStepsSelection(
                 modifier = Modifier
                     .wrapContentWidth(align = Alignment.CenterHorizontally)
                     .padding(1.dp)
+                    .clip(getCurrentShape(item, steps))
                     .clickable {
                         selectedIndex(item - 1)
                         currentIndex.value = item
