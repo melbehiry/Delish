@@ -18,7 +18,6 @@ android {
 
 
 dependencies {
-    implementation(projects.shared)
     api(projects.common.view)
 
     api(projects.common.imageloading)
@@ -34,6 +33,10 @@ dependencies {
     implementation(libs.compose.animation.animation)
     implementation(libs.compose.constraint.layout)
     implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.util)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.insets)
 
     implementation(libs.coil.compose)
 }

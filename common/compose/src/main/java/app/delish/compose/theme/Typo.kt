@@ -1,4 +1,4 @@
-package com.delish.compose.theme
+package app.delish.compose.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.ExperimentalTextApi

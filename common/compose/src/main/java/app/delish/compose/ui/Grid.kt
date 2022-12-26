@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.delish.compose.ui
+package app.delish.compose.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

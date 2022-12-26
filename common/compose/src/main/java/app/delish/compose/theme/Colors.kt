@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.delish.compose.theme
+package app.delish.compose.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable
@@ -34,6 +34,7 @@ val blue200 = Color(0xff91a4fc)
 val Green500 = Color(0xFF1EB980)
 val DarkBlue900 = Color(0xFF26282F)
 val orangeError = Color(0xFFF94701)
+val BlackTransparent90 = Color(0x90000000)
 
 @Composable
 fun Colors.compositedOnSurface(alpha: Float): Color {

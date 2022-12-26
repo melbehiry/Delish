@@ -1,4 +1,4 @@
-package com.delish.compose.theme
+package app.delish.compose.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.widget
+package app.delish.compose.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

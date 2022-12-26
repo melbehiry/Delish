@@ -1,4 +1,4 @@
-package com.delish.compose.ui
+package app.delish.compose.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImagePainter
 import coil.request.ImageRequest
 
+@Suppress("LongParameterList")
 @Composable
 fun AsyncImage(
     model: Any?,
