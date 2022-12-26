@@ -16,10 +16,10 @@
 
 package com.elbehiry.delish.di
 
-import com.elbehiry.shared.di.DefaultDispatcher
-import com.elbehiry.shared.di.IoDispatcher
-import com.elbehiry.shared.di.MainDispatcher
-import com.elbehiry.shared.di.MainImmediateDispatcher
+import app.delish.inject.DefaultDispatcher
+import app.delish.inject.IoDispatcher
+import app.delish.inject.MainDispatcher
+import app.delish.inject.MainImmediateDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

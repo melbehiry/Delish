@@ -5,14 +5,15 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".MainApplication"
+        android:name="com.elbehiry.delish.presentation.MainApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Delish">
-        <activity android:name=".home.MainActivity"
+        android:theme="@style/Theme.App.Starting">
+        <activity android:name=".presentation.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

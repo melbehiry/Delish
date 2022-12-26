@@ -15,13 +15,13 @@
  */
 
 plugins {
-    `android-application`
-    kotlin("android")
-    kotlin("kapt")
-    hilt
-//    safeargs
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
+val appVersionCode = propOrDef("Delish_VERSIONCODE", "1").toInt()
 
 android {
     compileSdk = libs.versions.compile.sdk.version.get().toInt()
@@ -30,9 +30,9 @@ android {
         targetSdk = libs.versions.target.sdk.version.get().toInt()
         namespace = "com.elbehiry.delish"
 
-        applicationId = AppCoordinates.APP_ID
-        versionCode = AppCoordinates.APP_VERSION_CODE
-        versionName = AppCoordinates.APP_VERSION_NAME
+        applicationId = "com.elbehiry.delish"
+        versionCode = appVersionCode
+        versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
@@ -43,7 +43,11 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
-        manifestPlaceholders["googleMapsKey"] = "AIzaSyAlPDIoP7vmHfGJwQrTjA8-29OToUIESBA"
+
+        buildConfigField("String", "SPOONACULAR_BASE_URL", "\"https://api.spoonacular.com/\"")
+        buildConfigField("String", "SPOONACULAR_KEY", propOrDef("SPOONACULAR_API_KEY", ""))
+        buildConfigField("String", "CUISINES_DATA_URL", "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\"")
+        buildConfigField("String", "INGREDIENTS_DATA_URL",  "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media&token=9361ddbe-b7e9-4d18-b9a9-530f222e4890\"")
     }
 
     buildTypes {
@@ -85,13 +89,8 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
-        buildConfig = false
-        aidl = false
-        renderScript = false
-        resValues = false
-        shaders = false
-        viewBinding = true
     }
 
     packagingOptions {
@@ -102,19 +101,26 @@ android {
 }
 
 dependencies {
-    implementation(projects.shared)
+    implementation(projects.data)
+    implementation(projects.domain)
     implementation(projects.base)
     implementation(projects.common.view)
     implementation(projects.common.imageloading)
     implementation(projects.common.compose)
     implementation(projects.ui.onboarding)
-    implementation(projects.testShared)
+    implementation(projects.ui.discover)
+    implementation(projects.ui.search)
+    implementation(projects.ui.bookmark)
+    implementation(projects.ui.details)
+    implementation(projects.ui.settings)
     api(projects.model)
 
+    // Hilt
     implementation(libs.hilt.library)
     implementation(libs.hilt.compose)
     kapt(libs.hilt.compiler)
 
+    // Androidx
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.lifecycle.livedata.ktx)
@@ -122,17 +128,15 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.fragment.ktx)
-    implementation(libs.room.ktx)
-    implementation(libs.room.runtime)
-    kapt(libs.room.compiler)
     implementation(libs.lifecycle.extensions)
     implementation(libs.lifecycle.runtime.ktx)
-
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-
+    implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
+
+    // Compose
     implementation(libs.compose.foundation.foundation)
     implementation(libs.compose.foundation.layout)
     implementation(libs.compose.material.material)
@@ -146,58 +150,10 @@ dependencies {
     implementation(libs.accompanist.insets)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.insetsui)
-
-
-//    // COMPOSE
-//    implementation(libs.compose.runtime)
-//    implementation(libs.compose.ui)
-//    implementation(libs.compose.foundation)
-//    implementation(libs.compose.material)
-//    implementation(libs.compose.ui.grapics)
-//    implementation(libs.compose.ui.tooling)
-//    implementation(libs.compose.livedata)
-//    implementation(libs.compose.animation)
-//    implementation(libs.compose.navigation)
-//    implementation(libs.compose.icons.extended)
-//    implementation(libs.compose.activity)
-//    implementation(libs.compose.constraintlayout)
-//    implementation(libs.compose.paging)
-//    implementation(libs.compose.viewmodel)
-//
-//    implementation(libs.accompanist.insets)
-//    implementation(libs.accompanist.coil)
-//    implementation(libs.accompanist.permissions)
-
-//    testImplementation(Libs.ARCH_TESTING)
-//    kaptAndroidTest(Libs.HILT_COMPILER)
-//    kaptAndroidTest(Libs.ANDROIDX_HILT_COMPILER)
-//
-//    // Kotlin
-//    implementation(Libs.KOTLIN_STDLIB)
-//
-//    // Local unit tests
-//    testImplementation(Libs.JUNIT)
-//    testImplementation(Libs.EXT_JUNIT)
-//    testImplementation(Libs.ASSERT_J)
-//    testImplementation(Libs.MOCKK)
-//    testImplementation(Libs.FAKER)
-//
-//    // unit tests livedata
-//    testImplementation(Libs.ARCH_TESTING)
-//
-//    // flow
-//    testImplementation(Libs.TURBINE)
-//
-//
-//    androidTestImplementation(Libs.COMPOSE_TEST)
-//    // play service
-//    implementation(Libs.COROUTINES_PLAY_SERVICE)
-//    implementation(Libs.PLAY_SERVICE_LOCATION)
-//
-//    // Maps
-//    api(Libs.GOOGLE_MAP_UTILS_KTX) {
-//        exclude(group = "com.google.android.gms")
-//    }
-//    api(Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX)
 }
-//apply(plugin = "com.google.gms.google-services")
+
+fun <T : Any> propOrDef(propertyName: String, defaultValue: T): T {
+    @Suppress("UNCHECKED_CAST")
+    val propertyValue = project.properties[propertyName] as T?
+    return propertyValue ?: defaultValue
+}
