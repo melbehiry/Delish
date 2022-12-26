@@ -1,38 +1,22 @@
-/*
- * Copyright 2021 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.elbehiry.delish.ui.search
+package app.delish.search
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,52 +29,79 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
-import com.elbehiry.delish.R
-import com.elbehiry.delish.ui.recipedetails.RecipeGradient
-import com.elbehiry.delish.ui.theme.compositedOnSurface
-import com.elbehiry.delish.ui.widget.SearchAppBar
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.elbehiry.delish.ui.widget.EmptyView
-import com.elbehiry.delish.ui.widget.NetworkImage
+import androidx.compose.ui.layout.ContentScale
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
+import androidx.paging.compose.items
+import app.delish.compose.ui.AsyncImage
+import app.delish.compose.ui.verticalGradient
+import app.delish.search.vm.SearchRecipesViewModel
 import com.elbehiry.model.RecipesItem
+import app.delish.view.EmptyView
+import app.delish.view.SearchAppBar
 
-@ExperimentalAnimationApi
 @Composable
 fun SearchScreen(
     navController: NavController,
-    searchKey: String,
-    type: SearchType = SearchType.QUERY,
+    query: String?,
+    cuisine: String?,
+    onBack: () -> Unit,
     onItemClick: (Int?) -> Unit
 ) {
-    val searchViewModel: SearchRecipesViewModel = viewModel()
-    val recipes = searchViewModel.searchRecipes(searchKey, type).collectAsLazyPagingItems()
-    val isEmpty by remember { mutableStateOf(recipes.itemCount == 0) }
+    SearchScreen(
+        searchViewModel = hiltViewModel(),
+        navController = navController,
+        query = query,
+        cuisine = cuisine,
+        onBack = onBack,
+        onItemClick = onItemClick
+    )
+}
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        SearchHeaderItem(navController, searchKey) {
-            // TODO: Handle query search next release.
-        }
+@Composable
+internal fun SearchScreen(
+    searchViewModel: SearchRecipesViewModel,
+    navController: NavController,
+    query: String?,
+    cuisine: String?,
+    onBack: () -> Unit,
+    onItemClick: (Int?) -> Unit
+) {
+    val viewState = searchViewModel.searchList.collectAsLazyPagingItems()
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .statusBarsPadding()
+    ) {
+        SearchHeaderItem(navController, query ?: cuisine ?: "", onBack) {}
+
         LazyColumn {
-            items(recipes) { recipe ->
+            items(viewState) { recipe ->
                 SearchItem(recipe = recipe, onItemClick = onItemClick)
             }
         }
-        AnimatedVisibility(visible = isEmpty) {
-            EmptyView(
-                descText = stringResource(id = R.string.no_search_result)
-            )
-        }
+
+        Spacer(modifier = Modifier.height(60.dp))
+    }
+
+    AnimatedVisibility(
+        visible = (viewState.loadState.refresh !is LoadState.Loading
+                && viewState.itemCount == 0)
+    ) {
+        EmptyView(
+            titleText = stringResource(id = R.string.ops),
+            descText = stringResource(id = R.string.no_search_result),
+            imageResourceId = R.drawable.recipe_empty
+        )
     }
 }
 
-@ExperimentalAnimationApi
 @Composable
 fun SearchHeaderItem(
     navController: NavController,
     title: String,
+    onBack: () -> Unit,
     onSearch: (String) -> Unit
 ) {
     var textState by remember { mutableStateOf(TextFieldValue()) }
@@ -98,7 +109,10 @@ fun SearchHeaderItem(
         title = title,
         textFieldValue = textState,
         onTextChanged = { textState = it },
-        onBackPressed = { navController.navigateUp() },
+        onBackPressed = {
+            onBack()
+            navController.navigateUp()
+        },
         searchHint = stringResource(id = R.string.search_hint),
         backgroundColor = Color(0x801F1F1F)
     ) {
@@ -112,7 +126,6 @@ fun SearchItem(
     modifier: Modifier = Modifier,
     onItemClick: (Int?) -> Unit
 ) {
-
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -126,18 +139,17 @@ fun SearchItem(
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomStart
         ) {
-            NetworkImage(
-                url = recipe?.image ?: "",
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colors.compositedOnSurface(alpha = 0.2f))
-                )
-            }
+            AsyncImage(
+                model = recipe?.image,
+                requestBuilder = { crossfade(true) },
+                contentDescription = "Cuisine image",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
         }
+
         RecipeGradient(modifier = Modifier.fillMaxSize())
+
         Text(
             text = recipe?.title ?: "",
             style = MaterialTheme.typography.body2,
@@ -150,4 +162,11 @@ fun SearchItem(
                 .padding(top = 4.dp, start = 8.dp)
         )
     }
+}
+
+@Composable
+fun RecipeGradient(modifier: Modifier) {
+    Spacer(
+        modifier = modifier.verticalGradient()
+    )
 }
