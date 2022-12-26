@@ -1,11 +1,11 @@
-package com.delish.base.vm
+package app.delish.base.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.delish.base.vm.MviViewModel.MviEvent
-import com.delish.base.vm.MviViewModel.MviViewResult
-import com.delish.base.vm.MviViewModel.MviViewState
-import com.delish.base.vm.MviViewModel.MviSideEffect
+import app.delish.base.vm.MviViewModel.MviEvent
+import app.delish.base.vm.MviViewModel.MviViewResult
+import app.delish.base.vm.MviViewModel.MviViewState
+import app.delish.base.vm.MviViewModel.MviSideEffect
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
