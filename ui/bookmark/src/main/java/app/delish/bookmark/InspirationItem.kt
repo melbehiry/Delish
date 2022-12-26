@@ -1,3 +1,4 @@
+package app.delish.bookmark
 /*
  * Copyright 2021 The Android Open Source Project
  *
@@ -14,15 +15,12 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipes
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,16 +30,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.elbehiry.delish.ui.theme.DelishComposeTheme
-import com.elbehiry.delish.ui.theme.compositedOnSurface
-import com.elbehiry.delish.ui.widget.BookMarkButton
-import com.elbehiry.delish.ui.widget.NetworkImage
+import app.delish.compose.ui.AsyncImage
+import app.delish.view.BookMarkButton
 import com.elbehiry.model.RecipesItem
 
 @Composable
@@ -49,13 +46,13 @@ fun InspirationItem(
     recipe: RecipesItem,
     modifier: Modifier = Modifier,
     onDetails: (Int) -> Unit,
-    onBookMark: () -> Unit
+    onBookMark: (RecipesItem) -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
             .width(250.dp)
             .padding(8.dp)
-            .clickable { onDetails(recipe.id ?: 0) }
+            .clickable { onDetails(recipe.id) }
     ) {
         val (image, time, title, source) = createRefs()
         Surface(
@@ -77,24 +74,20 @@ fun InspirationItem(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                NetworkImage(
-                    url = recipe.image ?: "",
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colors.compositedOnSurface(alpha = 0.2f))
-                    )
-                }
+                AsyncImage(
+                    model = recipe.image,
+                    requestBuilder = { crossfade(true) },
+                    contentDescription = "Cuisine image",
+                    modifier = Modifier.fillMaxSize() ,
+                    contentScale = ContentScale.Crop
+                )
                 BookMarkButton(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(8.dp),
+                    backgroundColor = colorResource(id = R.color.black_alpha),
                     onBookMark = {
-                        onBookMark()
-                        recipe.saved = !recipe.saved
+                        onBookMark(recipe)
                     },
                     selected = recipe.saved
                 )
@@ -157,13 +150,5 @@ fun InspirationItem(
                     )
                 }
         )
-    }
-}
-
-@Preview
-@Composable
-fun PreviewInspirationItem() {
-    DelishComposeTheme {
-        InspirationItem(RecipesItem(), onDetails = {}) {}
     }
 }
