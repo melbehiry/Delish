@@ -1,4 +1,4 @@
-package com.delish.inject
+package app.delish.inject
 
 import javax.inject.Qualifier
 

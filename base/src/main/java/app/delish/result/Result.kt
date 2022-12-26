@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.result
+package app.delish.result
 
 /**
  * A generic class that holds a value with its loading status.

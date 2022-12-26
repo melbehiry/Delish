@@ -1,4 +1,4 @@
-package com.delish.util
+package app.delish.util
 
 interface Logger {
 
