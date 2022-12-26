@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.delish.onboarding
+package app.delish.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.delish.domain.usecases.InitHomeUseCase
-import com.delish.domain.usecases.OnBoardingCompleteActionSuspendUseCase
+import app.delish.domain.usecases.InitHomeUseCase
+import app.delish.domain.usecases.OnBoardingCompleteActionSuspendUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardingViewModel @Inject constructor(
+internal class OnBoardingViewModel @Inject constructor(
     val onBoardingCompleteActionUseCase: OnBoardingCompleteActionSuspendUseCase,
     val initHomeUseCase: InitHomeUseCase
 ) : ViewModel() {

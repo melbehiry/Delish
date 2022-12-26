@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.delish.onboarding
+package app.delish.onboarding
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -38,7 +38,7 @@ import com.google.accompanist.pager.HorizontalPager
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnBoardingPager(
+internal fun OnBoardingPager(
     onBoardingPages: List<OnboardingPage>,
     pagerState: PagerState,
     modifier: Modifier = Modifier
@@ -53,7 +53,7 @@ fun OnBoardingPager(
 }
 
 @Composable
-fun OnBoardingPage(item: OnboardingPage) {
+internal fun OnBoardingPage(item: OnboardingPage) {
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {

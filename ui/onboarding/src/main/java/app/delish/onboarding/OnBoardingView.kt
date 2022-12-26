@@ -1,4 +1,4 @@
-package com.delish.onboarding
+package app.delish.onboarding
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.AnimatedVisibility
@@ -49,18 +49,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.delish.onboarding.R
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class, ExperimentalLifecycleComposeApi::class)
 @Composable
-fun OnBoardingContent(
+fun OnBoardingScreen(
+    onBoardingFinished: () -> Unit
+) {
+    OnBoardingContent(viewModel = hiltViewModel(), onBoardingFinished = onBoardingFinished)
+}
+
+@Composable
+internal fun OnBoardingContent(
     viewModel: OnBoardingViewModel,
     onBoardingFinished: () -> Unit
 ) {
@@ -127,50 +132,11 @@ fun OnBoardingContent(
                 visible = pagerState.currentPage != pagerState.pageCount - 1,
                 exit = slideOutVertically() + shrinkVertically() + fadeOut()
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
-                        .padding(horizontal = 16.dp)
-                ) {
-                    IconButton(
-                        modifier = Modifier.align(Alignment.CenterVertically),
-                        onClick = {
-                            viewModel.getStartedClick()
-                        }
-                    ) {
-                        Text(
-                            text =  stringResource(id = R.string.label_skip),
-                            color = MaterialTheme.colors.background,
-                            style = MaterialTheme.typography.body2
-                        )
-                    }
-
-                    HorizontalPagerIndicator(pagerState = pagerState, modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .padding(16.dp))
-
-                    TextButton(
-                        onClick = {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                            }
-                        },
-                        modifier = Modifier.align(Alignment.CenterVertically)
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.label_next),
-                            color = MaterialTheme.colors.background,
-                            style = MaterialTheme.typography.body2
-                        )
-                        Image(
-                            imageVector = Icons.Outlined.KeyboardArrowRight,
-                            contentDescription = null
-                        )
-                    }
-                }
+                OnBoardingPager(
+                    viewModel = viewModel,
+                    pagerState = pagerState,
+                    coroutineScope = coroutineScope
+                )
             }
         }
 
@@ -199,6 +165,60 @@ fun OnBoardingContent(
 
                 OnBoardingPager(onBoardingItemsList, pagerState)
             }
+        }
+    }
+}
+
+@Composable
+internal fun OnBoardingPager(
+    viewModel: OnBoardingViewModel,
+    pagerState: PagerState,
+    coroutineScope: CoroutineScope
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
+            .padding(horizontal = 16.dp)
+    ) {
+        IconButton(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            onClick = {
+                viewModel.getStartedClick()
+            }
+        ) {
+            Text(
+                text = stringResource(id = R.string.label_skip),
+                color = MaterialTheme.colors.background,
+                style = MaterialTheme.typography.body2
+            )
+        }
+
+        HorizontalPagerIndicator(
+            pagerState = pagerState, modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(16.dp)
+        )
+
+        TextButton(
+            onClick = {
+                coroutineScope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                }
+            },
+            modifier = Modifier.align(Alignment.CenterVertically)
+        ) {
+            Text(
+                text = stringResource(id = R.string.label_next),
+                color = MaterialTheme.colors.background,
+                style = MaterialTheme.typography.body2
+            )
+            Image(
+                imageVector = Icons.Outlined.KeyboardArrowRight,
+                contentDescription = null
+            )
         }
     }
 }

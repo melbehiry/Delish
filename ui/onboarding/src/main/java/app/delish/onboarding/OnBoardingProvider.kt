@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.delish.onboarding
+package app.delish.onboarding
 
 import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import app.delish.onboarding.R
 
-object OnBoardingProvider {
+internal object OnBoardingProvider {
     val onBoardingItems by lazy {
         listOf(
             OnboardingPage.Page1,
@@ -42,7 +42,24 @@ sealed class OnboardingPage(
     @RawRes val animation: Int,
     val color: Color
 ) {
-    object Page1 : OnboardingPage(R.string.label_title_onboarding1, R.string.label_subtitle_onboarding1, R.raw.onboarding_page_one, PurpleOnBoarding)
-    object Page2 : OnboardingPage(R.string.label_title_onboarding2, R.string.label_subtitle_onboarding2, R.raw.onboarding_page_two, OrangeOnBoarding)
-    object Page3 : OnboardingPage(R.string.label_title_onboarding3, R.string.label_subtitle_onboarding3, R.raw.onboarding_page_three, BlueOnBoardingLight)
+    object Page1 : OnboardingPage(
+        R.string.label_title_onboarding1,
+        R.string.label_subtitle_onboarding1,
+        R.raw.onboarding_page_one,
+        PurpleOnBoarding
+    )
+
+    object Page2 : OnboardingPage(
+        R.string.label_title_onboarding2,
+        R.string.label_subtitle_onboarding2,
+        R.raw.onboarding_page_two,
+        OrangeOnBoarding
+    )
+
+    object Page3 : OnboardingPage(
+        R.string.label_title_onboarding3,
+        R.string.label_subtitle_onboarding3,
+        R.raw.onboarding_page_three,
+        BlueOnBoardingLight
+    )
 }

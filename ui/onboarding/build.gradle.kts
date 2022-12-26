@@ -32,7 +32,7 @@ dependencies {
     implementation(libs.compose.animation.animation)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.constraint.layout)
-    implementation(libs.compose.paging)
+//    implementation(libs.compose.paging)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicator)
     implementation(libs.accompanist.insets)
