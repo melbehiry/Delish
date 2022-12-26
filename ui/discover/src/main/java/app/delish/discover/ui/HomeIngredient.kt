@@ -1,3 +1,4 @@
+package app.delish.discover.ui
 /*
  * Copyright 2021 The Android Open Source Project
  *
@@ -12,9 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
 
-package com.elbehiry.delish.ui.recipes
+ */
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -26,29 +26,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.elbehiry.delish.R
-import com.elbehiry.delish.ui.theme.compositedOnSurface
-import com.elbehiry.delish.ui.widget.NetworkImage
-import com.elbehiry.delish.ui.widget.VerticalGrid
+import app.delish.discover.R
+import app.delish.compose.ui.AsyncImage
+import app.delish.compose.ui.VerticalGrid
 import com.elbehiry.model.IngredientItem
 
-@ExperimentalFoundationApi
 @Composable
 fun HomeIngredient(
     ingredients: List<IngredientItem>,
@@ -62,10 +59,12 @@ fun HomeIngredient(
             text = stringResource(id = R.string.search_ingredient_home),
             style = MaterialTheme.typography.h6,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         )
         VerticalGrid(columns = 4) {
-            ingredients.take(8).forEach { ingredientItem ->
+            ingredients.forEach { ingredientItem ->
                 HomeIngredientItem(ingredientItem, onIngredientSearch)
             }
         }
@@ -106,26 +105,17 @@ fun HomeIngredientItem(
                 .clip(CircleShape)
                 .background(Color(android.graphics.Color.parseColor(ingredientItem.background)))
         ) {
-            NetworkImage(
-                url = ingredientItem.image,
+            AsyncImage(
+                model = ingredientItem.image,
+                requestBuilder = { crossfade(true) },
+                contentDescription = "Cuisine image",
                 modifier = Modifier
                     .height(70.dp)
                     .width(70.dp)
                     .padding(8.dp)
-                    .align(Alignment.Center)
-            ) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                        .background(
-                            MaterialTheme.colors.compositedOnSurface(alpha = 0.2f)
-                        )
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
+                    .align(Alignment.Center),
+                contentScale = ContentScale.Crop
+            )
         }
         Text(
             text = ingredientItem.title,
