@@ -36,7 +36,7 @@
 - Uses[Architecture Components](https://developer.android.com/topic/libraries/architecture/): including: Room, Lifecycle, Navigation, Datastore.
 
 ### Architecture
-- MVI Architecture (Declarative View - ViewModel - Model) clean architecture
+- MVI Architecture clean architecture
 - Repository pattern
   <p align="center">
 <img src="https://user-images.githubusercontent.com/8813304/209532870-b33c3dae-81a6-4cdb-9f3a-98c0c98dc025.png" width="25%"/>
