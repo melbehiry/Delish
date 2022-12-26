@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipedetails
+package app.delish.details
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,7 +33,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.elbehiry.delish.R
+import app.delish.details.R
 import com.elbehiry.model.RecipesItem
 
 @Composable
@@ -99,5 +99,5 @@ fun RecipeSummary(recipe: RecipesItem) {
 @Composable
 @Preview
 fun PreviewRecipeSummary() {
-    RecipeSummary(RecipesItem())
+    RecipeSummary(RecipesItem(id=-1))
 }

@@ -14,37 +14,33 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipedetails
+package app.delish.details
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.IconButton
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Minimize
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
-import com.elbehiry.delish.ui.widget.NetworkImage
-import com.elbehiry.delish.ui.widget.verticalGradient
+import app.delish.compose.ui.AsyncImage
+import app.delish.compose.ui.verticalGradient
 import com.elbehiry.model.RecipesItem
 
 @Composable
@@ -58,8 +54,10 @@ fun RecipesHeader(
             .height(300.dp)
     ) {
         val (image, info, topBar, title) = createRefs()
-        NetworkImage(
-            url = recipe.image ?: "",
+        AsyncImage(
+            model = recipe.image,
+            requestBuilder = { crossfade(true) },
+            contentDescription = "Cuisine image",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(346.dp)
@@ -73,12 +71,9 @@ fun RecipesHeader(
                     )
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
-                }
-        ) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }
-        }
+                },
+            contentScale = ContentScale.Crop
+        )
 
         DetailsAppBar(
             modifier = Modifier
@@ -91,27 +86,6 @@ fun RecipesHeader(
                 }
         ) { navController.navigateUp() }
 
-        Text(
-            text = recipe.title ?: "",
-            style = MaterialTheme.typography.h4,
-            textAlign = TextAlign.Start,
-            color = Color.White,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = 16.dp,
-                    end = 100.dp,
-                    bottom = 8.dp
-                )
-                .constrainAs(title) {
-                    linkTo(
-                        start = parent.start,
-                        end = parent.end
-                    )
-                    bottom.linkTo(info.top)
-                }
-        )
-
         Surface(
             shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
             modifier = Modifier
@@ -122,10 +96,14 @@ fun RecipesHeader(
                     height = Dimension.value(35.dp)
                 }
         ) {
+            Image(
+                imageVector = Icons.Filled.Minimize,
+                contentDescription = "arrow_down",
+                colorFilter = ColorFilter.tint(Color.White)
+            )
             Spacer(
                 modifier = Modifier
                     .height(40.dp)
-                    .background(MaterialTheme.colors.background)
             )
         }
     }

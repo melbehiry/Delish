@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipedetails
+package app.delish.details
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Row
@@ -36,7 +36,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.elbehiry.delish.R
+import app.delish.details.R
 import com.elbehiry.model.RecipesItem
 
 @Composable
@@ -62,7 +62,7 @@ fun RecipeCaloric(recipeItem: RecipesItem) {
                     )
                 }
                 Text(
-                    text = "${recipeItem.percentProtein} %",
+                    text = "${recipeItem.percentProtein ?: 0} %",
                     color = Color.White,
                     style = MaterialTheme.typography.subtitle2,
                     modifier = Modifier.align(Alignment.Center).padding(10.dp)

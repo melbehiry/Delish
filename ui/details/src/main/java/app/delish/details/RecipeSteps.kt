@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipedetails
+package app.delish.details
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -38,10 +38,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.elbehiry.delish.R
-import com.elbehiry.delish.ui.widget.RecipesStepsSelection
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import app.delish.details.R
+import app.delish.view.RecipesStepsSelection
 
 @Composable
 fun RecipeSteps(steps: List<String>?) {
@@ -80,10 +80,10 @@ fun RecipeStepItem(summary: String?) {
         Text(
             text = summary ?: "",
             color = Color.White,
-            style = MaterialTheme.typography.subtitle2,
+            style = MaterialTheme.typography.caption,
             textAlign = TextAlign.Start,
             overflow = TextOverflow.Ellipsis,
-            maxLines = if (extended) 100 else 2,
+            maxLines = 10,
             modifier = Modifier.padding(start = 16.dp, end = 8.dp)
                 .fillMaxWidth()
                 .constrainAs(summery) {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipedetails
+package app.delish.details
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
@@ -23,8 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.elbehiry.delish.R
-import com.elbehiry.delish.ui.widget.ChipView
+import app.delish.details.R
+import app.delish.view.ChipView
 import com.elbehiry.model.RecipesItem
 
 @Composable

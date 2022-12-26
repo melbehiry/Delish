@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recipe_detail_options">details options</string>
+    <string name="go_to_details">details go to</string>
+</resources>

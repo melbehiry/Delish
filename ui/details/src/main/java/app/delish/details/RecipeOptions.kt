@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.delish.ui.recipedetails
+package app.delish.details
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.elbehiry.delish.R
+import app.delish.details.R
 import com.elbehiry.model.RecipesItem
 
 @Composable
@@ -59,7 +59,7 @@ fun RecipeOptions(
                 tint = MaterialTheme.colors.primary
             )
             Text(
-                text = "${recipe.aggregateLikes}",
+                text = "${recipe.aggregateLikes ?: 0}",
                 color = Color.White,
                 style = MaterialTheme.typography.subtitle2,
                 fontSize = 12.sp
@@ -77,7 +77,7 @@ fun RecipeOptions(
                 tint = Color.White
             )
             Text(
-                text = "${recipe.spoonacularScore?.toInt()}",
+                text = "${(recipe.spoonacularScore?:0).toInt()}",
                 color = Color.White,
                 style = MaterialTheme.typography.subtitle2,
                 fontSize = 12.sp
