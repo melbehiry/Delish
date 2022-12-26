@@ -17,7 +17,7 @@
 package com.elbehiry.shared.usecase
 
 //import com.elbehiry.test_shared.MainCoroutineRule
-//import com.delish.domain.usecases.SuspendUseCase
+//import app.delish.domain.usecases.SuspendUseCase
 //import com.elbehiry.shared.result.Result
 //import com.elbehiry.test_shared.runBlockingTest
 //import kotlinx.coroutines.CoroutineDispatcher

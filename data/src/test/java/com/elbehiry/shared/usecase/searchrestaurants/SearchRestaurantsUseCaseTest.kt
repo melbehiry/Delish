@@ -19,7 +19,7 @@ package com.elbehiry.shared.usecase.searchrestaurants
 //import android.accounts.NetworkErrorException
 //import app.cash.turbine.test
 //import com.elbehiry.shared.data.restaurants.repository.ISearchRestaurantsRepository
-//import com.delish.domain.usecases.SearchRestaurantsUseCase
+//import app.delish.domain.usecases.SearchRestaurantsUseCase
 //import com.elbehiry.shared.result.Result
 //import com.elbehiry.shared.result.data
 //import com.elbehiry.test_shared.MainCoroutineRule

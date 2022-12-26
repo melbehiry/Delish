@@ -20,12 +20,14 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+
+
 android {
     compileSdk = libs.versions.compile.sdk.version.get().toInt()
     defaultConfig {
         minSdk = libs.versions.min.sdk.version.get().toInt()
         targetSdk = libs.versions.target.sdk.version.get().toInt()
-        namespace = "com.delish.shared"
+        namespace = "app.delish.data"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -43,16 +45,6 @@ android {
         }
     }
 
-    // debug and release variants share the same source dir
-    sourceSets {
-        getByName("debug") {
-            java.srcDir("src/debugRelease/java")
-        }
-        getByName("release") {
-            java.srcDir("src/debugRelease/java")
-        }
-    }
-
     // Some libs (such as androidx.core:core-ktx 1.2.0 and newer) require Java 8
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -63,44 +55,6 @@ android {
     // into bytecode that is being built with JVM target 1.6"
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
-    buildTypes {
-        val urlName = "SPOONACULAR_BASE_URL"
-        val baseUrl = "\"https://api.spoonacular.com/\""
-        val keyName = "SPOONACULAR_KEY"
-        val keyValue = "\"2d1acf7218d245b9b88d52a1b8362569\""
-//        val keyValue = "\"34410d759eb443e5a0b6fa9f01af0f94\""
-        val cuisinesName = "CUISINES_DATA_URL"
-        val cuisinesValue =
-            "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\""
-        val ingredientsName = "INGREDIENTS_DATA_URL"
-        val fourSquareSearchUrl = "FOURSQUARE_Search_Url"
-        val fourSquareClientKeyName = "FOURSQUARE_CLIENT_ID"
-        val fourSquareSecretKeyName = "FOURSQUARE_SECRET_ID"
-        val ingredientsValue =
-            "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media&token=9361ddbe-b7e9-4d18-b9a9-530f222e4890\""
-        val fourSquareClientKeyValue = "\"TGXNNR0CV15HF05YCZPMYDJWEEQZHRDPGWYYCRJWXF0LJNRB\""
-        val fourSquareSecretKeyValue = "\"MZ5Q1A0HPCBFI3FZLTBCMQIWU3R1GYNPTZNBMI4JTB23ZRKA\""
-        val fourSquareSearchUrlValue = "\"https://api.foursquare.com/v2/venues/search\""
-        getByName("release") {
-            buildConfigField("String", urlName, baseUrl)
-            buildConfigField("String", keyName, keyValue)
-            buildConfigField("String", cuisinesName, cuisinesValue)
-            buildConfigField("String", ingredientsName, ingredientsValue)
-            buildConfigField("String", fourSquareSearchUrl, fourSquareSearchUrlValue)
-            buildConfigField("String", fourSquareClientKeyName, fourSquareClientKeyValue)
-            buildConfigField("String", fourSquareSecretKeyName, fourSquareSecretKeyValue)
-        }
-        getByName("debug") {
-            buildConfigField("String", urlName, baseUrl)
-            buildConfigField("String", keyName, keyValue)
-            buildConfigField("String", cuisinesName, cuisinesValue)
-            buildConfigField("String", ingredientsName, ingredientsValue)
-            buildConfigField("String", fourSquareSearchUrl, fourSquareSearchUrlValue)
-            buildConfigField("String", fourSquareClientKeyName, fourSquareClientKeyValue)
-            buildConfigField("String", fourSquareSecretKeyName, fourSquareSecretKeyValue)
-        }
     }
 
     sourceSets {
@@ -121,7 +75,6 @@ ksp {
 
 dependencies {
     implementation(projects.base)
-    implementation(projects.testShared)
     api(projects.model)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)

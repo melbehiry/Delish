@@ -16,7 +16,7 @@
 
 package com.elbehiry.shared.usecase.searchrestaurants
 
-import com.delish.domain.usecases.restaurants.CreateFoursquareVersionUseCase
+import app.delish.domain.usecases.restaurants.CreateFoursquareVersionUseCase
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -24,11 +24,11 @@ import java.util.Calendar
 
 class CreateFoursquareVersionUseCaseTest {
 
-    lateinit var usecase: com.delish.domain.usecases.restaurants.CreateFoursquareVersionUseCase
+    lateinit var usecase: app.delish.domain.usecases.restaurants.CreateFoursquareVersionUseCase
 
     @Before
     fun setup() {
-        usecase = com.delish.domain.usecases.restaurants.CreateFoursquareVersionUseCase()
+        usecase = app.delish.domain.usecases.restaurants.CreateFoursquareVersionUseCase()
     }
 
     @Test
