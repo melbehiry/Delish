@@ -57,6 +57,11 @@
     <string name="map_variant_standard">Standard</string>
     <string name="discover_title">Discover</string>
     <string name="search_title">Search</string>
-    <string name="bookmark_title">BookMarl</string>
+    <string name="bookmark_title">BookMark</string>
     <string name="settings_title">Settings</string>
+    <string name="settings_item_notifications">Notifications</string>
+    <string name="settings_item_location">Location</string>
+    <string name="settings_item_language">Language</string>
+    <string name="settings_item_share_app">Share App</string>
+    <string name="settings_item_ask_question">Ask a question</string>
 </resources>
