@@ -3,7 +3,7 @@ package app.delish.common.imageloading
 import android.app.Application
 import coil.Coil
 import coil.ImageLoader
-import com.delish.appinitializers.AppInitializer
+import app.delish.appinitializers.AppInitializer
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 

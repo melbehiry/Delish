@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.delish.common.imageloading"
+    namespace = "app.delish.common.imageloading"
 }
 dependencies {
     implementation(projects.base)

@@ -1,6 +1,6 @@
 package app.delish.common.imageloading
 
-import com.delish.appinitializers.AppInitializer
+import app.delish.appinitializers.AppInitializer
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
