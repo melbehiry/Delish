@@ -21,7 +21,7 @@ data class Recipes(
 )
 
 data class RecipesItem(
-    val id: Int? = 1,
+    val id: Int,
     val sustainable: Boolean? = null,
     val glutenFree: Boolean? = null,
     val veryPopular: Boolean? = null,
@@ -60,7 +60,7 @@ data class Recipe(
     val readyInMinutes: Int? = null,
     val dairyFree: Boolean? = null,
     val vegetarian: Boolean? = null,
-    val id: Int? = 1,
+    val id: Int,
     val image: String? = null,
     val veryHealthy: Boolean? = null,
     val vegan: Boolean? = null,
@@ -145,7 +145,7 @@ fun List<StepsItem>.toStepsUiModel(): List<String> {
 }
 
 fun List<ExtendedIngredientsItem>.toIngredientUiModel(): List<String> {
-    return this.map {
+    return this.filter { !it.originalString.isNullOrEmpty() }.map {
         it.originalString ?: ""
     }
 }

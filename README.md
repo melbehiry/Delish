@@ -1,55 +1,54 @@
 ![GitHub Cards Preview](https://user-images.githubusercontent.com/8813304/111876563-f3566000-89a7-11eb-9f6f-27bc9c75d524.jpg)
 
 <h1 align="center">Delish</h1>
+<h1 align="center">work-in-progress</h1>
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
 </p>
 
-### Screens 
+### Screens
 <p align="center">
-<img src="https://user-images.githubusercontent.com/8813304/111877013-f3575f80-89a9-11eb-8ce2-4c020f849b05.png" width="17%"/>
-<img src="https://user-images.githubusercontent.com/8813304/111877016-f7837d00-89a9-11eb-9c9d-ca6296b054d3.png" width="17%"/>
-<img src="https://user-images.githubusercontent.com/8813304/111877066-2b5ea280-89aa-11eb-96b5-753c22771ec4.png" width="17%"/>
-<img src="https://user-images.githubusercontent.com/8813304/111885866-ffa3e280-89d2-11eb-91da-2828f6cfbc21.png" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209520971-4a896a72-4963-4d21-b94e-775d79ab5a7b.jpg" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209520972-4d44094f-11f8-4fa5-ab95-232beaa18fec.jpg" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209520974-f29e59cd-31da-420e-b6a8-a8ba4aa46de6.jpg" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209520977-2b7fa2be-5949-4f5e-a1cc-8256d6840ab8.jpg" width="17%"/>
 </p>
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/8813304/113940259-7592b100-97fd-11eb-9d33-7e82991b8183.png" width="17%"/>
 <img src="https://user-images.githubusercontent.com/8813304/111885886-15190c80-89d3-11eb-9334-96db534f50c3.png" width="17%"/>
-<img src="https://user-images.githubusercontent.com/8813304/111886023-ef403780-89d3-11eb-8bd5-f04e829e63e9.png" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209531543-5965f9d5-2ad0-4ade-bde7-4ed91640f4ad.png" width="17%"/>
 <img src="https://user-images.githubusercontent.com/8813304/111885918-3da10680-89d3-11eb-821d-33319587db0c.png" width="17%"/>
 </p>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/8813304/111886718-8d360100-89d8-11eb-8ec1-ea8b08ec623a.gif" width="15%"/>
-<img src="https://github.com/Elbehiry/Delish/blob/master/images/vid1.gif" width="15%"/>
-<img src="https://github.com/Elbehiry/Delish/blob/master/images/vid2.gif" width="15%"/>
-<img src="https://github.com/Elbehiry/Delish/blob/master/images/vid3.gif" width="15%"/>
-<img src="https://user-images.githubusercontent.com/8813304/127920672-a1c03b1d-321d-4ad5-aba9-897e7ea88354.gif" width="15%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209529453-a595b5ba-69d6-465c-b78d-c640aa6fcf6f.gif" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209529492-ffb29501-4ac7-4194-ba14-4d7f0b9ed748.gif" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209529459-0a6a2407-b0a0-45de-9ccb-3c8df7da802b.gif" width="17%"/>
+<img src="https://user-images.githubusercontent.com/8813304/209530772-6f0c46ad-4838-4b2f-9dbd-d58cca9044b5.gif" width="17%"/>
 </p>
 
-## Tech stack & Open-source libraries
-- 100% [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) for asynchronous.
-- [Dagger Hilt](https://dagger.dev/hilt) 2.37
-- [Accompanist](https://github.com/google/accompanist)
+### Tech stack & Open-source libraries
+- 100% [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)
+- [Dagger Hilt](https://dagger.dev/hilt)
+- UI completely written in [Jetpack Compose](https://developer.android.com/jetpack/compose)
+- Uses[Architecture Components](https://developer.android.com/topic/libraries/architecture/): including: Room, Lifecycle, Navigation, Datastore.
 
-- JetPack
-  - [Jetpack Compose](https://developer.android.com/jetpack/compose) 1.0.0
-  - [Compose Paging](https://developer.android.com/reference/kotlin/androidx/paging/compose/package-summary) 1.0.0-alpha11
-  - [Navigation](https://developer.android.com/guide/navigation)
-  - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
-  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
-  - [Room](https://developer.android.com/training/data-storage/room)
-  - [Datastore](https://developer.android.com/topic/libraries/architecture/datastore)
+### Architecture
+- MVI Architecture (Declarative View - ViewModel - Model) clean architecture
+- Repository pattern
+  <p align="center">
+<img src="https://user-images.githubusercontent.com/8813304/209532870-b33c3dae-81a6-4cdb-9f3a-98c0c98dc025.png" width="25%"/>
+</p>
 
-- Architecture
-  - MVVM Architecture (Declarative View - ViewModel - Model) clean architecture
-  - Repository pattern
-  
-  ## Contributing
-Delish is under development a lot of stuff to be done, feel free to contribute 🤩
-just create your own Api Key [here](https://spoonacular.com/food-api/) and add it into [build.gradle.kts](https://github.com/Elbehiry/Delish/blob/97b3f13e37113f78ad26252d39a2bd9b2ab99d6a/shared/build.gradle.kts#L77) file. 😉
+### Development setup
+
+The project require the latest [Android Studio Dolphin](https://developer.android.com/studio) (or newer).
+
+### API keys
+
+Delish uses [Spoonacular](https://spoonacular.com/food-api) after creating your own application add the Api Key to you gradle with ```SPOONACULAR_API_KEY```
 
 ## Find this repository useful? :heart:
 <a href="https://www.buymeacoffee.com/elbehiry" target="_blank">
@@ -58,10 +57,6 @@ just create your own Api Key [here](https://spoonacular.com/food-api/) and add i
 
 Support it by joining __[stargazers](https://github.com/elbehiry/delish/stargazers)__ for this repository. :star: <br>
 And __[follow](https://github.com/elbehiry)__ me for my next creations! 🤩
-
-## Download
-
-Go to the [Releases](https://github.com/elbehiry/delish/releases) to download the latest APK.
 
 ## Contribution
 

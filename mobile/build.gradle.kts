@@ -15,22 +15,24 @@
  */
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
-    id("kotlin-android")
-    id("androidx.navigation.safeargs")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
+val appVersionCode = propOrDef("Delish_VERSIONCODE", "1").toInt()
+
 android {
-    compileSdk = Versions.COMPILE_SDK
+    compileSdk = libs.versions.compile.sdk.version.get().toInt()
     defaultConfig {
+        minSdk = libs.versions.min.sdk.version.get().toInt()
+        targetSdk = libs.versions.target.sdk.version.get().toInt()
+        namespace = "com.elbehiry.delish"
+
         applicationId = "com.elbehiry.delish"
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
-        versionCode = Versions.versionCodeMobile
-        versionName = Versions.versionName
+        versionCode = appVersionCode
+        versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
@@ -41,8 +43,13 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
-        manifestPlaceholders["googleMapsKey"] = "AIzaSyAlPDIoP7vmHfGJwQrTjA8-29OToUIESBA"
+
+        buildConfigField("String", "SPOONACULAR_BASE_URL", "\"https://api.spoonacular.com/\"")
+        buildConfigField("String", "SPOONACULAR_KEY", propOrDef("SPOONACULAR_API_KEY", ""))
+        buildConfigField("String", "CUISINES_DATA_URL", "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\"")
+        buildConfigField("String", "INGREDIENTS_DATA_URL",  "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media&token=9361ddbe-b7e9-4d18-b9a9-530f222e4890\"")
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -66,15 +73,6 @@ android {
         }
     }
 
-    lint {
-        // Eliminates UnusedResources false positives for resources used in DataBinding layouts
-        isCheckGeneratedSources = true
-        // Running lint over the debug variant is enough
-        isCheckReleaseBuilds = false
-        // See lint.xml for rules configuration
-        isAbortOnError = false
-    }
-
     // Required for AR because it includes a library built with Java 8
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -83,22 +81,16 @@ android {
     // To avoid the compile error: "Cannot inline bytecode built with JVM target 1.8
     // into bytecode that is being built with JVM target 1.6"
     kotlinOptions {
-        val options = this
-        options.jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE
+        kotlinCompilerExtensionVersion = libs.versions.compose.compilerextension.get()
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
-        buildConfig = false
-        aidl = false
-        renderScript = false
-        resValues = false
-        shaders = false
-        viewBinding = true
     }
 
     packagingOptions {
@@ -109,83 +101,59 @@ android {
 }
 
 dependencies {
-    api(platform(project(":depconstraints")))
-    kapt(platform(project(":depconstraints")))
-    implementation(project(":shared"))
-    testImplementation(project(":test-shared"))
-    api(project(":model"))
+    implementation(projects.data)
+    implementation(projects.domain)
+    implementation(projects.base)
+    implementation(projects.common.view)
+    implementation(projects.common.imageloading)
+    implementation(projects.common.compose)
+    implementation(projects.ui.onboarding)
+    implementation(projects.ui.discover)
+    implementation(projects.ui.search)
+    implementation(projects.ui.bookmark)
+    implementation(projects.ui.details)
+    implementation(projects.ui.settings)
+    api(projects.model)
 
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    // Hilt
+    implementation(libs.hilt.library)
+    implementation(libs.hilt.compose)
+    kapt(libs.hilt.compiler)
 
-    implementation(Libs.APP_COMPAT)
-    implementation(Libs.CORE_KTX)
+    // Androidx
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    kapt(libs.lifecycle.compiler)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.lifecycle.extensions)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
 
-    // Architecture Components
-    implementation(Libs.LIFECYCLE_LIVE_DATA_KTX)
-    kapt(Libs.LIFECYCLE_COMPILER)
-    testImplementation(Libs.ARCH_TESTING)
-    implementation(Libs.NAVIGATION_FRAGMENT_KTX)
-    implementation(Libs.NAVIGATION_UI_KTX)
-    implementation(Libs.FRAGMENT_KTX)
-    implementation(Libs.ROOM_KTX)
-    implementation(Libs.ROOM_RUNTIME)
-    kapt(Libs.ROOM_COMPILER)
-    implementation(Libs.LIFECYCLE_EXTENSION)
-    implementation(Libs.LIFECYCLE_RUN_TIME)
-
-    // Dagger Hilt
-    implementation(Libs.HILT_ANDROID)
-    implementation(Libs.HILT_VIEWMODEL)
-    kapt(Libs.HILT_COMPILER)
-    kapt(Libs.ANDROIDX_HILT_COMPILER)
-    kaptAndroidTest(Libs.HILT_COMPILER)
-    kaptAndroidTest(Libs.ANDROIDX_HILT_COMPILER)
-
-    // Kotlin
-    implementation(Libs.KOTLIN_STDLIB)
-
-    // Local unit tests
-    testImplementation(Libs.JUNIT)
-    testImplementation(Libs.EXT_JUNIT)
-    testImplementation(Libs.ASSERT_J)
-    testImplementation(Libs.MOCKK)
-    testImplementation(Libs.FAKER)
-
-    // unit tests livedata
-    testImplementation(Libs.ARCH_TESTING)
-
-    // flow
-    testImplementation(Libs.TURBINE)
-
-    // COMPOSE
-    implementation(Libs.COMPOSE_RUNTIME)
-    implementation(Libs.COMPOSE_UI)
-    implementation(Libs.COMPOSE_FOUNDATION_LAYOUT)
-    implementation(Libs.COMPOSE_MATERIAL)
-    implementation(Libs.COMPOSE_UI_GRAPHICS)
-    implementation(Libs.COMPOSE_UI_TOOLING)
-    implementation(Libs.COMPOSE_RUNTIME_LIVEDATA)
-    implementation(Libs.COMPOSE_ANIMATION)
-    implementation(Libs.COMPOSE_NAVIGATION)
-    implementation(Libs.COMPOSE_ICON)
-    implementation(Libs.COMPOSE_ACTIVITY)
-    implementation(Libs.COMPOSE_CONSTRAINT)
-    implementation(Libs.COMPOSE_PAGING)
-    implementation(Libs.COMPOSE_VIEW_MODEL)
-
-    implementation(Libs.INSETS)
-    implementation(Libs.COIL)
-    implementation(Libs.ACCOMPANIST_PERMISSION)
-
-    androidTestImplementation(Libs.COMPOSE_TEST)
-    // play service
-    implementation(Libs.COROUTINES_PLAY_SERVICE)
-    implementation(Libs.PLAY_SERVICE_LOCATION)
-
-    // Maps
-    api(Libs.GOOGLE_MAP_UTILS_KTX) {
-        exclude(group = "com.google.android.gms")
-    }
-    api(Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX)
+    // Compose
+    implementation(libs.compose.foundation.foundation)
+    implementation(libs.compose.foundation.layout)
+    implementation(libs.compose.material.material)
+    implementation(libs.compose.material.iconsext)
+    implementation(libs.compose.animation.animation)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.constraint.layout)
+    implementation(libs.accompanist.navigation.animation)
+    implementation(libs.accompanist.navigation.material)
+    implementation(libs.accompanist.navigation.material)
+    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.insetsui)
 }
-apply(plugin = "com.google.gms.google-services")
+
+fun <T : Any> propOrDef(propertyName: String, defaultValue: T): T {
+    @Suppress("UNCHECKED_CAST")
+    val propertyValue = project.properties[propertyName] as T?
+    return propertyValue ?: defaultValue
+}
