@@ -48,7 +48,7 @@ The project require the latest [Android Studio Dolphin](https://developer.androi
 
 ### API keys
 
-Delish uses [Spoonacular](https://spoonacular.com/food-api) after creating your own application add the Api Key to you gradle with ```SPOONACULAR_API_KEY```
+Delish uses [Spoonacular](https://spoonacular.com/food-api) after creating your own application add the Api Key to you gradle with ```SPOONACULAR_API_KEY``` [Check](https://github.com/Elbehiry/Delish/blob/531ebd3d64e5db342a114617dfc05baaa60f5916/mobile/build.gradle.kts#L48)
 
 ## Find this repository useful? :heart:
 <a href="https://www.buymeacoffee.com/elbehiry" target="_blank">
