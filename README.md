@@ -33,7 +33,7 @@
 - 100% [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)
 - [Dagger Hilt](https://dagger.dev/hilt)
 - UI completely written in [Jetpack Compose](https://developer.android.com/jetpack/compose)
-- Uses[Architecture Components](https://developer.android.com/topic/libraries/architecture/): including: Room, Lifecycle, Navigation, Datastore.
+- Uses [Architecture Components](https://developer.android.com/topic/libraries/architecture/): including: Room, Lifecycle, Navigation, Datastore.
 
 ### Architecture
 - MVI clean architecture
@@ -48,7 +48,7 @@ The project require the latest [Android Studio Dolphin](https://developer.androi
 
 ### API keys
 
-Delish uses [Spoonacular](https://spoonacular.com/food-api) after creating your own application add the Api Key to you gradle with ```SPOONACULAR_API_KEY``` [Check](https://github.com/Elbehiry/Delish/blob/531ebd3d64e5db342a114617dfc05baaa60f5916/mobile/build.gradle.kts#L48)
+Delish uses [Spoonacular](https://spoonacular.com/food-api) after creating your own application add the Api Key to you gradle with ```SPOONACULAR_API_KEY``` [Check](https://github.com/Elbehiry/Delish/blob/91f109e4e03a89099f9009a381b3ec27b1b6cef1/mobile/build.gradle.kts#L48)
 
 ## Find this repository useful? :heart:
 <a href="https://www.buymeacoffee.com/elbehiry" target="_blank">
