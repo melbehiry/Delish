@@ -46,8 +46,8 @@ android {
 
         buildConfigField("String", "SPOONACULAR_BASE_URL", "\"https://api.spoonacular.com/\"")
         buildConfigField("String", "SPOONACULAR_KEY", propOrDef("SPOONACULAR_API_KEY", ""))
-        buildConfigField("String", "CUISINES_DATA_URL", "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media&token=20daa785-e0e4-4ef5-97f8-b8c62f106900\"")
-        buildConfigField("String", "INGREDIENTS_DATA_URL",  "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media&token=9361ddbe-b7e9-4d18-b9a9-530f222e4890\"")
+        buildConfigField("String", "CUISINES_DATA_URL", "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/getCuisines.json?alt=media\"")
+        buildConfigField("String", "INGREDIENTS_DATA_URL",  "\"https://firebasestorage.googleapis.com/v0/b/delish-d4e2b.appspot.com/o/ingredients.json?alt=media\"")
     }
 
     buildTypes {
