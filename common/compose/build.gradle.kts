@@ -18,10 +18,8 @@ android {
 
 
 dependencies {
-    api(projects.common.view)
-
     api(projects.common.imageloading)
-    implementation(libs.androidx.core.ktx)
+    api(projects.common.resources)
 
     api(platform(libs.compose.bom))
     implementation(libs.compose.ui.ui)
@@ -37,6 +35,10 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.insets)
-
     implementation(libs.coil.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.coroutines.core)
+    implementation(libs.androidx.core.ktx)
 }

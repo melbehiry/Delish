@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package app.delish.view
+package app.delish.compose.view
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
@@ -39,7 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.delish.common.ui.R
+import app.delish.common.compose.R
 
 @Composable
 fun ToggleAddButton(

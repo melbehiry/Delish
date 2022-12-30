@@ -16,7 +16,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import app.delish.bookmark.vm.BookMarkViewModel
 import app.delish.bookmark.vm.ViewEvent
-import app.delish.view.EmptyView
+import app.delish.compose.view.EmptyView
 
 @Composable
 fun BookMarkScreen(

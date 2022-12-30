@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package app.delish.view
+package app.delish.compose.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding

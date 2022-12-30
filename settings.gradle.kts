@@ -26,7 +26,6 @@ include(
     ":data",
     ":common:imageloading",
     ":common:compose",
-    ":common:view",
     ":common:resources",
     ":ui:onboarding",
     ":ui:discover",

@@ -41,7 +41,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import app.delish.details.R
-import app.delish.view.RecipesStepsSelection
+import app.delish.compose.view.RecipesStepsSelection
 
 @Composable
 fun RecipeSteps(steps: List<String>?) {

@@ -1,4 +1,4 @@
-package app.delish.view.rowCell
+package app.delish.compose.view.rowCell
 
 sealed class RowCellTextType {
 

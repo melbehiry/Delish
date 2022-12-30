@@ -1,4 +1,4 @@
-package app.delish.view
+package app.delish.compose.view
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box

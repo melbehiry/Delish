@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.delish.details.R
-import app.delish.view.ChipView
+import app.delish.compose.view.ChipView
 import com.elbehiry.model.RecipesItem
 
 @Composable
