@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import app.delish.settings.models.Settings
-import app.delish.view.rowCell.RowCell
-import app.delish.view.rowCell.RowCellStartIconType
-import app.delish.view.rowCell.RowCellTextType
+import app.delish.compose.view.rowCell.RowCell
+import app.delish.compose.view.rowCell.RowCellStartIconType
+import app.delish.compose.view.rowCell.RowCellTextType
 
 @Composable
 fun SettingsScreen(

@@ -20,7 +20,6 @@ android {
 dependencies {
     implementation(projects.base)
     implementation(projects.domain)
-    implementation(projects.common.view)
     implementation(projects.common.compose)
     api(projects.common.imageloading)
 

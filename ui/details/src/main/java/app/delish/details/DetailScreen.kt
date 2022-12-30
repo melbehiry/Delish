@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import app.delish.compose.ui.ScrollableBackground
 import app.delish.details.vm.DetailsViewModel
 import app.delish.details.vm.ViewEvent
-import app.delish.view.CircularLoading
+import app.delish.compose.view.CircularLoading
 
 private const val RECIPE_TITLE_ITEM_KEY = "RecipeTitleCompose"
 

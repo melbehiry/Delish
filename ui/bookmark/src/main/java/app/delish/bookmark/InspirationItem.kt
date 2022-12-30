@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import app.delish.compose.ui.AsyncImage
-import app.delish.view.BookMarkButton
+import app.delish.compose.view.BookMarkButton
 import com.elbehiry.model.RecipesItem
 
 @Composable

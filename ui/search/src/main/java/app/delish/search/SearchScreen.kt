@@ -38,8 +38,8 @@ import app.delish.compose.ui.AsyncImage
 import app.delish.compose.ui.verticalGradient
 import app.delish.search.vm.SearchRecipesViewModel
 import com.elbehiry.model.RecipesItem
-import app.delish.view.EmptyView
-import app.delish.view.SearchAppBar
+import app.delish.compose.view.EmptyView
+import app.delish.compose.view.SearchAppBar
 
 @Composable
 fun SearchScreen(

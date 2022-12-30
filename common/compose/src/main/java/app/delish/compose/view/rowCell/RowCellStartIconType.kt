@@ -1,4 +1,4 @@
-package app.delish.view.rowCell
+package app.delish.compose.view.rowCell
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color

@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.delish.discover.R
-import app.delish.view.CircularLoading
-import app.delish.view.EmptyView
+import app.delish.compose.view.CircularLoading
+import app.delish.compose.view.EmptyView
 import app.delish.discover.vm.DiscoverViewModel
 import app.delish.discover.vm.ViewEvent
 import com.elbehiry.model.RecipesItem

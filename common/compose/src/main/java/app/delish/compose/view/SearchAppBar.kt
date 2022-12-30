@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package app.delish.view
+package app.delish.compose.view
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background

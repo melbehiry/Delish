@@ -1,4 +1,4 @@
-package app.delish.view.rowCell
+package app.delish.compose.view.rowCell
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

@@ -9,7 +9,6 @@ android {
 }
 dependencies {
     implementation(projects.base)
-    implementation(projects.common.view)
 
     implementation(libs.androidx.core.ktx)
 

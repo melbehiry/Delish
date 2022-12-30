@@ -104,7 +104,6 @@ dependencies {
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.base)
-    implementation(projects.common.view)
     implementation(projects.common.imageloading)
     implementation(projects.common.compose)
     implementation(projects.ui.onboarding)

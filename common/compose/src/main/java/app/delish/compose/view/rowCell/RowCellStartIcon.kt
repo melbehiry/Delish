@@ -1,4 +1,4 @@
-package app.delish.view.rowCell
+package app.delish.compose.view.rowCell
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

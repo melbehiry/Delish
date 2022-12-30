@@ -33,7 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import app.delish.details.vm.DetailsViewModel
 import app.delish.details.vm.ViewEvent
-import app.delish.view.CircularLoading
+import app.delish.compose.view.CircularLoading
 
 @Composable
 fun DetailsScreen(
